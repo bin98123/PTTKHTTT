@@ -13,6 +13,7 @@ public class Test{
           // tui nhận đc thông báo, r tui qua tui merge vào
           // tui mới merge vào á
           // còn nếu mà ko pull request là tui ko thấy có thay đổi code tui ko merge vào đc
+          // tui chưa merge là sẽ ko có cập nhật lên
 		System.out.println("Hello Tấn!!!");
 	}
 }
