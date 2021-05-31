@@ -9,6 +9,10 @@ public class Test{
           //h đặt tên commit
           // tui push lên branch ThanhTan r, h nó thông báo có thay đổi ổ banch master, tại khi có thay đổi mới pull repuest đc
           // pull request để có thể đc merge vào branch chính á
+          // h git nó có pull repest của ông nè
+          // tui nhận đc thông báo, r tui qua tui merge vào
+          // tui mới merge vào á
+          // còn nếu mà ko pull request là tui ko thấy có thay đổi code tui ko merge vào đc
 		System.out.println("Hello Tấn!!!");
 	}
 }
