@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <style type="text/css">
 td, th, table {
 	border: 1px solid black;
@@ -43,6 +44,9 @@ td, th {
 	Chuyen c = new Chuyen();
 	List<ChuyenDetails> chuyens = new ArrayList<ChuyenDetails>();
 	chuyens = c.getChuyens();
+	if(none==null||none==""){
+		none="none";
+	}
 	if (chuyen == null) {
 		chuyen=chuyens;
 	}
@@ -51,13 +55,12 @@ td, th {
 		<div class="contain-search">
 			<form action="SearchServlet" medthod="post">
 				<input class="search-box" type="text" name="txtSearch" size="15px">
-				<input class="search-btn" type="submit" name="btnSearch"
-					value="Search">
+				<input class="search-btn" type="submit" name="btnSearch" value="Search">
 			</form>
 		</div>
 	</div>
-	<h1>Danh sách chuyến xe bus</h1>
-	<table class="table" style="width: 50%">
+	<h1 id="default">Danh sách tìm kiếm</h1>
+	<table id="example" style="width: 50%">
 		<thead>
 			<tr>
 				<!-- 
@@ -95,7 +98,9 @@ td, th {
 			</tr>
 		</tfoot>
 	</table>
-	<table class="table1" style="width: 50%; display: none">
+<!-- 	<table class="table1" style="width: 50%; display: none"> -->
+<h1>Danh sách chuyến xe bus</h1>
+	<table class="table1" style="width: 50%">
 		<thead>
 			<tr>
 				<!-- 
@@ -133,10 +138,11 @@ td, th {
 			</tr>
 		</tfoot>
 	</table>
-	</div>
+	<script type="text/javascript">
 <!-- 	<script> -->
-<%-- document.getElementsByClassName("table1").style.display = <%=none%>; --%>
-<!-- </script> -->
-	
+	document.getElementById("example").style.display= "<%=none%>";
+	document.getElementById("default").style.display= "<%=none%>";
+// 	document.getElementById("example").style.display="none";
+</script>
 </body>
 </html>

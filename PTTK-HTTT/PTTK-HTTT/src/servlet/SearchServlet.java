@@ -62,7 +62,7 @@ public class SearchServlet extends HttpServlet {
 			listChuyens = searchDAO.getSearch(txtSearch);
 			System.out.println(searchDAO.getSearch(txtSearch));
 			request.setAttribute("list1", searchDAO.getSearch(txtSearch));
-			request.setAttribute("none", "none");
+			request.setAttribute("none", "visible");
 			request.getRequestDispatcher("/BusManager2.jsp").forward(request, response);
 
 		} catch (Exception e) {
