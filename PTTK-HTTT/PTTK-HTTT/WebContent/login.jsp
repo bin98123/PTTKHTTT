@@ -39,6 +39,7 @@
 .containerApp .overview .GiaoDien {
     flex: 1 1 40%;
     border: 1px solid #badcf2;
+    
 }
 .containerApp .overview .DinhForm {
     padding-top: 7px;
@@ -55,8 +56,11 @@
 .containerApp .overview .DinhForm .fontPhu{
     text-align: right;
     padding-right: 30px;
-    margin-top: -60px;
+/*     margin-top: -60px; */
     font-size: 20px;
+}
+.fontPhu{
+  margin-top: -45px; 
 }
 .containerApp .overview .DinhForm .fontPhu span {
     padding-left: 40px;
@@ -69,7 +73,7 @@
     
 }
 .containerApp .MainForm .NoiDungForm input[type="submit"] {
-    background: #11605b;
+/*     background: #11605b; */
     color: white;
     font-size: 1.2em;
     padding: 2px;
@@ -88,6 +92,7 @@
 }
 .containerApp .MainForm .NoiDungForm .NoiDung {
     padding: 1px 30px 0px;
+    margin-top: 30px;
 }
 /* .containerApp .MainForm .NoiDungForm .NoiDung .nguoidung {
     padding: 15px 80px 0px;
@@ -109,6 +114,7 @@
 
  
     </style>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 	<form action="Login View" method="post">
@@ -134,7 +140,7 @@
                                 <input  name="Password" class="pass" type="password" required="">
                             </div>
                             <div style="margin-top: 30px;" class="submit NoiDung j-between">
-                                <input type="submit" value="Đăng nhập">
+                                <input class="btn btn-primary btn-lg" type="submit" value="Đăng nhập">
                             </div>
                     </div>
                     </div>
@@ -142,5 +148,8 @@
             </div>
             </div>
     </form>
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

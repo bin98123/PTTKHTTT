@@ -51,6 +51,7 @@ td, th {
 		chuyen=chuyens;
 	}
 	%>
+<%-- 	<%@ include file="test.jsp" %> --%>
 	<div class="top">
 		<div class="contain-search">
 			<form action="SearchServlet" medthod="post">

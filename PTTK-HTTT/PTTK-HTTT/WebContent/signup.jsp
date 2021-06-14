@@ -105,7 +105,7 @@
 .containerApp .MainForm .NoiDungForm .NDung input[type="text"], .containerApp .MainForm .NoiDungForm .NDung input[type="tel"], .containerApp .MainForm .NoiDungForm .NDung input[type="password"], .containerApp .MainForm .NoiDungForm .NDung input[type="email"] {
     outline: none;
     font-size: 1em;
-    width: 75%;
+    width: 70%;
     justify-content: center;
     color: #000;
     float: right;
@@ -138,6 +138,7 @@
  </style>
 </head>
 <body>
+<form action="SignUp" method="post">
     <div class="containerApp">
         <div class="overview flex">
              <div class="GiaoDien">
@@ -154,38 +155,37 @@
                 <div class="tenForm "><h4 class="textdangki">ĐĂNG KÍ</h4></div>
                     <div class="Ten ">
                         <label for="taikhoan">HỌ: </label> 
-                        <input type="text" id="dangki" style="width: 60px;" required="">
+                        <input name="lastName" type="text" id="dangki" style="width: 60px;" required="">
                         <label for="taikhoan" style="margin-left: 50px;">TÊN: </label> 
-                        <input type="text" id="dangki" required="" style="float: right;">
+                        <input name="firstName" type="text" id="dangki" required="" style="float: right;">
                     </div>
                     <p class="NDung">
                         <label for="taikhoan">E-MAIL: </label> 
-                        <input type="email" required="" id="dangki">
+                        <input name="email" type="email" required="" id="dangki">
                     </p>
                     <p class="NDung">
                         <label for="taikhoan">SĐT: </label> 
-                        <input type="tel" id="dangki">
+                        <input name="phoneNumber" type="tel" id="dangki">
                     </p >
-                    <p class="NDung">
-                        <label for="taikhoan">ĐỊA CHỈ: </label> 
-                        <input type="text" id="dangki">
+                    <p class="NDung">NGÀY SINH: </label> 
+                        <input name="birthday" type="text" id="dangki">
                     </p>
                     <p class="Taikhoan">
                         <label >TÊN TÀI KHOẢN: </label> 
-                        <input type="text" id="dangki">
+                        <input name="accountName" type="text" id="dangki">
                     </p>
                     <p class="Taikhoan">
                         <label >MẬT KHẨU: </label> 
-                        <input type="password" required="" id="dangki">
+                        <input name="password" type="password" required="" id="dangki">
                     </p>
                     <div style="margin-top: 5px;" class="submit NoiDung j-between">
-                        <input type="button" onclick="window.location.href='./login.jsp'" value=" Đăng kí ">
+                        <input type="submit" value=" Đăng kí ">
                     </div>
             </div>
         </div>
     </div>
 </div>
 </div>
-    
+    </form>
 </body>
 </html>

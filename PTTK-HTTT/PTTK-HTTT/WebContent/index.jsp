@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1 id="example">Khánh đẹp trai</h1>
-<!-- <script type="text/javascript"> -->
-<!--	document.getElementById("example").style.color="red"; -->
-<!-- </script> -->
+<jsp:forward page="index.html"></jsp:forward>
 </body>
 </html>
