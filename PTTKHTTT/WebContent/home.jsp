@@ -17,11 +17,7 @@
 	<div class="contain-info1">
 		<!-- 	style="flex-direction: row; background-color: yellow;flex-wrap: wrap;display: flex;"> -->
 		<div class="left-info1" style="float: left; height: 100%;">
-			<%@include file="info.jsp"%>
-		</div>
-		<div class="right-info1"
-			style="float: right; height: 100%; margin-left: 260px">
-			<%@include file="infoTest.jsp"%>
+			<%@include file="findPath.jsp"%>
 		</div>
 	</div>
 </body>

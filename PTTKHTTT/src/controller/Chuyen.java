@@ -13,7 +13,9 @@ import model.BusDetails;
 import model.BusUnitManagerDetails;
 
 public class Chuyen {
-	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
+//	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
+	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
+			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
 
 	public List<ChuyenDetails> getChuyens() {
 		List<ChuyenDetails> result = new ArrayList<ChuyenDetails>();
@@ -321,8 +323,8 @@ public class Chuyen {
 	public static void main(String[] args) {
 //		System.out.println(new Chuyen().getList().contains("Đại học Nông Lâm"));
 //		System.out.println(new Chuyen().getBuses());
-		System.out.println(new Chuyen().getBusesUnitManager());
-//		System.out.println(new Chuyen().getChuyens());
+//		System.out.println(new Chuyen().getBusesUnitManager());
+		System.out.println(new Chuyen().getChuyens());
 	}
 //
 //	@Override

@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class User {
-	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=Shop;user=sa;password=root";
+//	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=Shop;user=sa;password=root";
+	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
+			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
 
 	public boolean getLogin(String userName, String userPassword) {
 		int available = 0;

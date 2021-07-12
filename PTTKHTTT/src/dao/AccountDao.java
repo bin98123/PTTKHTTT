@@ -1,4 +1,5 @@
 package dao;
+
 import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,7 +22,9 @@ public class AccountDao {
 //	private Date birthday;
 //	private String email;
 //	private String phoneNumber;
-	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
+//	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
+	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
+			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
 	String INSERT_ACCOUNT_SQL = "INSERT INTO Account"
 			+ "  (accountID,accountName,password , fullName, birthday, email, phoneNumber) VALUES ";
 	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -64,7 +67,7 @@ public class AccountDao {
 		try (Connection connection = DriverManager.getConnection(connectionUrl))
 
 		{
-			
+
 			// Step 3: Execute the query or update query
 			try {
 				Statement statement = connection.createStatement();
@@ -202,6 +205,7 @@ public class AccountDao {
 //		System.out.println(new AccountDao().getCount());
 //		System.out.println(new AccountDao().registerUser(new AccountDetails("442", "khanhle", "12344",
 //				"Hoàng Văn Thụ", new Date(1954, 3, 3), "ddsds@gmail.com", "13456")));
-		System.out.println(new AccountDao().getNumberID());
+//		System.out.println(new AccountDao().getNumberID());
+		System.out.println(new AccountDao().getLogin("an", "an"));
 	}
 }
