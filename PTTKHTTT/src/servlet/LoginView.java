@@ -27,8 +27,8 @@ public class LoginView extends HttpServlet {
 	private AccountDao accountDao;
 	private loginDAO loginDAO;
 	private static final long serialVersionUID = 1L;
-	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=Shop;user=sa;password=root";
-	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+//	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=Shop;user=sa;password=root";
+//	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
 	public LoginView() {
 		super();

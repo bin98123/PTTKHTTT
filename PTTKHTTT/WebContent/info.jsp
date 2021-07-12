@@ -122,17 +122,17 @@ body {
 				if (accountDetails != null) {
 					session.setMaxInactiveInterval(1800);
 				%>
-				<form id="info" action="home.jsp" method="post">
+				<form id="info" action="homeTest.jsp" method="post">
 					<li onclick="info.submit();"><input type="hidden"
 						id="info-btn" value="info" /><a>Thông tin cá nhân</a></li>
 				</form>
-				<%
-					} ;
-				%>
 				<form id="statistic" action="Manager" method="post">
 					<li onclick="statistic.submit();"><input name="home" type="hidden"
 						id="statistic-btn" value="statistic" /><a>Thống kê</a></li>
 				</form>
+				<%
+					} ;
+				%>
 				<form id="findPath" action="findPath.jsp" method="post">
 					<li onclick="findPath.submit();"><input type="hidden"
 						id="findPath-btn" value="findPath" /><a>Tìm đường</a></li>

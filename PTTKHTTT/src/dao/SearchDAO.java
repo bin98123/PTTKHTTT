@@ -11,7 +11,9 @@ import model.BusDetails;
 import model.BusUnitManagerDetails;
 
 public class SearchDAO {
-	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
+//	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
+	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
+			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
 
 	public List<ChuyenDetails> getSearch(String txtSearch) {
 		List<ChuyenDetails> result = new ArrayList<ChuyenDetails>();
@@ -132,9 +134,9 @@ public class SearchDAO {
 			Connection con = DriverManager.getConnection(connectionUrl);
 
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(
-					"select * from BusUnitManager where unitID like N'%" + txtSearch + "%' or unitName like N'%" + txtSearch
-							+ "%' or phoneNumber like N'%" + txtSearch + "%' or email like N'%" + txtSearch + "%'");
+			ResultSet rs = stmt.executeQuery("select * from BusUnitManager where unitID like N'%" + txtSearch
+					+ "%' or unitName like N'%" + txtSearch + "%' or phoneNumber like N'%" + txtSearch
+					+ "%' or email like N'%" + txtSearch + "%'");
 			while (rs.next()) {
 				BusUnitManagerDetails chuyen = new BusUnitManagerDetails();
 //				available++;
@@ -201,7 +203,7 @@ public class SearchDAO {
 //		System.out.println(new SearchDAO().getSearch("Sài"));
 //		System.out.println(new SearchDAO().getSearchBus("2020"));
 		System.out.println(new SearchDAO().getSearchUnit("liên"));
-		
+
 //		System.out.println(new SearchDAO().getCount());
 	}
 }

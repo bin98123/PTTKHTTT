@@ -14,7 +14,9 @@ public class ChuyenXeDB {
 	private List<Integer> list = new ArrayList<>();
 	private ArrayList<String> tramqua;
 	private ArrayList<ChuyenXe> chuyenxe = new ArrayList<>();
-	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
+//	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
+	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
+			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
 	String INSERT_ACCOUNT_SQL = "INSERT INTO Account"
 			+ "  (accountID,accountName,password , fullName, birthday, email, phoneNumber) VALUES ";
 	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
