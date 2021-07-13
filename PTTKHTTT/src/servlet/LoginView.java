@@ -77,7 +77,7 @@ public class LoginView extends HttpServlet {
 
 				}
 			} else {
-				request.getRequestDispatcher("/index.html").forward(request, response);
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:forward page="login.jsp"></jsp:forward>
+<h1 id="example">Khánh đẹp trai</h1>
+<!-- <script type="text/javascript"> -->
+<!--	document.getElementById("example").style.color="red"; -->
+<!-- </script> -->
 </body>
 </html>

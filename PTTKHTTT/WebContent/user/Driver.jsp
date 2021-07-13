@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:forward page="login.jsp"></jsp:forward>
+<h1>Tài xế</h1>
 </body>
 </html>
