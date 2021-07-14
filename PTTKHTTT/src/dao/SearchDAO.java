@@ -11,9 +11,9 @@ import model.BusDetails;
 import model.BusUnitManagerDetails;
 
 public class SearchDAO {
-//	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
-	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
-			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
+	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
+//	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
+//			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
 
 	public List<ChuyenDetails> getSearch(String txtSearch) {
 		List<ChuyenDetails> result = new ArrayList<ChuyenDetails>();

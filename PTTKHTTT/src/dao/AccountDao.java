@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.*;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +12,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import model.AccountDetails;
-import model.AccountDetails1;
 
 public class AccountDao {
 //	private String accountID;
@@ -22,9 +21,9 @@ public class AccountDao {
 //	private Date birthday;
 //	private String email;
 //	private String phoneNumber;
-//	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
-	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
-			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
+	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
+//	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
+//			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
 	String INSERT_ACCOUNT_SQL = "INSERT INTO Account"
 			+ "  (accountID,accountName,password , fullName, birthday, email, phoneNumber) VALUES ";
 	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
