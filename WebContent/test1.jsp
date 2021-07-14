@@ -16,7 +16,7 @@
 <%@include file="home.jsp" %>
 </div>
 <div class="right" style="float:right;width:70%;height:100%;">
-<%@include file="BusManager2.jsp" %>
+<%-- <%@include file="BusManager2.jsp" %> --%>
 </div>
 </div>
 </body>
