@@ -65,5 +65,8 @@ public class ManagerServlet extends HttpServlet {
 		else if (home.equals("search-unit")) {
 			request.getRequestDispatcher("./Unit.jsp").forward(request, response);
 		}
+		else if (home.equals("manager-unit")) {
+			request.getRequestDispatcher("./ManagerUnit.jsp").forward(request, response);
+		}
 	}
 }

@@ -152,7 +152,10 @@ body {
 				</a>
 					<ul class="manager-show">
 						<li><a href="#">Quản lý Tuyến Xe</a></li>
-						<li><a href="#">Quản lý Đơn vị</a></li>
+						<form id="managerUnit" action="Manager" method="post">
+							<li onclick="managerUnit.submit();"><input name="home"
+								type="hidden" id="manager-unit-btn" value="manager-unit" /><a>Quản lý Đơn vị</a></li>
+						</form>
 						<li><a href="#">Quản lý tài xế</a></li>
 						<li><a href="#">Quản lý nhân viên</a></li>
 					</ul></li>

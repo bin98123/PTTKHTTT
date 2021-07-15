@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="./img/bus-icon.png">
 <title>Kết quả đường đi</title>
 <style type="text/css">
 td {

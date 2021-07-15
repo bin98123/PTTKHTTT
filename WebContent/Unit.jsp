@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-
+<link rel="icon" href="./img/bus-icon.png">
+<!-- <link rel="icon" href="./img/images.png"> -->
 <style type="text/css">
 .contain-info1 {
 	display: flex;

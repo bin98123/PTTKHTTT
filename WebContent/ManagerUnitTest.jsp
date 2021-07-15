@@ -23,9 +23,20 @@ td, th {
 	height: 30px;
 	width: 50%;
 }
-
+.containt-top{
+display: flex;
+}
 .contain-search {
-	float: right;
+/* 	display: table-row; */
+}
+.bnt-add{
+float: right;
+margin-left: 330px;
+/* width: 100px; */
+}
+.top-content{
+float: left;
+/* width: 100px; */
 }
 </style>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -53,15 +64,7 @@ td, th {
 	}
 	%>
 	<%-- 	<%@ include file="test.jsp" %> --%>
-	<div class="top">
-		<div class="contain-search">
-			<form action="SearchUnitServlet" medthod="post">
-				<input class="search-box" type="text" name="txtSearch" size="15px">
-				<input class="search-btn" type="submit" name="btnSearch"
-					value="Search">
-			</form>
-		</div>
-	</div>
+	
 	<h1 id="default" style="display: <%=none%>;">Danh sách tìm kiếm</h1>
 	<table id="example" style="width: 100%;display: <%=none%>">
 		<thead>
@@ -77,6 +80,8 @@ td, th {
 				<th style="text-align: left">Tên đơn vị</th>
 				<th style="text-align: left">Số điện thoại</th>
 				<th style="text-align: left">Email</th>
+				<th style="text-align: left">Sửa</th>
+				<th style="text-align: left">Xóa</th>
 
 			</tr>
 		</thead>
@@ -89,6 +94,16 @@ td, th {
 				<td style="text-align: left"><%=e.getUnitName()%></td>
 				<td style="text-align: left"><%=e.getPhoneNumber()%></td>
 				<td style="text-align: left"><%=e.getEmail()%></td>
+				<td style="text-align: center; line-height: inherit;"><button
+						type="button"
+						onclick="window.location.href='/QuanLiSanPham?sumbit=edit&productID=<%=e.getUnitID()%>'">
+					</button></td>
+				<td style="text-align: center; line-height: inherit;"><button
+						type="button"
+						onclick="window.location.href='/QuanLiSanPham?sumbit=delete&productID=<%=e.getUnitID()%>'">
+					</button></td>
+
+
 
 			</tr>
 
@@ -102,11 +117,14 @@ td, th {
 				<th style="text-align: left">Tên đơn vị</th>
 				<th style="text-align: left">Số điện thoại</th>
 				<th style="text-align: left">Email</th>
+				<th style="text-align: left">Sửa</th>
+				<th style="text-align: left">Xóa</th>
 			</tr>
 		</tfoot>
 	</table>
 	<!-- 	<table class="table1" style="width: 50%; display: none"> -->
-	<h1>Danh sách đơn vị quản lý tuyến xe</h1>
+	<div class="containt-top"> <div class="top-content">
+	<h1>Danh sách đơn vị quản lý tuyến xe</h1></div> <div class="bnt-add"><button>Thêm</button></div></div>
 	<table class="table1" style="width: 100%;">
 		<thead>
 			<tr>
@@ -120,6 +138,8 @@ td, th {
 				<th style="text-align: left">Tên đơn vị</th>
 				<th style="text-align: left">Số điện thoại</th>
 				<th style="text-align: left">Email</th>
+				<th style="text-align: left">Sửa</th>
+				<th style="text-align: left">Xóa</th>
 			</tr>
 		</thead>
 		<%
@@ -131,6 +151,14 @@ td, th {
 				<td style="text-align: left"><%=e.getUnitName()%></td>
 				<td style="text-align: left"><%=e.getPhoneNumber()%></td>
 				<td style="text-align: left"><%=e.getEmail()%></td>
+				<td style="text-align: center; line-height: inherit;"><button
+						type="button"
+						onclick="window.location.href='/QuanLiSanPham?sumbit=edit&productID=<%=e.getUnitID()%>'">
+						Sửa</button></td>
+				<td style="text-align: center; line-height: inherit;"><button
+						type="button"
+						onclick="window.location.href='/QuanLiSanPham?sumbit=delete&productID=<%=e.getUnitID()%>'">
+						Xóa</button></td>
 
 
 			</tr>
@@ -145,6 +173,8 @@ td, th {
 				<th style="text-align: left">Tên đơn vị</th>
 				<th style="text-align: left">Số điện thoại</th>
 				<th style="text-align: left">Email</th>
+				<th style="text-align: left">Sửa</th>
+				<th style="text-align: left">Xóa</th>
 			</tr>
 		</tfoot>
 	</table>

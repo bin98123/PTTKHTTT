@@ -5,6 +5,7 @@
 <head>
 <meta charset="utf-8">
 <title>THÔNG BÁO THÔNG TIN ĐĂNG KÍ</title>
+<link rel="icon" href="./img/bus-icon.png">
 </head>
 <body>
 	<h3>TÀI KHOẢN CỦA BẠN ĐÃ ĐƯỢC ĐĂNG KÍ THÀNH CÔNG!!!</h3>
