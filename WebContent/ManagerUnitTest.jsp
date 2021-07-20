@@ -15,8 +15,8 @@ td, th, table {
 }
 
 td, th {
-	padding-left: 15px;
-	padding-right: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .top {
@@ -33,6 +33,10 @@ display: flex;
 float: right;
 margin-left: 330px;
 /* width: 100px; */
+}
+.bnt-rollback{
+float: right;
+margin-right: 80px;
 }
 .top-content{
 float: left;
@@ -96,12 +100,12 @@ float: left;
 				<td style="text-align: left"><%=e.getEmail()%></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button"
-						onclick="window.location.href='/QuanLiSanPham?sumbit=edit&productID=<%=e.getUnitID()%>'">
-					</button></td>
+						onclick="window.location.href='./ManagerUnit?submit=edit&unitID=<%=e.getUnitID()%>'">
+					Sửa</button></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button"
-						onclick="window.location.href='/QuanLiSanPham?sumbit=delete&productID=<%=e.getUnitID()%>'">
-					</button></td>
+						onclick="window.location.href='./ManagerUnit?submit=delete&unitID=<%=e.getUnitID()%>'">
+					Xóa</button></td>
 
 
 
@@ -124,7 +128,8 @@ float: left;
 	</table>
 	<!-- 	<table class="table1" style="width: 50%; display: none"> -->
 	<div class="containt-top"> <div class="top-content">
-	<h1>Danh sách đơn vị quản lý tuyến xe</h1></div> <div class="bnt-add"><button>Thêm</button></div></div>
+	<h1>Danh sách đơn vị quản lý</h1></div> <div class="bnt-add"><button>Thêm</button></div> <div class="bnt-rollback"><button type="button"
+						onclick="window.location.href='./ManagerUnit?submit=rollback'">Hoàn tác</button></div></div>
 	<table class="table1" style="width: 100%;">
 		<thead>
 			<tr>
@@ -153,13 +158,12 @@ float: left;
 				<td style="text-align: left"><%=e.getEmail()%></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button"
-						onclick="window.location.href='/QuanLiSanPham?sumbit=edit&productID=<%=e.getUnitID()%>'">
-						Sửa</button></td>
+						onclick="window.location.href='./ManagerUnit?submit=edit&unitID=<%=e.getUnitID()%>'">
+					Sửa</button></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button"
-						onclick="window.location.href='/QuanLiSanPham?sumbit=delete&productID=<%=e.getUnitID()%>'">
-						Xóa</button></td>
-
+						onclick="window.location.href='./ManagerUnit?submit=delete&unitID=<%=e.getUnitID()%>'">
+					Xóa</button></td>
 
 			</tr>
 
