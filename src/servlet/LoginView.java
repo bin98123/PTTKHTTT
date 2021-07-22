@@ -63,8 +63,11 @@ public class LoginView extends HttpServlet {
 //					System.out.println(c.getChuyens());
 //					request.setAttribute("user",
 //							new AccountDetails(null, userName, userPassword, null, null, null, null));
-					session.setAttribute("user",
-							new AccountDetails(null, userName, userPassword, null, null, null, null));
+					AccountDetails accountDetails = new AccountDetails();
+					accountDetails = accountDao.getAccount(userName, userPassword);
+//					session.setAttribute("user",
+//							new AccountDetails(null, userName, userPassword, null, null, null, null));
+					session.setAttribute("user", accountDetails);
 					request.getRequestDispatcher("/home.jsp").forward(request, response);
 				} else {
 					// username: 'Khanh'

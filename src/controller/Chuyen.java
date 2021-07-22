@@ -11,6 +11,7 @@ import java.util.List;
 import dao.ChuyenDetails;
 import model.BusDetails;
 import model.BusUnitManagerDetails;
+import model.DriverDetails;
 
 public class Chuyen {
 	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
@@ -144,6 +145,65 @@ public class Chuyen {
 				chuyen.setUnitName(rs.getNString("unitName"));
 				chuyen.setPhoneNumber(rs.getNString("phoneNumber"));
 				chuyen.setEmail(rs.getNString("EMAIL"));
+//				System.out.println(rs.getInt("STT"));
+//				chuyen.setTemTram(rs.getNString("nameBusStop"));
+//				System.out.println(rs.getNString("TenTram"));
+				chuyens.add(chuyen);
+//				for (ChuyenDetails chuyenDetails : chuyens) {
+//					chuyen.setChuyenID(rs.getInt("ChuyenID"));
+//					chuyen.setLuotDi(rs.getS	tring("LUOTDI"));
+//					chuyen.setLuotVe(rs.getString("LUOTVE"));
+//					chuyen.setTenChuyen(rs.getString("TENCHUYEN"));
+//					chuyen.setID(rs.getFloat("ID"));
+//					System.out.println(rs.getFloat("ID"));
+//					chuyen.setSTT(rs.getInt("STT"));
+//					System.out.println(rs.getInt("STT"));
+//					chuyen.setTemTram(rs.getString("TenTram"));
+//					System.out.println(rs.getString("TenTram"));
+//					chuyens.add(chuyen);
+//				}
+			}
+			result = chuyens;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+//		if (available != 0) {
+//			return true;
+//		}
+		return chuyens;
+
+	}
+
+	public List<DriverDetails> getDriver() {
+		List<DriverDetails> result = new ArrayList<DriverDetails>();
+		List<DriverDetails> chuyens = new ArrayList<DriverDetails>();
+		int available = 0;
+		try {
+
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Driver");
+			while (rs.next()) {
+				DriverDetails chuyen = new DriverDetails();
+//				available++;
+//				System.out.println("Khanh");
+//				chuyen.setID(rs.getFloat("ID"));
+////				System.out.println(rs.getFloat("ID"));
+//				chuyen.setSTT(rs.getInt("STT"));
+				chuyen.setDriverID(rs.getNString("DriverID"));
+				chuyen.setFullName(rs.getNString("FullName"));
+				chuyen.setBirthday(rs.getDate("Birthday"));
+				chuyen.setMale(rs.getBoolean("Male"));
+				chuyen.setAddress(rs.getNString("Address"));
+				chuyen.setCountry(rs.getNString("Country"));
+				chuyen.setDayBegin(rs.getDate("DayBegin"));
+				chuyen.setSalary(rs.getInt("Salary"));
+				chuyen.setDriverLicense(rs.getNString("DriverLicense"));
+				chuyen.setBusID(rs.getNString("BusID"));
 //				System.out.println(rs.getInt("STT"));
 //				chuyen.setTemTram(rs.getNString("nameBusStop"));
 //				System.out.println(rs.getNString("TenTram"));

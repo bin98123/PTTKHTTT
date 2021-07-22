@@ -135,6 +135,51 @@ public class AccountDao {
 
 	}
 
+	public void selectAccount() {
+		int available = 0;
+		try {
+
+			Class.forName(driver);
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Account");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+
+	}
+
+	public AccountDetails getAccount(String userName, String userPassword) {
+		AccountDetails available = new AccountDetails();
+		try {
+
+			Class.forName(driver);
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Account where accountName='" + userName
+					+ "' and password='" + userPassword + "'");
+			while (rs.next()) {
+				available.setAccountID(rs.getString("accountID"));
+				available.setAccountName(rs.getString("accountName"));
+				available.setPassword(rs.getString("password"));
+				available.setFullName(rs.getNString("fullName"));
+				available.setBirthday(rs.getDate("birthday"));
+				available.setEmail(rs.getString("Email"));
+				available.setPhoneNumber(rs.getString("phoneNumber"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+		return available;
+
+	}
+
 	private void printSQLException(SQLException ex) {
 		for (Throwable e : ex) {
 			if (e instanceof SQLException) {
@@ -201,10 +246,13 @@ public class AccountDao {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 //		System.out.println(new SearchDAO().getSearch("Sài"));
+		System.out.println(new AccountDao().getAccount("an", "an"));
 //		System.out.println(new AccountDao().getCount());
 //		System.out.println(new AccountDao().registerUser(new AccountDetails("442", "khanhle", "12344",
 //				"Hoàng Văn Thụ", new Date(1954, 3, 3), "ddsds@gmail.com", "13456")));
 //		System.out.println(new AccountDao().getNumberID());
-		System.out.println(new AccountDao().getLogin("an", "an"));
+//		System.out.println(new AccountDao().getLogin("an", "an"));
+//		System.out.println();
+//		new AccountDao().selectAccount();
 	}
 }

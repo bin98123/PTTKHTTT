@@ -127,8 +127,9 @@ body {
 						id="info-btn" value="info" /><a>Thông tin cá nhân</a></li>
 				</form>
 				<form id="statistic" action="Manager" method="post">
-					<li onclick="statistic.submit();"><input name="home" type="hidden"
-						id="statistic-btn" value="statistic" /><a>Thống kê</a></li>
+					<li onclick="statistic.submit();"><input name="home"
+						type="hidden" id="statistic-btn" value="statistic" /><a>Thống
+							kê</a></li>
 				</form>
 				<%
 					} ;
@@ -154,10 +155,15 @@ body {
 						<li><a href="#">Quản lý Tuyến Xe</a></li>
 						<form id="managerUnit" action="Manager" method="post">
 							<li onclick="managerUnit.submit();"><input name="home"
-								type="hidden" id="manager-unit-btn" value="manager-unit" /><a>Quản lý Đơn vị</a></li>
+								type="hidden" id="manager-unit-btn" value="manager-unit" /><a>Quản
+									lý Đơn vị</a></li>
 						</form>
-						<li><a href="#">Quản lý tài xế</a></li>
-						<li><a href="#">Quản lý nhân viên</a></li>
+						<form id="managerDriver" action="Manager" method="post">
+							<li onclick="managerDriver.submit();"><input name="home"
+								type="hidden" id="manager-driver-btn" value="manager-driver" /><a>Quản
+									lý Tài Xế</a></li>
+						</form>
+						<li><a href="#">Quản lý Xe Buýt</a></li>
 					</ul></li>
 				<%
 					} ;
@@ -180,12 +186,12 @@ body {
 						<form id="myForm3" action="Manager" method="post">
 							<li onclick="myForm3.submit();"><input name="home"
 								type="hidden" id="search-bus-driver-btn"
-								value="search-bus-driver" /><a>Tra cứu tài xế</a></li>
+								value="search-bus-driver" /><a>Tra cứu Tài Xế</a></li>
 						</form>
 						<form id="myForm4" action="Manager" method="post">
 							<li onclick="myForm4.submit();"><input name="home"
 								type="hidden" id="search-bus-btn" value="search-bus" /><a>Tra
-									cứu xe buýt</a></li>
+									cứu Xe Buýt</a></li>
 						</form>
 					</ul></li>
 				<form id="exit" action="Manager" method="post">

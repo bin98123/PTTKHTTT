@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ page import="model.*"%>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -200,7 +201,7 @@ input::-webkit-input-placeholder {
 }
 
 .email {
-	margin-top: 58px;
+	margin-top: 0px;
 }
 
 .email_info {
@@ -242,15 +243,20 @@ input::-webkit-input-placeholder {
 </style>
 <title>Trang thông tin cá nhân</title>
 </head>
+<%
+	AccountDetails accountDetails1 = (AccountDetails) session.getAttribute("user");
+if (accountDetails1 != null) {
+	// 	session.setMaxInactiveInterval(1800);
+%>
 <body style="background-color: darkcyan">
 	<div class="container111">
 		<div class="top-info"></div>
 		<!-- <div class="contain_left">-->
 		<div class="left">
-			<a for="exampleFormControlFile1"> <img src='./images/demo.png'
-				title="ảnh demo avatar" alt="demo avatar" class="left-img">
-			</a> <input type="file" class="form-control-file"
-				id="exampleFormControlFile">
+<!-- 			<a for="exampleFormControlFile1"> <img src='./images/demo.png' -->
+<!-- 				title="ảnh demo avatar" alt="demo avatar" class="left-img"> -->
+<!-- 			</a> <input type="file" class="form-control-file" -->
+<!-- 				id="exampleFormControlFile"> -->
 			<div class="left-content">
 				<div class="contain_name_in">
 					<input placeholder="Họ" class="name_in" type="text"> <input
@@ -278,19 +284,17 @@ input::-webkit-input-placeholder {
 			</div>
 			<div class="right-content">
 				<div class="contain_right-content-left">
-					<p class="right-content-left firstName">Họ</p>
-					<p class="right-content-left lastName">Tên</p>
-					<p class="right-content-left address">Địa chỉ</p>
+					<p class="right-content-left firstName">Họ và tên</p>
+					<p class="right-content-left address">Ngày sinh</p>
 					<p class="right-content-left email">Email</p>
 					<p class="right-content-left phoneNumber">Số điện thoại</p>
 				</div>
 				<div class="contain_right-content-right">
-					<p class="right-content-right">Trịnh</p>
-					<p class="right-content-right">Lê Quốc Khánh</p>
-					<p class="right-content-right">230 Nguyễn Thị Định, phường
-						Thạnh Mỹ Lợi, thành phố Thủ Đức,Thành phố Hồ Chí Minh</p>
-					<p class="right-content-right email_info">18130112@st.hcmuaf.edu.vn</p>
-					<p class="right-content-right">09736473647</p>
+					<p class="right-content-right"><%=accountDetails1.getFullName()%></p>
+					<p class="right-content-right"><%=accountDetails1.getBirthday()%></p>
+					<p class="right-content-right email_info"><%=accountDetails1.getEmail()%></p>
+					<p class="right-content-right"><%=accountDetails1.getPhoneNumber()%></p>
+
 
 				</div>
 			</div>
@@ -308,5 +312,12 @@ input::-webkit-input-placeholder {
 			crossorigin="anonymous"></script>
 
 	</div>
+	<%
+		} else {
+	%>
+	<jsp:forward page="findPath.jsp"></jsp:forward>
+	<%
+		}
+	%>
 </body>
 </html>

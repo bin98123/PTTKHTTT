@@ -24,8 +24,29 @@ td, th {
 	width: 50%;
 }
 
+.containt-top {
+	display: flex;
+}
+
 .contain-search {
+	/* 	display: table-row; */
+	
+}
+
+.bnt-add {
 	float: right;
+	margin-left: 580px;
+	/* width: 100px; */
+}
+
+.bnt-rollback {
+	float: right;
+	margin-right: 80px;
+}
+
+.top-content {
+	float: left;
+	/* width: 100px; */
 }
 </style>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -83,6 +104,8 @@ td, th {
 				<th style="text-align: center">Lương</th>
 				<th style="text-align: center">Bằng lái</th>
 				<th style="text-align: center">Mã xe</th>
+				<th style="text-align: left">Sửa</th>
+				<th style="text-align: left">Xóa</th>
 
 			</tr>
 		</thead>
@@ -105,11 +128,19 @@ td, th {
 				%>
 				<td style="text-align: center"><%=male%></td>
 				<td style="text-align: left"><%=e.getAddress()%></td>
-				<td style="text-align: left"><%=e.getCountry()%></td>
+				<td style="text-align: center"><%=e.getCountry()%></td>
 				<td style="text-align: center"><%=e.getDayBegin()%></td>
 				<td style="text-align: left"><%=e.getSalary()%></td>
 				<td style="text-align: left"><%=e.getDriverLicense()%></td>
 				<td style="text-align: left"><%=e.getBusID()%></td>
+				<td style="text-align: center; line-height: inherit;"><button
+						type="button"
+						onclick="window.location.href='./ManagerDriver?submit=edit&unitID=<%=e.getDriverID()%>'">
+						Sửa</button></td>
+				<td style="text-align: center; line-height: inherit;"><button
+						type="button"
+						onclick="window.location.href='./ManagerDriver?submit=delete&unitID=<%=e.getDriverID()%>'">
+						Xóa</button></td>
 
 			</tr>
 
@@ -129,11 +160,27 @@ td, th {
 				<th style="text-align: center">Lương</th>
 				<th style="text-align: center">Bằng lái</th>
 				<th style="text-align: center">Mã xe</th>
+				<th style="text-align: left">Sửa</th>
+				<th style="text-align: left">Xóa</th>
 			</tr>
 		</tfoot>
 	</table>
+
 	<!-- 	<table class="table1" style="width: 50%; display: none"> -->
-	<h1>Danh sách tài xế</h1>
+	<div class="containt-top">
+		<div class="top-content">
+			<h1>Danh sách tài xế</h1>
+		</div>
+		<div class="bnt-add">
+			<button type="button"
+				onclick="window.location.href='./addDriver.jsp'">Thêm</button>
+		</div>
+		<div class="bnt-rollback">
+			<button type="button"
+				onclick="window.location.href='./ManagerDriver?submit=rollback'">Hoàn
+				tác</button>
+		</div>
+	</div>
 	<table class="table1" style="width: 100%;">
 		<thead>
 			<tr>
@@ -153,6 +200,8 @@ td, th {
 				<th style="text-align: center">Lương</th>
 				<th style="text-align: center">Bằng lái</th>
 				<th style="text-align: center">Mã xe</th>
+				<th style="text-align: left">Sửa</th>
+				<th style="text-align: left">Xóa</th>
 			</tr>
 		</thead>
 		<%
@@ -174,11 +223,19 @@ td, th {
 				%>
 				<td style="text-align: center"><%=male%></td>
 				<td style="text-align: left"><%=e.getAddress()%></td>
-				<td style="text-align: left"><%=e.getCountry()%></td>
+				<td style="text-align: center"><%=e.getCountry()%></td>
 				<td style="text-align: center"><%=e.getDayBegin()%></td>
 				<td style="text-align: left"><%=e.getSalary()%></td>
 				<td style="text-align: left"><%=e.getDriverLicense()%></td>
 				<td style="text-align: left"><%=e.getBusID()%></td>
+				<td style="text-align: center; line-height: inherit;"><button
+						type="button"
+						onclick="window.location.href='./ManagerDriver?submit=edit&unitID=<%=e.getDriverID()%>'">
+						Sửa</button></td>
+				<td style="text-align: center; line-height: inherit;"><button
+						type="button"
+						onclick="window.location.href='./ManagerDriver?submit=delete&unitID=<%=e.getDriverID()%>'">
+						Xóa</button></td>
 			</tr>
 
 			<%
@@ -197,6 +254,8 @@ td, th {
 				<th style="text-align: center">Lương</th>
 				<th style="text-align: center">Bằng lái</th>
 				<th style="text-align: center">Mã xe</th>
+				<th style="text-align: left">Sửa</th>
+				<th style="text-align: left">Xóa</th>
 			</tr>
 		</tfoot>
 	</table>

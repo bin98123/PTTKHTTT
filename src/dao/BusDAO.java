@@ -158,8 +158,8 @@ public class BusDAO {
 	}
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-//		System.out.println(new BusDAO().deleteUnit("u03"));
-//		new BusDAO().rollback();
+//		System.out.println(new BusDAO().deleteUnit("u18"));
+		new BusDAO().rollback();
 
 	}
 }

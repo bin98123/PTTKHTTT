@@ -9,13 +9,17 @@ public class DriverDetails {
 	private boolean male;
 	private String address;
 	private String country;
-	private String dayBegin;
+	private Date dayBegin;
 	private int salary;
 	private String driverLicense;
 	private String BusID;
 
+	public DriverDetails() {
+
+	}
+
 	public DriverDetails(String driverID, String fullName, Date birthday, boolean male, String address, String country,
-			String dayBegin, int salary, String driverLicense, String busID) {
+			Date dayBegin, int salary, String driverLicense, String busID) {
 		super();
 		this.driverID = driverID;
 		this.fullName = fullName;
@@ -77,11 +81,11 @@ public class DriverDetails {
 		this.country = country;
 	}
 
-	public String getDayBegin() {
+	public Date getDayBegin() {
 		return dayBegin;
 	}
 
-	public void setDayBegin(String dayBegin) {
+	public void setDayBegin(Date dayBegin) {
 		this.dayBegin = dayBegin;
 	}
 
@@ -107,6 +111,13 @@ public class DriverDetails {
 
 	public void setBusID(String busID) {
 		BusID = busID;
+	}
+
+	@Override
+	public String toString() {
+		return "DriverDetails [driverID=" + driverID + ", fullName=" + fullName + ", birthday=" + birthday + ", male="
+				+ male + ", address=" + address + ", country=" + country + ", dayBegin=" + dayBegin + ", salary="
+				+ salary + ", driverLicense=" + driverLicense + ", BusID=" + BusID + "]";
 	}
 
 }

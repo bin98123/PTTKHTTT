@@ -23,6 +23,10 @@ public class AccountDetails {
 		this.phoneNumber = phoneNumber;
 	}
 
+	public AccountDetails() {
+
+	}
+
 	public String getAccountID() {
 		return accountID;
 	}
@@ -77,6 +81,13 @@ public class AccountDetails {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "AccountDetails [accountID=" + accountID + ", accountName=" + accountName + ", password=" + password
+				+ ", fullName=" + fullName + ", birthday=" + birthday + ", email=" + email + ", phoneNumber="
+				+ phoneNumber + "]";
 	}
 
 }
