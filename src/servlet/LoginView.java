@@ -15,7 +15,7 @@ import controller.Chuyen;
 import controller.User;
 import dao.AccountDao;
 import dao.ChuyenDetails;
-import dao.loginDAO;
+import dao.LoginDAO;
 import model.AccountDetails;
 
 /**
@@ -25,7 +25,7 @@ import model.AccountDetails;
 public class LoginView extends HttpServlet {
 //	private User user;
 	private AccountDao accountDao;
-	private loginDAO loginDAO;
+	private LoginDAO loginDAO;
 	private static final long serialVersionUID = 1L;
 //	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=Shop;user=sa;password=root";
 //	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -42,7 +42,7 @@ public class LoginView extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String userPassword = request.getParameter("Password");
 //		user = new User();
-		loginDAO = new loginDAO();
+		loginDAO = new LoginDAO();
 		loginDAO.setUserName(userName);
 		loginDAO.setUserPassword(userPassword);
 
@@ -68,6 +68,7 @@ public class LoginView extends HttpServlet {
 //					session.setAttribute("user",
 //							new AccountDetails(null, userName, userPassword, null, null, null, null));
 					session.setAttribute("user", accountDetails);
+					session.setAttribute("accountID", accountDetails.getAccountID());
 					request.getRequestDispatcher("/home.jsp").forward(request, response);
 				} else {
 					// username: 'Khanh'

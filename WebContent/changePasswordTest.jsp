@@ -37,12 +37,13 @@
 <title>Thay Đổi Mật Khẩu Tài Khoản</title>
 </head>
 <body>
-	<form action="ChangePassword">
+	<form action="ChangePassword" method="post">
 		<div class="contain_change_pass">
 			<input placeholder="Nhập Mật Khẩu Hiện Tại" class="current_pass"
-				type="text"> <input placeholder="Nhập Mật Khẩu Mới"
-				class="new_pass" type="text"> <input
-				placeholder="Xác Nhận Mật Khẩu Mới" class="new_pass_con" type="text">
+				name="current_pass" type="text"> <input
+				placeholder="Nhập Mật Khẩu Mới" class="new_pass" name="new_pass"
+				type="text"> <input placeholder="Xác Nhận Mật Khẩu Mới"
+				class="new_pass_con" name="new_pass_con" type="text">
 		</div>
 		<button type="submit" class="btn btn-primary">Lưu</button>
 	</form>

@@ -152,6 +152,38 @@ public class AccountDao {
 
 	}
 
+	public String getPassword(String id) {
+		String result = "";
+		try {
+
+			Class.forName(driver);
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select password from Account where accountID='" + id + "';");
+			while (rs.next()) {
+				result = rs.getString("password");
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+		return result;
+
+	}
+
+	public boolean checkPassword(String passInput, String id) {
+		if (passInput.equals(getPassword(id))) {
+			return true;
+		} else {
+
+			return false;
+		}
+
+	}
+
 	public AccountDetails getAccount(String userName, String userPassword) {
 		AccountDetails available = new AccountDetails();
 		try {
@@ -161,8 +193,8 @@ public class AccountDao {
 			Connection con = DriverManager.getConnection(connectionUrl);
 
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from Account where accountName='" + userName
-					+ "' and password='" + userPassword + "'");
+			ResultSet rs = stmt.executeQuery(
+					"select * from Account where accountName='" + userName + "' and password='" + userPassword + "'");
 			while (rs.next()) {
 				available.setAccountID(rs.getString("accountID"));
 				available.setAccountName(rs.getString("accountName"));
@@ -194,6 +226,94 @@ public class AccountDao {
 				}
 			}
 		}
+	}
+
+	public void editAccount(AccountDetails account, String id) throws SQLException, ClassNotFoundException {
+		Class.forName(driver);
+//		try (Connection connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/examples", "sa", ""))
+		try (Connection connection = DriverManager.getConnection(connectionUrl))
+
+		{
+
+			// Step 3: Execute the query or update query
+//			try {
+//				Statement statement = connection.createStatement();
+//			} catch (SQLException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+//			String uName = user.getUserName();
+//			String uIGName = user.getUserNameIG();
+//			String uEmail = user.getUserEmail();
+
+//			try (PreparedStatement insert = connection
+//					.prepareStatement(INSERT_ACCOUNT_SQL + " (?, ?, ?, " + "(N'Quốc Khánh Trịnh Lê Ka')" + ", ?,?,?);")) {
+			try (PreparedStatement insert = connection.prepareStatement(
+					"UPDATE Account SET fullName = ?, birthday= ?, email= ?, phoneNumber= ? WHERE accountID ='" + id
+							+ ";")) {
+//				String driverID = rs0.getNString("driverID");
+//				String fullName = rs0.getNString("fullName");
+//				Date birthday = rs0.getDate("birthday");
+//				boolean male = rs0.getBoolean("male");
+//				String address = rs0.getNString("address");
+//				String country = rs0.getNString("country");
+//				Date dayBegin = rs0.getDate("dayBegin");
+//				int salary = rs0.getInt("salary");
+//				String driverLicense = rs0.getNString("driverLicense");
+//				String BusID = rs0.getNString("BusID");
+				insert.setNString(1, account.getFullName());
+				insert.setDate(2,
+						java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(account.getBirthday())));
+				insert.setString(3, account.getEmail());
+				insert.setString(4, account.getPhoneNumber());
+//				insert.executeUpdate();
+				insert.executeUpdate();
+
+			}
+		}
+	}
+
+	public void changePassword(String pass, String id) throws ClassNotFoundException, SQLException {
+		Class.forName(driver);
+//		try (Connection connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/examples", "sa", ""))
+		try (Connection connection = DriverManager.getConnection(connectionUrl))
+
+		{
+
+			// Step 3: Execute the query or update query
+//			try {
+//				Statement statement = connection.createStatement();
+//			} catch (SQLException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+//			String uName = user.getUserName();
+//			String uIGName = user.getUserNameIG();
+//			String uEmail = user.getUserEmail();
+
+//			try (PreparedStatement insert = connection
+//					.prepareStatement(INSERT_ACCOUNT_SQL + " (?, ?, ?, " + "(N'Quốc Khánh Trịnh Lê Ka')" + ", ?,?,?);")) {
+			try (PreparedStatement insert = connection
+					.prepareStatement("UPDATE Account SET password = ? WHERE accountID = ?;")) {
+//				String driverID = rs0.getNString("driverID");
+//				String fullName = rs0.getNString("fullName");
+//				Date birthday = rs0.getDate("birthday");
+//				boolean male = rs0.getBoolean("male");
+//				String address = rs0.getNString("address");
+//				String country = rs0.getNString("country");
+//				Date dayBegin = rs0.getDate("dayBegin");
+//				int salary = rs0.getInt("salary");
+//				String driverLicense = rs0.getNString("driverLicense");
+//				String BusID = rs0.getNString("BusID");
+				insert.setString(1, pass);
+				insert.setNString(2, id);
+//				insert.executeUpdate();
+				insert.executeUpdate();
+
+			}
+
+		}
+
 	}
 
 	public boolean checkUpdate() throws SQLException {
@@ -246,13 +366,16 @@ public class AccountDao {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 //		System.out.println(new SearchDAO().getSearch("Sài"));
-		System.out.println(new AccountDao().getAccount("an", "an"));
+//		System.out.println(new AccountDao().getAccount("an", "an"));
 //		System.out.println(new AccountDao().getCount());
 //		System.out.println(new AccountDao().registerUser(new AccountDetails("442", "khanhle", "12344",
 //				"Hoàng Văn Thụ", new Date(1954, 3, 3), "ddsds@gmail.com", "13456")));
 //		System.out.println(new AccountDao().getNumberID());
 //		System.out.println(new AccountDao().getLogin("an", "an"));
+		new AccountDao().changePassword("huyenbeiu", "6");
 //		System.out.println();
 //		new AccountDao().selectAccount();
+//		System.out.println(new AccountDao().getPassword("1624453300292"));
+//		System.out.println(new AccountDao().checkPassword("huyen", "1624453300292"));
 	}
 }
