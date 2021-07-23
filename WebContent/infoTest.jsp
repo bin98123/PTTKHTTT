@@ -46,7 +46,7 @@
 	/* 	background-color: blue; */
 }
 
-.name_in, .bnt-edit {
+.bnt-edit {
 	margin-bottom: 15px;
 	/*margin-right: 12px;
 */
@@ -57,11 +57,10 @@
 	margin-top: 15px;
 }
 
-.contain_name_in {
-	margin-top: 18px;
-	margin-left: 16px;
-}
-
+/* .contain_name_in { */
+/* 	margin-top: 18px; */
+/* 	margin-left: 16px; */
+/* } */
 .bnt-edit {
 	margin-left: 0px;
 	/*margin-right: 20px;
@@ -141,7 +140,7 @@ input::-webkit-input-placeholder {
 	text-align: center;
 }
 
-.address_in, .phoneNumber_in, .email_in {
+.address_in, .phoneNumber_in, .email_in, .name_in {
 	width: 95%;
 	height: 47px;
 	margin: 15px;
@@ -253,36 +252,40 @@ if (accountDetails1 != null) {
 	<div class="container111">
 		<div class="top-info"></div>
 		<!-- <div class="contain_left">-->
-		<form action="UpdateAccount" method="post">
-		<div class="left">
-			<!-- 			<a for="exampleFormControlFile1"> <img src='./images/demo.png' -->
-			<!-- 				title="ảnh demo avatar" alt="demo avatar" class="left-img"> -->
-			<!-- 			</a> <input type="file" class="form-control-file" -->
-			<!-- 				id="exampleFormControlFile"> -->
-			<div class="left-content">
-				<div class="contain_name_in">
-					<input placeholder="Họ" class="name_in" type="text"> <input
-						placeholder="Tên" class="name_in" type="text">
-				</div>
-				<input placeholder="Ngày sinh: dd/mm/yyyy" class="address_in"
-					type="text"> <input placeholder="Email: name@example.com"
-					class="email_in" type="text"> <input
-					placeholder="Số điện thoại" class="phoneNumber_in" type="text">
-				<div class="contain_bnt_edit">
-					<button class="btn btn-primary btn-lg bnt-edit update"
-						type="button">Cập nhật</button>
-					<button class="btn btn-primary btn-lg bnt-edit cancel"
-						type="reset">Hủy
-						bỏ</button>
+		<form action="EditAccount" method="post">
+			<div class="left">
+				<!-- 			<a for="exampleFormControlFile1"> <img src='./images/demo.png' -->
+				<!-- 				title="ảnh demo avatar" alt="demo avatar" class="left-img"> -->
+				<!-- 			</a> <input type="file" class="form-control-file" -->
+				<!-- 				id="exampleFormControlFile"> -->
+				<div class="left-content">
+					<!-- 				<div class="contain_name_in"> -->
+					<input placeholder="Họ và tên" class="name_in" name="name_in"
+						type="text">
+					<!-- 					 <input -->
+					<!-- 						placeholder="Tên" class="name_in" type="text"> -->
+					<!-- 				</div> -->
+					<input placeholder="Ngày sinh: dd/mm/yyyy" class="address_in"
+						name="address_in" type="text"> <input
+						placeholder="Email: name@example.com" class="email_in"
+						name="email_in" type="text"> <input
+						placeholder="Số điện thoại" class="phoneNumber_in"
+						name="phoneNumber_in" type="text">
+					<div class="contain_bnt_edit">
+						<button class="btn btn-primary btn-lg bnt-edit update"
+							type="submit">Cập nhật</button>
+						<button class="btn btn-primary btn-lg bnt-edit cancel"
+							type="reset">Hủy bỏ</button>
+					</div>
 				</div>
 			</div>
-		</div>
 		</form>
 
 		<div class="right">
 			<div class="right-title">
 				<h2 class="right-title-sub">Thông tin cá nhân</h2>
-				<button class="btn btn-danger right-change-bnt" type="button"onclick="window.location.href='./changePassword.jsp'">Thay
+				<button class="btn btn-danger right-change-bnt" type="button"
+					onclick="window.location.href='./changePassword.jsp'">Thay
 					đổi mật khẩu</button>
 			</div>
 			<div class="right-content">
