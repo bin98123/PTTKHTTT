@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.AccountDao;
 import model.AccountDetails;
@@ -73,6 +74,7 @@ public class SignUpServlet extends HttpServlet {
 		int month = Integer.parseInt(monthText);
 		int year = Integer.parseInt(yearText);
 //		}
+		HttpSession session = request.getSession();
 		Date birthday = new Date(year - 1900, month - 1, date);
 		String email = request.getParameter("email");
 		String phoneNumber = request.getParameter("phoneNumber");
@@ -84,10 +86,18 @@ public class SignUpServlet extends HttpServlet {
 //		int a = accountDao.getCount();
 		try {
 //			accountDao.registerUser(accountDetails);
-			if (accountDao.registerUser(accountDetails) > 0) {
-				request.getRequestDispatcher("./RegisterSuccess.jsp").forward(request, response);
+			if (accountDao.checkAccount(accountDetails.getAccountName()) == 0) {
+				if (accountDao.registerUser(accountDetails) > 0) {
+					request.getRequestDispatcher("./RegisterSuccess.jsp").forward(request, response);
+				} else {
+					request.getRequestDispatcher("./signup.jsp").forward(request, response);
+					;
+				}
 			} else {
-				request.getRequestDispatcher("./signup.jsp");
+				String error = "Tên Tài Khoản Đã Được Sửa Dụng";
+				session.setAttribute("errorSignUp", error);
+				request.getRequestDispatcher("./signup.jsp").forward(request, response);
+				;
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

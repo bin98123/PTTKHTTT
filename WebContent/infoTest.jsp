@@ -1,3 +1,4 @@
+<%@page import="dao.AccountDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="model.*"%>
@@ -244,7 +245,10 @@ input::-webkit-input-placeholder {
 <title>Trang thông tin cá nhân</title>
 </head>
 <%
-	AccountDetails accountDetails1 = (AccountDetails) session.getAttribute("user");
+	String accountDetails1 = (String) session.getAttribute("accountID");
+AccountDao account = new AccountDao();
+
+AccountDetails accountDetails2 = account.getAccount(accountDetails1);
 if (accountDetails1 != null) {
 	// 	session.setMaxInactiveInterval(1800);
 %>
@@ -266,7 +270,7 @@ if (accountDetails1 != null) {
 					<!-- 						placeholder="Tên" class="name_in" type="text"> -->
 					<!-- 				</div> -->
 					<input placeholder="Ngày sinh: dd/mm/yyyy" class="address_in"
-						name="address_in" type="text"> <input
+						name="birthday_in" type="text"> <input
 						placeholder="Email: name@example.com" class="email_in"
 						name="email_in" type="text"> <input
 						placeholder="Số điện thoại" class="phoneNumber_in"
@@ -296,10 +300,10 @@ if (accountDetails1 != null) {
 					<p class="right-content-left phoneNumber">Số điện thoại</p>
 				</div>
 				<div class="contain_right-content-right">
-					<p class="right-content-right"><%=accountDetails1.getFullName()%></p>
-					<p class="right-content-right"><%=accountDetails1.getBirthday()%></p>
-					<p class="right-content-right email_info"><%=accountDetails1.getEmail()%></p>
-					<p class="right-content-right"><%=accountDetails1.getPhoneNumber()%></p>
+					<p class="right-content-right"><%=accountDetails2.getFullName()%></p>
+					<p class="right-content-right"><%=accountDetails2.getBirthday()%></p>
+					<p class="right-content-right email_info"><%=accountDetails2.getEmail()%></p>
+					<p class="right-content-right"><%=accountDetails2.getPhoneNumber()%></p>
 
 
 				</div>

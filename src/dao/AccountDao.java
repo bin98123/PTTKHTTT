@@ -212,6 +212,54 @@ public class AccountDao {
 
 	}
 
+	public int checkAccount(String userName) {
+		int available = 0;
+		try {
+
+			Class.forName(driver);
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Account where accountName='" + userName + "'");
+			while (rs.next()) {
+				available++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+		return available;
+
+	}
+
+	public AccountDetails getAccount(String id) {
+		AccountDetails available = new AccountDetails();
+		try {
+
+			Class.forName(driver);
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Account where accountID='" + id + "'");
+			while (rs.next()) {
+				available.setAccountID(rs.getString("accountID"));
+				available.setAccountName(rs.getString("accountName"));
+				available.setPassword(rs.getString("password"));
+				available.setFullName(rs.getNString("fullName"));
+				available.setBirthday(rs.getDate("birthday"));
+				available.setEmail(rs.getString("Email"));
+				available.setPhoneNumber(rs.getString("phoneNumber"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+		return available;
+
+	}
+
 	private void printSQLException(SQLException ex) {
 		for (Throwable e : ex) {
 			if (e instanceof SQLException) {
@@ -250,7 +298,7 @@ public class AccountDao {
 //					.prepareStatement(INSERT_ACCOUNT_SQL + " (?, ?, ?, " + "(N'Quốc Khánh Trịnh Lê Ka')" + ", ?,?,?);")) {
 			try (PreparedStatement insert = connection.prepareStatement(
 					"UPDATE Account SET fullName = ?, birthday= ?, email= ?, phoneNumber= ? WHERE accountID ='" + id
-							+ ";")) {
+							+ "';")) {
 //				String driverID = rs0.getNString("driverID");
 //				String fullName = rs0.getNString("fullName");
 //				Date birthday = rs0.getDate("birthday");
