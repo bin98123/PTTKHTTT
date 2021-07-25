@@ -21,7 +21,7 @@
 		</div>
 		<div class="right-path1"
 			style="float: left; height: 100%; margin-left: 300px">
-			<jsp:include page="BusTest.jsp" />
+			<jsp:include page="editBusRouteTest.jsp" />
 		</div>
 	</div>
 </body>

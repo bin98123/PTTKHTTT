@@ -152,7 +152,11 @@ body {
 						class="fas fa-caret-down first"></span>
 				</a>
 					<ul class="manager-show">
-						<li><a href="#">Quản lý Tuyến Xe</a></li>
+						<form id="managerBusRoute" action="Manager" method="post">
+							<li onclick="managerBusRoute.submit();"><input name="home"
+								type="hidden" id="manager-route-btn" value="manager-route" /><a>Quản
+									lý Tuyến Xe</a></li>
+						</form>
 						<form id="managerUnit" action="Manager" method="post">
 							<li onclick="managerUnit.submit();"><input name="home"
 								type="hidden" id="manager-unit-btn" value="manager-unit" /><a>Quản
@@ -163,7 +167,16 @@ body {
 								type="hidden" id="manager-driver-btn" value="manager-driver" /><a>Quản
 									lý Tài Xế</a></li>
 						</form>
-						<li><a href="#">Quản lý Xe Buýt</a></li>
+						<form id="managerBus" action="Manager" method="post">
+							<li onclick="managerBus.submit();"><input name="home"
+								type="hidden" id="manager-bus-btn" value="manager-bus" /><a>Quản
+									lý Xe Buýt</a></li>
+						</form>
+						<form id="managerStop" action="Manager" method="post">
+							<li onclick="managerStop.submit();"><input name="home"
+								type="hidden" id="manager-stop-btn" value="manager-stop" /><a>Quản
+									lý Trạm Dừng</a></li>
+						</form>
 					</ul></li>
 				<%
 					} ;
@@ -192,6 +205,11 @@ body {
 							<li onclick="myForm4.submit();"><input name="home"
 								type="hidden" id="search-bus-btn" value="search-bus" /><a>Tra
 									cứu Xe Buýt</a></li>
+						</form>
+						<form id="myForm5" action="Manager" method="post">
+							<li onclick="myForm5.submit();"><input name="home"
+								type="hidden" id="search-busStop-btn" value="search-busStop" /><a>Tra
+									cứu Trạm Dừng</a></li>
 						</form>
 					</ul></li>
 				<form id="exit" action="Manager" method="post">

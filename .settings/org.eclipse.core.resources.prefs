@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//WebContent/BusManager.jsp=UTF-8
+encoding//WebContent/BusRouteTest.jsp=UTF-8
 encoding//WebContent/Driver.jsp=UTF-8
+encoding//WebContent/editUnitTest.jsp=UTF-8
 encoding//WebContent/findPath.jsp=UTF-8
 encoding//WebContent/home.jsp=UTF-8
 encoding//WebContent/index.jsp=UTF-8

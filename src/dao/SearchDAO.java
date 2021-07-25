@@ -9,6 +9,7 @@ import java.util.List;
 
 import model.BusDetails;
 import model.BusUnitManagerDetails;
+import model.DriverDetails;
 
 public class SearchDAO {
 	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
@@ -95,6 +96,80 @@ public class SearchDAO {
 				chuyen.setManufactureDay(rs.getDate("ManufactureDay"));
 				chuyen.setLateGuaranteeDay(rs.getDate("LateGuaranteeDay"));
 				chuyen.setRouteID(rs.getInt("RouteID"));
+//				System.out.println(rs.getNString("TenTram"));
+				chuyens.add(chuyen);
+//				for (ChuyenDetails chuyenDetails : chuyens) {
+//					chuyen.setChuyenID(rs.getInt("ChuyenID"));
+//					chuyen.setLuotDi(rs.getString("LUOTDI"));
+//					chuyen.setLuotVe(rs.getString("LUOTVE"));
+//					chuyen.setTenChuyen(rs.getString("TENCHUYEN"));
+//					chuyen.setID(rs.getFloat("ID"));
+//					System.out.println(rs.getFloat("ID"));
+//					chuyen.setSTT(rs.getInt("STT"));
+//					System.out.println(rs.getInt("STT"));
+//					chuyen.setTemTram(rs.getString("TenTram"));
+//					System.out.println(rs.getString("TenTram"));
+//					chuyens.add(chuyen);
+//				}
+			}
+			result = chuyens;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+//		if (available != 0) {
+//			return true;
+//		}
+		return chuyens;
+
+	}
+
+	public List<DriverDetails> getSearchDriver(String txtSearch) {
+		if (txtSearch.equals("Name")) {
+			txtSearch = "true";
+		} else if (txtSearch.equals("Nữ")) {
+			txtSearch = "false";
+
+		}
+		List<DriverDetails> result = new ArrayList<DriverDetails>();
+		List<DriverDetails> chuyens = new ArrayList<DriverDetails>();
+		int available = 0;
+		try {
+
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt
+					.executeQuery("select * from Driver where driverID like N'%" + txtSearch + "%' or fullName like N'%"
+							+ txtSearch + "%' or address like N'%" + txtSearch + "%' or country like N'%" + txtSearch
+							+ "%' or dayBegin like N'%" + txtSearch + "%' or salary like N'%" + txtSearch
+							+ "%' or driverLicense like N'%" + txtSearch + "%' or BusID like N'%" + txtSearch + "%'");
+			while (rs.next()) {
+				DriverDetails chuyen = new DriverDetails();
+//				available++;
+//				System.out.println("Khanh");
+//				chuyen.setID(rs.getFloat("routeID"));
+////				System.out.println(rs.getFloat("ID"));
+//				chuyen.setSTT(rs.getInt("SERIAL"));
+////				System.out.println(rs.getInt("STT"));
+//				chuyen.setTemTram(rs.getNString("NAMEBUSSTOP"));
+				chuyen.setDriverID(rs.getNString("driverID"));
+				chuyen.setFullName(rs.getNString("fullName"));
+				chuyen.setBirthday(rs.getDate("birthday"));
+				chuyen.setMale(rs.getBoolean("male"));
+				chuyen.setAddress(rs.getNString("address"));
+				chuyen.setCountry(rs.getNString("country"));
+				chuyen.setDayBegin(rs.getDate("dayBegin"));
+				chuyen.setSalary(rs.getInt("salary"));
+				chuyen.setDriverLicense(rs.getNString("driverLicense"));
+				chuyen.setBusID(rs.getNString("BusID"));
+//				chuyen.setLicensePlate(rs.getNString("licensePlate"));
+//				chuyen.setKind(rs.getNString("kind"));
+//				chuyen.setManufactureDay(rs.getDate("ManufactureDay"));
+//				chuyen.setLateGuaranteeDay(rs.getDate("LateGuaranteeDay"));
+//				chuyen.setRouteID(rs.getInt("RouteID"));
 //				System.out.println(rs.getNString("TenTram"));
 				chuyens.add(chuyen);
 //				for (ChuyenDetails chuyenDetails : chuyens) {

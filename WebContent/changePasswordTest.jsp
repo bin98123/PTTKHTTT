@@ -46,6 +46,8 @@
 				class="new_pass_con" name="new_pass_con" type="text">
 		</div>
 		<button type="submit" class="btn btn-primary">Lưu</button>
+		<button type="button" class="btn btn-danger"
+			onclick="window.location.href='./homeTest.jsp'">Return</button>
 	</form>
 </body>
 </html>

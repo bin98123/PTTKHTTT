@@ -53,26 +53,43 @@ public class ManagerServlet extends HttpServlet {
 		}
 		// search
 //		String search = request.getParameter("search");
-		else if (home.equals("search-bus-router")) {
+
+		// Trạm
+		else if (home.equals("search-busStop")) {
 			request.getRequestDispatcher("./BusManager2.jsp").forward(request, response);
-		}
-		else if (home.equals("search-bus")) {
+			// Xe
+		} else if (home.equals("search-bus")) {
 			request.getRequestDispatcher("./Bus.jsp").forward(request, response);
-		}
-		else if (home.equals("search-bus-driver")) {
+			// Tài xế
+		} else if (home.equals("search-bus-driver")) {
 			request.getRequestDispatcher("./Driver.jsp").forward(request, response);
-		}
-		else if (home.equals("search-unit")) {
+			// Tuyến xe
+		} else if (home.equals("search-bus-router")) {
+			request.getRequestDispatcher("./BusRoute.jsp").forward(request, response);
+			// Đơn vị
+		} else if (home.equals("search-unit")) {
 			request.getRequestDispatcher("./Unit.jsp").forward(request, response);
-		}
-		else if (home.equals("statistic")) {
+			// -------------------------------------
+			// Thống kê
+		} else if (home.equals("statistic")) {
 			request.getRequestDispatcher("./statistic.jsp").forward(request, response);
-		}
-		else if (home.equals("manager-unit")) {
+			// -------------------------------------
+			// Quản lý
+			// Đơn vị
+		} else if (home.equals("manager-unit")) {
 			request.getRequestDispatcher("./ManagerUnit.jsp").forward(request, response);
-		}
-		else if (home.equals("manager-driver")) {
+			// Trạm
+		} else if (home.equals("manager-stop")) {
+			request.getRequestDispatcher("./ManagerBusStop.jsp").forward(request, response);
+			// Tài xế
+		} else if (home.equals("manager-driver")) {
 			request.getRequestDispatcher("./ManagerDriver.jsp").forward(request, response);
+			// Xe
+		} else if (home.equals("manager-bus")) {
+			request.getRequestDispatcher("./ManagerBus.jsp").forward(request, response);
+			// Tuyến xe
+		} else if (home.equals("manager-route")) {
+			request.getRequestDispatcher("./ManagerRoute.jsp").forward(request, response);
 		}
 	}
 }

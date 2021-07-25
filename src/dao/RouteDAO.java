@@ -12,19 +12,20 @@ import java.util.Date;
 import java.util.List;
 
 import model.AccountDetails;
+import model.BusRouteDetails;
 import model.DriverDetails;
 
-public class DriverDAO {
+public class RouteDAO {
 	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
 //	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
 //			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
-	String INSERT_DriverTemp_SQL = "INSERT INTO DriverTemp"
-			+ "  (driverID , fullName , birthday , male , address , country, dayBegin, salary, driverLicense, BusID,id) VALUES ";
-	String INSERT_Driver_SQL = "INSERT INTO Driver"
-			+ "  (driverID , fullName , birthday , male , address , country, dayBegin, salary, driverLicense, BusID)  VALUES ";
+	String INSERT_RouteTemp_SQL = "INSERT INTO BusRouteTemp"
+			+ "  (routeID , unitID , routeName , timeStart , timeEnd , timeBreak, startLocation, endLocation, kindRoute,id) VALUES ";
+	String INSERT_Route_SQL = "INSERT INTO BusRoute"
+			+ "  (routeID , unitID , routeName , timeStart , timeEnd , timeBreak, startLocation, endLocation, kindRoute)  VALUES ";
 	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
-	public DriverDAO() {
+	public RouteDAO() {
 
 	}
 
@@ -38,7 +39,7 @@ public class DriverDAO {
 		try {
 
 			Class.forName(driver);
-			ResultSet rs0 = stmt.executeQuery("select max(id) as maxID from DriverTemp;");
+			ResultSet rs0 = stmt.executeQuery("select max(id) as maxID from BusRoute;");
 			if (rs0.next()) {
 				result = rs0.getFloat("maxID");
 			} else {
@@ -52,7 +53,7 @@ public class DriverDAO {
 		return result;
 	}
 
-	public int edit(DriverDetails driverDetails, String driverID) throws ClassNotFoundException, SQLException {
+	public int edit(BusRouteDetails driverDetails, String routeID) throws ClassNotFoundException, SQLException {
 		int result = 0;
 		System.out.println(driverDetails);
 //		Class.forName("org.hsqldb.jdbcDriver");
@@ -76,8 +77,8 @@ public class DriverDAO {
 //			try (PreparedStatement insert = connection
 //					.prepareStatement(INSERT_ACCOUNT_SQL + " (?, ?, ?, " + "(N'Quốc Khánh Trịnh Lê Ka')" + ", ?,?,?);")) {
 			try (PreparedStatement insert = connection.prepareStatement(
-					"UPDATE Driver SET fullName = ?, birthday= ?, male= ?, address= ?, country= ?, dayBegin= ?, salary= ?, driverLicense= ?, BusID= ? WHERE driverID = ?;")) {
-				System.out.println(driverDetails.getFullName());
+					"UPDATE BusRoute SET unitID = ?, routeName= ?, timeStart= ?, timeEnd= ?, timeBreak= ?, startLocation= ?, endLocation= ?, kindRoute= ? WHERE routeID = ?;")) {
+				System.out.println(driverDetails.getUnitID());
 //				String driverID = rs0.getNString("driverID");
 //				String fullName = rs0.getNString("fullName");
 //				Date birthday = rs0.getDate("birthday");
@@ -88,18 +89,15 @@ public class DriverDAO {
 //				int salary = rs0.getInt("salary");
 //				String driverLicense = rs0.getNString("driverLicense");
 //				String BusID = rs0.getNString("BusID");
-				insert.setString(1, driverDetails.getFullName());
-				insert.setDate(2,
-						java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(driverDetails.getBirthday())));
-				insert.setBoolean(3, driverDetails.getMale());
-				insert.setNString(4, driverDetails.getAddress());
-				insert.setNString(5, driverDetails.getCountry());
-				insert.setDate(6,
-						java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(driverDetails.getDayBegin())));
-				insert.setInt(7, driverDetails.getSalary());
-				insert.setNString(8, driverDetails.getDriverLicense());
-				insert.setNString(9, driverDetails.getBusID());
-				insert.setNString(10, driverID);
+				insert.setNString(1, driverDetails.getUnitID());
+				insert.setNString(2, driverDetails.getRouteName());
+				insert.setNString(3, driverDetails.getTimeStart());
+				insert.setNString(4, driverDetails.getTimeEnd());
+				insert.setDouble(5, driverDetails.getTimeBreak());
+				insert.setNString(6, driverDetails.getStartLocation());
+				insert.setNString(7, driverDetails.getEndLocation());
+				insert.setNString(8, driverDetails.getKindRoute());
+				insert.setNString(9, routeID);
 //				insert.executeUpdate();
 				result = insert.executeUpdate();
 
@@ -110,9 +108,8 @@ public class DriverDAO {
 
 	}
 
-	public int add(DriverDetails driverDetails) throws ClassNotFoundException, SQLException {
+	public int add(BusRouteDetails route) throws ClassNotFoundException, SQLException {
 		int result = 0;
-		System.out.println(driverDetails);
 //		Class.forName("org.hsqldb.jdbcDriver");
 		Class.forName(driver);
 //		try (Connection connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/examples", "sa", ""))
@@ -133,11 +130,9 @@ public class DriverDAO {
 
 //			try (PreparedStatement insert = connection
 //					.prepareStatement(INSERT_ACCOUNT_SQL + " (?, ?, ?, " + "(N'Quốc Khánh Trịnh Lê Ka')" + ", ?,?,?);")) {
-			try (PreparedStatement insert = connection.prepareStatement(INSERT_Driver_SQL + " ((N'"
-					+ driverDetails.getDriverID() + "'),(N'" + driverDetails.getFullName() + "'), ?,?,(N'"
-					+ driverDetails.getAddress() + "'),(N'" + driverDetails.getCountry() + "'),?,?,(N'"
-					+ driverDetails.getDriverLicense() + "'),(N'" + driverDetails.getBusID() + "'));")) {
-				System.out.println(driverDetails.getFullName());
+			try (PreparedStatement insert = connection
+					.prepareStatement(INSERT_Route_SQL + " (?,?,?,?,?,?,(N'" + route.getStartLocation() + "'),(N'"
+							+ route.getEndLocation() + "'),(N'" + route.getKindRoute() + "'));")) {
 				// 1private String accountID;
 //				2private String accountName;
 //				3private String password;
@@ -146,13 +141,12 @@ public class DriverDAO {
 //				6private String email;
 //				7private String phoneNumber;
 //				insert.setString(1, account.getPassword() + account.getAccountName());
-				insert.setDate(1,
-						java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(driverDetails.getBirthday())));
-				insert.setBoolean(2, driverDetails.getMale());
-//				insert.setNString(4, "N'" + account.getFullName() + "'");
-				insert.setDate(3,
-						java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(driverDetails.getDayBegin())));
-				insert.setInt(4, driverDetails.getSalary());
+				insert.setInt(1, route.getRouteID());
+				insert.setString(2, route.getUnitID());
+				insert.setNString(3, route.getRouteName());
+				insert.setString(4, route.getTimeStart());
+				insert.setString(5, route.getTimeEnd());
+				insert.setDouble(6, route.getTimeBreak());
 //				insert.executeUpdate();
 				result = insert.executeUpdate();
 
@@ -163,7 +157,7 @@ public class DriverDAO {
 
 	}
 
-	public boolean deleteDriver(String id) throws ClassNotFoundException, SQLException {
+	public boolean delete(String id) throws ClassNotFoundException, SQLException {
 		boolean result = false;
 
 		Connection con = DriverManager.getConnection(connectionUrl);
@@ -173,21 +167,20 @@ public class DriverDAO {
 		try {
 
 			Class.forName(driver);
-			ResultSet rs0 = stmt.executeQuery("select * from Driver WHERE driverID='" + id + "';");
+			ResultSet rs0 = stmt.executeQuery("select * from BusRoute WHERE routeID=" + id + ";");
 			while (rs0.next()) {
-				String driverID = rs0.getNString("driverID");
-				String fullName = rs0.getNString("fullName");
-				Date birthday = rs0.getDate("birthday");
-				boolean male = rs0.getBoolean("male");
-				String address = rs0.getNString("address");
-				String country = rs0.getNString("country");
-				Date dayBegin = rs0.getDate("dayBegin");
-				int salary = rs0.getInt("salary");
-				String driverLicense = rs0.getNString("driverLicense");
-				String BusID = rs0.getNString("BusID");
+				int routeID = rs0.getInt("routeID");
+				String unitID = rs0.getNString("unitID");
+				String routeName = rs0.getNString("routeName");
+				String timeStart = rs0.getNString("timeStart");
+				String timeEnd = rs0.getNString("timeEnd");
+				Double timeBreak = rs0.getDouble("timeBreak");
+				String startLocation = rs0.getNString("startLocation");
+				String endLocation = rs0.getNString("endLocation");
+				String kindRoute = rs0.getNString("kindRoute");
 
 				try (PreparedStatement insert = con
-						.prepareStatement(INSERT_DriverTemp_SQL + " (?, ?, ?,?,?,?, ?, ?,?,?,?);")) {
+						.prepareStatement(INSERT_RouteTemp_SQL + " (?, ?, ?,?,?,?, ?, ?,?,?);")) {
 					// 1private String accountID;
 //			2private String accountName;
 //			3private String password;
@@ -196,24 +189,23 @@ public class DriverDAO {
 //			6private String email;
 //			7private String phoneNumber;
 //			insert.setString(1, account.getPassword() + account.getAccountName());
-					insert.setNString(1, driverID);
-					insert.setNString(2, fullName);
-					insert.setDate(3, java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(birthday)));
-					insert.setBoolean(4, male);
-					insert.setNString(5, address);
-					insert.setNString(6, country);
-					insert.setDate(7, java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(dayBegin)));
-					insert.setInt(8, salary);
-					insert.setNString(9, driverLicense);
-					insert.setNString(10, BusID);
-					insert.setFloat(11, System.currentTimeMillis() + getMaxID());
+					insert.setInt(1, routeID);
+					insert.setNString(2, unitID);
+					insert.setNString(3, routeName);
+					insert.setNString(4, timeStart);
+					insert.setNString(5, timeEnd);
+					insert.setDouble(6, timeBreak);
+					insert.setNString(7, startLocation);
+					insert.setNString(8, endLocation);
+					insert.setNString(9, kindRoute);
+					insert.setFloat(10, System.currentTimeMillis() + getMaxID());
 //				int rs1 = insert.executeUpdate();
 
 					insert.executeUpdate();
 //					insert.close();
 				}
 				Statement stmt1 = con.createStatement();
-				int rs2 = stmt1.executeUpdate("delete from Driver where driverID='" + id + "';");
+				int rs2 = stmt1.executeUpdate("delete from BusRoute where routeID=" + id + ";");
 				if (rs2 > 0) {
 					result = true;
 				}
@@ -255,21 +247,20 @@ public class DriverDAO {
 		try {
 
 			Class.forName(driver);
-			ResultSet rs0 = stmt.executeQuery("select * from DriverTemp where id=(select max(id) from DriverTemp);");
+			ResultSet rs0 = stmt
+					.executeQuery("select * from BusRouteTemp where id=(select max(id) from BusRouteTemp);");
 			while (rs0.next()) {
-				String driverID = rs0.getNString("driverID");
-				String fullName = rs0.getNString("fullName");
-				Date birthday = rs0.getDate("birthday");
-				boolean male = rs0.getBoolean("male");
-				String address = rs0.getNString("address");
-				String country = rs0.getNString("country");
-				Date dayBegin = rs0.getDate("dayBegin");
-				int salary = rs0.getInt("salary");
-				String driverLicense = rs0.getNString("driverLicense");
-				String BusID = rs0.getNString("BusID");
+				int routeID = rs0.getInt("routeID");
+				String unitID = rs0.getNString("unitID");
+				String routeName = rs0.getNString("routeName");
+				String timeStart = rs0.getNString("timeStart");
+				String timeEnd = rs0.getNString("timeEnd");
+				Double timeBreak = rs0.getDouble("timeBreak");
+				String startLocation = rs0.getNString("startLocation");
+				String endLocation = rs0.getNString("endLocation");
+				String kindRoute = rs0.getNString("kindRoute");
 
-				try (PreparedStatement insert = con
-						.prepareStatement(INSERT_Driver_SQL + " (?,?, ?, ?,?,?, ?, ?,?,?);")) {
+				try (PreparedStatement insert = con.prepareStatement(INSERT_Route_SQL + " (?,?, ?, ?,?,?, ?, ?,?);")) {
 					// 1private String accountID;
 //		2private String accountName;
 //		3private String password;
@@ -278,23 +269,22 @@ public class DriverDAO {
 //		6private String email;
 //		7private String phoneNumber;
 //		insert.setString(1, account.getPassword() + account.getAccountName());
-					insert.setNString(1, driverID);
-					insert.setNString(2, fullName);
-					insert.setDate(3, java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(birthday)));
-					insert.setBoolean(4, male);
-					insert.setNString(5, address);
-					insert.setNString(6, country);
-					insert.setDate(7, java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(dayBegin)));
-					insert.setInt(8, salary);
-					insert.setNString(9, driverLicense);
-					insert.setNString(10, BusID);
+					insert.setInt(1, routeID);
+					insert.setNString(2, unitID);
+					insert.setNString(3, routeName);
+					insert.setNString(4, timeStart);
+					insert.setNString(5, timeEnd);
+					insert.setDouble(6, timeBreak);
+					insert.setNString(7, startLocation);
+					insert.setNString(8, endLocation);
+					insert.setNString(9, kindRoute);
 //				int rs1 = insert.executeUpdate();
 
 					insert.executeUpdate();
 					insert.close();
 				}
 				Statement stmt1 = con.createStatement();
-				stmt1.executeUpdate("delete from DriverTemp where id=(select max(id) from DriverTemp);");
+				stmt1.executeUpdate("delete from BusRouteTemp where id=(select max(id) from BusRouteTemp);");
 				con.commit();
 				stmt1.close();
 			}

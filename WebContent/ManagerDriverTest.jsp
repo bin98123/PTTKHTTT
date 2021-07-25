@@ -7,7 +7,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <style type="text/css">
 td, th, table {
 	border: 1px solid black;
@@ -76,15 +86,17 @@ td, th {
 	<%-- 	<%@ include file="test.jsp" %> --%>
 	<div class="top">
 		<div class="contain-search">
-			<form action="SearchUnitServlet" medthod="post">
+			<form action="SearchDriver" medthod="post">
 				<input class="search-box" type="text" name="txtSearch" size="15px">
-				<input class="search-btn" type="submit" name="btnSearch"
-					value="Search">
+				<input class="btn btn-sm btn-primary search-btn" type="submit"
+					name="btnSearch" value="Search">
 			</form>
 		</div>
 	</div>
 	<h1 id="default" style="display: <%=none%>;">Danh sách tìm kiếm</h1>
-	<table id="example" style="width: 100%;display: <%=none%>">
+	<table class="table table-striped table-bordered table-list example"
+		id="example" style="width: 100%;display: <%=none%>">
+		<%-- 	<table id="example" style="width: 100%;display: <%=none%>"> --%>
 		<thead>
 			<tr>
 				<!-- 
@@ -134,13 +146,15 @@ td, th {
 				<td style="text-align: left"><%=e.getDriverLicense()%></td>
 				<td style="text-align: left"><%=e.getBusID()%></td>
 				<td style="text-align: center; line-height: inherit;"><button
-						type="button"
+						type="button" class="btn btn-info btn-sm"
 						onclick="window.location.href='./ManagerDriver?submit=edit&unitID=<%=e.getDriverID()%>'">
-						Sửa</button></td>
+						<i class="fa fa-edit"></i>
+					</button></td>
 				<td style="text-align: center; line-height: inherit;"><button
-						type="button"
+						type="button" class="btn btn-danger btn-sm"
 						onclick="window.location.href='./ManagerDriver?submit=delete&unitID=<%=e.getDriverID()%>'">
-						Xóa</button></td>
+						<i class="fa fa-trash-o"></i>
+					</button></td>
 
 			</tr>
 
@@ -172,16 +186,18 @@ td, th {
 			<h1>Danh sách tài xế</h1>
 		</div>
 		<div class="bnt-add">
-			<button type="button"
+			<button type="button" class="btn btn-sm btn-primary"
 				onclick="window.location.href='./addDriver.jsp'">Thêm</button>
 		</div>
 		<div class="bnt-rollback">
-			<button type="button"
+			<button type="button" class="btn btn-sm btn-primary"
 				onclick="window.location.href='./ManagerDriver?submit=rollback'">Hoàn
 				tác</button>
 		</div>
 	</div>
-	<table class="table1" style="width: 100%;">
+	<!-- 	<table class="table1" style="width: 100%;"> -->
+	<table class="table table-striped table-bordered table-list table1"
+		style="width: 100%;">
 		<thead>
 			<tr>
 				<!-- 
@@ -229,13 +245,15 @@ td, th {
 				<td style="text-align: left"><%=e.getDriverLicense()%></td>
 				<td style="text-align: left"><%=e.getBusID()%></td>
 				<td style="text-align: center; line-height: inherit;"><button
-						type="button"
+						type="button" class="btn btn-info btn-sm"
 						onclick="window.location.href='./ManagerDriver?submit=edit&unitID=<%=e.getDriverID()%>'">
-						Sửa</button></td>
+						<i class="fa fa-edit"></i>
+					</button></td>
 				<td style="text-align: center; line-height: inherit;"><button
-						type="button"
+						type="button" class="btn btn-danger btn-sm"
 						onclick="window.location.href='./ManagerDriver?submit=delete&unitID=<%=e.getDriverID()%>'">
-						Xóa</button></td>
+						<i class="fa fa-trash-o"></i>
+					</button></td>
 			</tr>
 
 			<%

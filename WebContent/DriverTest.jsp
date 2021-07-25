@@ -7,7 +7,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <style type="text/css">
 td, th, table {
 	border: 1px solid black;
@@ -40,7 +46,7 @@ td, th {
 </head>
 <body>
 	<%
-		List<DriverDetails> chuyen = (List<DriverDetails>) request.getAttribute("listBusUnit");
+		List<DriverDetails> chuyen = (List<DriverDetails>) request.getAttribute("listDriver");
 	String none = (String) request.getAttribute("none");
 	Chuyen c = new Chuyen();
 	List<DriverDetails> chuyens = new ArrayList<DriverDetails>();
@@ -55,15 +61,16 @@ td, th {
 	<%-- 	<%@ include file="test.jsp" %> --%>
 	<div class="top">
 		<div class="contain-search">
-			<form action="SearchUnitServlet" medthod="post">
+			<form action="SearchDriver" medthod="post">
 				<input class="search-box" type="text" name="txtSearch" size="15px">
-				<input class="search-btn" type="submit" name="btnSearch"
-					value="Search">
+				<input class="btn btn-sm btn-primary search-btn" type="submit"
+					name="btnSearch" value="Search">
 			</form>
 		</div>
 	</div>
 	<h1 id="default" style="display: <%=none%>;">Danh sách tìm kiếm</h1>
-	<table id="example" style="width: 100%;display: <%=none%>">
+	<table class="table table-striped table-bordered table-list example"
+		id="example" style="width: 100%;display: <%=none%>">
 		<thead>
 			<tr>
 				<!-- 
@@ -134,7 +141,8 @@ td, th {
 	</table>
 	<!-- 	<table class="table1" style="width: 50%; display: none"> -->
 	<h1>Danh sách tài xế</h1>
-	<table class="table1" style="width: 100%;">
+	<table class="table table-striped table-bordered table-list table1"
+		style="width: 100%;">
 		<thead>
 			<tr>
 				<!-- 

@@ -39,13 +39,12 @@
 					</div>
 					<div class="form-group">
 						<label class="container">Nam <input type="checkbox"
-							 name="male" checked><span
-							class="checkmark"></span>
+							name="male" checked><span class="checkmark"></span>
 						</label>
-<!-- 						<label class="container">Male <input type="checkbox" -->
-<!-- 							 name="male" value="Nam" checked="checked"> <span -->
-<!-- 							class="checkmark"></span> -->
-<!-- 						</label> -->
+						<!-- 						<label class="container">Male <input type="checkbox" -->
+						<!-- 							 name="male" value="Nam" checked="checked"> <span -->
+						<!-- 							class="checkmark"></span> -->
+						<!-- 						</label> -->
 					</div>
 					<div class="form-group">
 						<label>Địa chỉ</label> <input type="text" class="form-control"
@@ -56,16 +55,16 @@
 							name="country" placeholder="Enter country">
 					</div>
 					<div class="form-group">
-						<label>Ngày bắt đầu hợp đồng</label> <input type="text" class="form-control"
-							name="dayBegin" placeholder="dd/mm/yyyy">
+						<label>Ngày bắt đầu hợp đồng</label> <input type="text"
+							class="form-control" name="dayBegin" placeholder="dd/mm/yyyy">
 					</div>
 					<div class="form-group">
 						<label>Lương</label> <input type="text" class="form-control"
 							name="salary" placeholder="Enter salary">
 					</div>
 					<div class="form-group">
-						<label>Bằng lái</label> <input type="text"
-							class="form-control" name="license" placeholder="Enter license">
+						<label>Bằng lái</label> <input type="text" class="form-control"
+							name="license" placeholder="Enter license">
 					</div>
 					<div class="form-group">
 						<label>Mã xe</label>
@@ -84,6 +83,7 @@
 								}
 							%>
 
+
 						</select>
 					</div>
 
@@ -93,7 +93,8 @@
 					<!-- 					</div> -->
 					<button type="submit" class="btn btn-primary">Save</button>
 					<button type="reset" class="btn btn-primary">Cancel</button>
-					<button type="button" class="btn btn-danger" onclick="window.location.href='./ManagerDriver.jsp'">Return</button>
+					<button type="button" class="btn btn-danger"
+						onclick="window.location.href='./ManagerDriver.jsp'">Return</button>
 				</form>
 			</div>
 		</div>

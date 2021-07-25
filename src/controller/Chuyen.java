@@ -1,15 +1,15 @@
 package controller;
 
-import java.sql.*;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import dao.ChuyenDetails;
 import model.BusDetails;
+import model.BusRouteDetails;
 import model.BusUnitManagerDetails;
 import model.DriverDetails;
 
@@ -29,7 +29,7 @@ public class Chuyen {
 			Connection con = DriverManager.getConnection(connectionUrl);
 
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from BusStop");
+			ResultSet rs = stmt.executeQuery("select * from BusStop ORDER BY routeID DESC,serial ASC");
 			while (rs.next()) {
 				ChuyenDetails chuyen = new ChuyenDetails();
 //				available++;
@@ -145,6 +145,64 @@ public class Chuyen {
 				chuyen.setUnitName(rs.getNString("unitName"));
 				chuyen.setPhoneNumber(rs.getNString("phoneNumber"));
 				chuyen.setEmail(rs.getNString("EMAIL"));
+//				System.out.println(rs.getInt("STT"));
+//				chuyen.setTemTram(rs.getNString("nameBusStop"));
+//				System.out.println(rs.getNString("TenTram"));
+				chuyens.add(chuyen);
+//				for (ChuyenDetails chuyenDetails : chuyens) {
+//					chuyen.setChuyenID(rs.getInt("ChuyenID"));
+//					chuyen.setLuotDi(rs.getS	tring("LUOTDI"));
+//					chuyen.setLuotVe(rs.getString("LUOTVE"));
+//					chuyen.setTenChuyen(rs.getString("TENCHUYEN"));
+//					chuyen.setID(rs.getFloat("ID"));
+//					System.out.println(rs.getFloat("ID"));
+//					chuyen.setSTT(rs.getInt("STT"));
+//					System.out.println(rs.getInt("STT"));
+//					chuyen.setTemTram(rs.getString("TenTram"));
+//					System.out.println(rs.getString("TenTram"));
+//					chuyens.add(chuyen);
+//				}
+			}
+			result = chuyens;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+//		if (available != 0) {
+//			return true;
+//		}
+		return chuyens;
+
+	}
+
+	public List<BusRouteDetails> getBusRoute() {
+		List<BusRouteDetails> result = new ArrayList<BusRouteDetails>();
+		List<BusRouteDetails> chuyens = new ArrayList<BusRouteDetails>();
+		int available = 0;
+		try {
+
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from BusRoute");
+			while (rs.next()) {
+				BusRouteDetails chuyen = new BusRouteDetails();
+//				available++;
+//				System.out.println("Khanh");
+//				chuyen.setID(rs.getFloat("ID"));
+////				System.out.println(rs.getFloat("ID"));
+//				chuyen.setSTT(rs.getInt("STT"));
+				chuyen.setRouteID(rs.getInt("routeID"));
+				chuyen.setUnitID(rs.getNString("unitID"));
+				chuyen.setRouteName(rs.getNString("routeName"));
+				chuyen.setTimeStart(rs.getNString("timeStart"));
+				chuyen.setTimeEnd(rs.getNString("timeEnd"));
+				chuyen.setTimeBreak(rs.getDouble("timeBreak"));
+				chuyen.setStartLocation(rs.getString("startLocation"));
+				chuyen.setEndLocation(rs.getString("endLocation"));
+				chuyen.setKindRoute(rs.getString("kindRoute"));
 //				System.out.println(rs.getInt("STT"));
 //				chuyen.setTemTram(rs.getNString("nameBusStop"));
 //				System.out.println(rs.getNString("TenTram"));
@@ -380,11 +438,110 @@ public class Chuyen {
 
 	}
 
+	public List<BusRouteDetails> getRouteName() {
+		List<BusRouteDetails> result = new ArrayList<BusRouteDetails>();
+		List<BusRouteDetails> chuyens = new ArrayList<BusRouteDetails>();
+		int available = 0;
+		try {
+
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select distinct routeName from BusRoute");
+			while (rs.next()) {
+				BusRouteDetails chuyen = new BusRouteDetails();
+//				available++;
+//				System.out.println("Khanh");
+//				chuyen.setID(rs.getFloat("ID"));
+////				System.out.println(rs.getFloat("ID"));
+//				chuyen.setSTT(rs.getInt("STT"));
+//				System.out.println(rs.getInt("STT"));
+				chuyen.setRouteName(rs.getString("routeName"));
+//				System.out.println(rs.getNString("TenTram"));
+				chuyens.add(chuyen);
+//				for (ChuyenDetails chuyenDetails : chuyens) {
+//					chuyen.setChuyenID(rs.getInt("ChuyenID"));
+//					chuyen.setLuotDi(rs.getString("LUOTDI"));
+//					chuyen.setLuotVe(rs.getString("LUOTVE"));
+//					chuyen.setTenChuyen(rs.getString("TENCHUYEN"));
+//					chuyen.setID(rs.getFloat("ID"));
+//					System.out.println(rs.getFloat("ID"));
+//					chuyen.setSTT(rs.getInt("STT"));
+//					System.out.println(rs.getInt("STT"));
+//					chuyen.setTemTram(rs.getString("TenTram"));
+//					System.out.println(rs.getString("TenTram"));
+//					chuyens.add(chuyen);
+//				}
+			}
+			result = chuyens;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+//		if (available != 0) {
+//			return true;
+//		}
+		return chuyens;
+
+	}
+
+	public List<BusUnitManagerDetails> getUnitID() {
+		List<BusUnitManagerDetails> result = new ArrayList<BusUnitManagerDetails>();
+		List<BusUnitManagerDetails> chuyens = new ArrayList<BusUnitManagerDetails>();
+		int available = 0;
+		try {
+
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select distinct unitID from BusUnitManager");
+			while (rs.next()) {
+				BusUnitManagerDetails chuyen = new BusUnitManagerDetails();
+//				available++;
+//				System.out.println("Khanh");
+//				chuyen.setID(rs.getFloat("ID"));
+////				System.out.println(rs.getFloat("ID"));
+//				chuyen.setSTT(rs.getInt("STT"));
+//				System.out.println(rs.getInt("STT"));
+				chuyen.setUnitID(rs.getString("unitID"));
+//				System.out.println(rs.getNString("TenTram"));
+				chuyens.add(chuyen);
+//				for (ChuyenDetails chuyenDetails : chuyens) {
+//					chuyen.setChuyenID(rs.getInt("ChuyenID"));
+//					chuyen.setLuotDi(rs.getString("LUOTDI"));
+//					chuyen.setLuotVe(rs.getString("LUOTVE"));
+//					chuyen.setTenChuyen(rs.getString("TENCHUYEN"));
+//					chuyen.setID(rs.getFloat("ID"));
+//					System.out.println(rs.getFloat("ID"));
+//					chuyen.setSTT(rs.getInt("STT"));
+//					System.out.println(rs.getInt("STT"));
+//					chuyen.setTemTram(rs.getString("TenTram"));
+//					System.out.println(rs.getString("TenTram"));
+//					chuyens.add(chuyen);
+//				}
+			}
+			result = chuyens;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+//		if (available != 0) {
+//			return true;
+//		}
+		return chuyens;
+
+	}
+
 	public static void main(String[] args) {
 //		System.out.println(new Chuyen().getList().contains("Đại học Nông Lâm"));
 //		System.out.println(new Chuyen().getBuses());
 //		System.out.println(new Chuyen().getBusesUnitManager());
 		System.out.println(new Chuyen().getChuyens());
+//		System.out.println(new Chuyen().getBusRoute());
 	}
 //
 //	@Override

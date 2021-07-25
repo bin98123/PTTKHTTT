@@ -38,15 +38,15 @@ td, th {
 	display: flex;
 }
 
-.contain-search { /*
-display: table-row; */
+.contain-search {
+	/* 	display: table-row; */
 	
 }
 
 .bnt-add {
 	float: right;
-	margin-left: 330px; /*
-width: 100px; */
+	margin-left: 330px;
+	/* width: 100px; */
 }
 
 .bnt-rollback {
@@ -55,7 +55,8 @@ width: 100px; */
 }
 
 .top-content {
-	float: left; /* width: 100px; */
+	float: left;
+	/* width: 100px; */
 }
 </style>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -70,11 +71,11 @@ width: 100px; */
 </head>
 <body>
 	<%
-		List<BusUnitManagerDetails> chuyen = (List<BusUnitManagerDetails>) request.getAttribute("listBusUnit");
+		List<BusRouteDetails> chuyen = (List<BusRouteDetails>) request.getAttribute("listBusRoute");
 	String none = (String) request.getAttribute("none");
 	Chuyen c = new Chuyen();
-	List<BusUnitManagerDetails> chuyens = new ArrayList<BusUnitManagerDetails>();
-	chuyens = c.getBusesUnitManager();
+	List<BusRouteDetails> chuyens = new ArrayList<BusRouteDetails>();
+	chuyens = c.getBusRoute();
 	if (none == null || none == "") {
 		none = "none";
 	}
@@ -104,34 +105,44 @@ width: 100px; */
 	<th>Tên Chuyến</th>
 	 -->
 
-				<th style="text-align: left">Mã đơn vị</th>
-				<th style="text-align: left">Tên đơn vị</th>
-				<th style="text-align: left">Số điện thoại</th>
-				<th style="text-align: left">Email</th>
+				<th style="text-align: left">Mã Tuyến Xe</th>
+				<th style="text-align: left">Mã Đơn Vị</th>
+				<th style="text-align: left">Tên Tuyến</th>
+				<th style="text-align: left">Thời Gian Bắt Đầu</th>
+				<th style="text-align: left">Thời Gian Kết Thúc</th>
+				<th style="text-align: left">Thời Gian Giản Cách</th>
+				<th style="text-align: left">Lộ Trình Lượt Đi</th>
+				<th style="text-align: left">Lộ Trình Lượt Về</th>
+				<th style="text-align: left">Loại Tuyến</th>
 				<th style="text-align: left">Sửa</th>
 				<th style="text-align: left">Xóa</th>
-
 			</tr>
 		</thead>
 		<%
-			for (BusUnitManagerDetails e : chuyen) {
+			for (BusRouteDetails e : chuyen) {
 		%>
 		<tbody>
 			<tr>
-				<td style="text-align: center"><%=e.getUnitID()%></td>
-				<td style="text-align: left"><%=e.getUnitName()%></td>
-				<td style="text-align: left"><%=e.getPhoneNumber()%></td>
-				<td style="text-align: left"><%=e.getEmail()%></td>
+				<td style="text-align: center"><%=e.getRouteID()%></td>
+				<td style="text-align: left"><%=e.getUnitID()%></td>
+				<td style="text-align: left"><%=e.getRouteName()%></td>
+				<td style="text-align: left"><%=e.getTimeStart()%></td>
+				<td style="text-align: left"><%=e.getTimeEnd()%></td>
+				<td style="text-align: left"><%=e.getTimeBreak()%> phút</td>
+				<td style="text-align: left"><%=e.getStartLocation()%></td>
+				<td style="text-align: left"><%=e.getEndLocation()%></td>
+				<td style="text-align: left"><%=e.getKindRoute()%></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-info btn-sm"
-						onclick="window.location.href='./ManagerUnit?submit=edit&unitID=<%=e.getUnitID()%>'">
+						onclick="window.location.href='./ManagerRoute?submit=edit&unitID=<%=e.getUnitID()%>'">
 						<i class="fa fa-edit"></i>
 					</button></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-danger btn-sm"
-						onclick="window.location.href='./ManagerUnit?submit=delete&unitID=<%=e.getUnitID()%>'">
+						onclick="window.location.href='./ManagerRoute?submit=delete&unitID=<%=e.getUnitID()%>'">
 						<i class="fa fa-trash-o"></i>
 					</button></td>
+
 			</tr>
 
 			<%
@@ -140,27 +151,32 @@ width: 100px; */
 		</tbody>
 		<tfoot>
 			<tr>
-				<th style="text-align: left">Mã đơn vị</th>
-				<th style="text-align: left">Tên đơn vị</th>
-				<th style="text-align: left">Số điện thoại</th>
-				<th style="text-align: left">Email</th>
+				<th style="text-align: left">Mã Tuyến Xe</th>
+				<th style="text-align: left">Mã Đơn Vị</th>
+				<th style="text-align: left">Tên Tuyến</th>
+				<th style="text-align: left">Thời Gian Bắt Đầu</th>
+				<th style="text-align: left">Thời Gian Kết Thúc</th>
+				<th style="text-align: left">Thời Gian Giản Cách</th>
+				<th style="text-align: left">Lộ Trình Lượt Đi</th>
+				<th style="text-align: left">Lộ Trình Lượt Về</th>
+				<th style="text-align: left">Loại Tuyến</th>
 				<th style="text-align: left">Sửa</th>
 				<th style="text-align: left">Xóa</th>
 			</tr>
 		</tfoot>
 	</table>
-	<!-- 	<table class="table1" style="width: 50%; display: none"> -->
 	<div class="containt-top">
 		<div class="top-content">
-			<h1>Danh sách đơn vị quản lý</h1>
+			<!-- 	<table class="table1" style="width: 50%; display: none"> -->
+			<h1>Danh sách Tuyến Xe</h1>
 		</div>
 		<div class="bnt-add">
 			<button type="button" class="btn btn-sm btn-primary"
-				onclick="window.location.href='./addUnit.jsp'">Thêm</button>
+				onclick="window.location.href='./addBusRoute.jsp'">Thêm</button>
 		</div>
 		<div class="bnt-rollback">
 			<button type="button" class="btn btn-sm btn-primary"
-				onclick="window.location.href='./ManagerUnit?submit=rollback'">Hoàn
+				onclick="window.location.href='./ManagerRoute?submit=rollback'">Hoàn
 				tác</button>
 		</div>
 	</div>
@@ -174,31 +190,41 @@ width: 100px; */
 	<th>Tên Trạm lượt về</th>
 	<th>Tên Chuyến</th>
 	 -->
-				<th style="text-align: left">Mã đơn vị</th>
-				<th style="text-align: left">Tên đơn vị</th>
-				<th style="text-align: left">Số điện thoại</th>
-				<th style="text-align: left">Email</th>
+				<th style="text-align: left">Mã Tuyến Xe</th>
+				<th style="text-align: left">Mã Đơn Vị</th>
+				<th style="text-align: left">Tên Tuyến</th>
+				<th style="text-align: left">Thời Gian Bắt Đầu</th>
+				<th style="text-align: left">Thời Gian Kết Thúc</th>
+				<th style="text-align: left">Thời Gian Giản Cách</th>
+				<th style="text-align: left">Lộ Trình Lượt Đi</th>
+				<th style="text-align: left">Lộ Trình Lượt Về</th>
+				<th style="text-align: left">Loại Tuyến</th>
 				<th style="text-align: left">Sửa</th>
 				<th style="text-align: left">Xóa</th>
 			</tr>
 		</thead>
 		<%
-			for (BusUnitManagerDetails e : chuyens) {
+			for (BusRouteDetails e : chuyens) {
 		%>
 		<tbody>
 			<tr>
-				<td style="text-align: center"><%=e.getUnitID()%></td>
-				<td style="text-align: left"><%=e.getUnitName()%></td>
-				<td style="text-align: left"><%=e.getPhoneNumber()%></td>
-				<td style="text-align: left"><%=e.getEmail()%></td>
+				<td style="text-align: center"><%=e.getRouteID()%></td>
+				<td style="text-align: left"><%=e.getUnitID()%></td>
+				<td style="text-align: left"><%=e.getRouteName()%></td>
+				<td style="text-align: left"><%=e.getTimeStart()%></td>
+				<td style="text-align: left"><%=e.getTimeEnd()%></td>
+				<td style="text-align: left"><%=e.getTimeBreak()%> phút</td>
+				<td style="text-align: left"><%=e.getStartLocation()%></td>
+				<td style="text-align: left"><%=e.getEndLocation()%></td>
+				<td style="text-align: left"><%=e.getKindRoute()%></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-info btn-sm"
-						onclick="window.location.href='./ManagerUnit?submit=edit&unitID=<%=e.getUnitID()%>'">
+						onclick="window.location.href='./ManagerRoute?submit=edit&unitID=<%=e.getUnitID()%>'">
 						<i class="fa fa-edit"></i>
 					</button></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-danger btn-sm"
-						onclick="window.location.href='./ManagerUnit?submit=delete&unitID=<%=e.getUnitID()%>'">
+						onclick="window.location.href='./ManagerRoute?submit=delete&unitID=<%=e.getUnitID()%>'">
 						<i class="fa fa-trash-o"></i>
 					</button></td>
 			</tr>
@@ -209,10 +235,15 @@ width: 100px; */
 		</tbody>
 		<tfoot>
 			<tr>
-				<th style="text-align: left">Mã đơn vị</th>
-				<th style="text-align: left">Tên đơn vị</th>
-				<th style="text-align: left">Số điện thoại</th>
-				<th style="text-align: left">Email</th>
+				<th style="text-align: left">Mã Tuyến Xe</th>
+				<th style="text-align: left">Mã Đơn Vị</th>
+				<th style="text-align: left">Tên Tuyến</th>
+				<th style="text-align: left">Thời Gian Bắt Đầu</th>
+				<th style="text-align: left">Thời Gian Kết Thúc</th>
+				<th style="text-align: left">Thời Gian Giản Cách</th>
+				<th style="text-align: left">Lộ Trình Lượt Đi</th>
+				<th style="text-align: left">Lộ Trình Lượt Về</th>
+				<th style="text-align: left">Loại Tuyến</th>
 				<th style="text-align: left">Sửa</th>
 				<th style="text-align: left">Xóa</th>
 			</tr>

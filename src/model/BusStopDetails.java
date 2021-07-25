@@ -12,6 +12,10 @@ public class BusStopDetails {
 		this.nameBusStop = nameBusStop;
 	}
 
+	public BusStopDetails() {
+
+	}
+
 	public int getRouteID() {
 		return routeID;
 	}

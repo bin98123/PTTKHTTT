@@ -2,8 +2,8 @@
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="dao.ChuyenDetails"%>
+<%@ page import="model.BusDetails"%>
 <%@ page import="controller.*"%>
-<%@ page import="model.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,15 +38,15 @@ td, th {
 	display: flex;
 }
 
-.contain-search { /*
-display: table-row; */
+.contain-search {
+	/* 	display: table-row; */
 	
 }
 
 .bnt-add {
 	float: right;
-	margin-left: 330px; /*
-width: 100px; */
+	margin-left: 330px;
+	/* width: 100px; */
 }
 
 .bnt-rollback {
@@ -55,7 +55,8 @@ width: 100px; */
 }
 
 .top-content {
-	float: left; /* width: 100px; */
+	float: left;
+	/* width: 100px; */
 }
 </style>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -70,11 +71,11 @@ width: 100px; */
 </head>
 <body>
 	<%
-		List<BusUnitManagerDetails> chuyen = (List<BusUnitManagerDetails>) request.getAttribute("listBusUnit");
+		List<BusDetails> chuyen = (List<BusDetails>) request.getAttribute("listBus");
 	String none = (String) request.getAttribute("none");
 	Chuyen c = new Chuyen();
-	List<BusUnitManagerDetails> chuyens = new ArrayList<BusUnitManagerDetails>();
-	chuyens = c.getBusesUnitManager();
+	List<BusDetails> chuyens = new ArrayList<BusDetails>();
+	chuyens = c.getBuses();
 	if (none == null || none == "") {
 		none = "none";
 	}
@@ -85,14 +86,14 @@ width: 100px; */
 	<%-- 	<%@ include file="test.jsp" %> --%>
 	<div class="top">
 		<div class="contain-search">
-			<form action="SearchUnitServlet" medthod="post">
+			<form action="SearchBus" medthod="post">
 				<input class="search-box" type="text" name="txtSearch" size="15px">
 				<input class="btn btn-sm btn-primary search-btn" type="submit"
 					name="btnSearch" value="Search">
 			</form>
 		</div>
 	</div>
-	<h1 id="default" style="display: <%=none%>;">Danh sách tìm kiếm</h1>
+	<h1 id="default" style="display: <%=none%>;">Danh sách Xe Buýt</h1>
 	<table class="table table-striped table-bordered table-list example"
 		id="example" style="width: 100%;display: <%=none%>">
 		<thead>
@@ -104,32 +105,36 @@ width: 100px; */
 	<th>Tên Chuyến</th>
 	 -->
 
-				<th style="text-align: left">Mã đơn vị</th>
-				<th style="text-align: left">Tên đơn vị</th>
-				<th style="text-align: left">Số điện thoại</th>
-				<th style="text-align: left">Email</th>
+				<th style="text-align: left">Mã xe</th>
+				<th style="text-align: left">Biển số xe</th>
+				<th style="text-align: left">Loại xe</th>
+				<th style="text-align: left">Ngày sản xuất</th>
+				<th style="text-align: left">Ngày bảo hành</th>
+				<th style="text-align: left">Mã tuyến</th>
 				<th style="text-align: left">Sửa</th>
 				<th style="text-align: left">Xóa</th>
 
 			</tr>
 		</thead>
 		<%
-			for (BusUnitManagerDetails e : chuyen) {
+			for (BusDetails e : chuyen) {
 		%>
 		<tbody>
 			<tr>
-				<td style="text-align: center"><%=e.getUnitID()%></td>
-				<td style="text-align: left"><%=e.getUnitName()%></td>
-				<td style="text-align: left"><%=e.getPhoneNumber()%></td>
-				<td style="text-align: left"><%=e.getEmail()%></td>
+				<td style="text-align: left"><%=e.getBusID()%></td>
+				<td style="text-align: left"><%=e.getLicensePlate()%></td>
+				<td style="text-align: left"><%=e.getKind()%></td>
+				<td style="text-align: left"><%=e.getManufactureDay()%></td>
+				<td style="text-align: left"><%=e.getLateGuaranteeDay()%></td>
+				<td style="text-align: center;"><%=e.getRouteID()%></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-info btn-sm"
-						onclick="window.location.href='./ManagerUnit?submit=edit&unitID=<%=e.getUnitID()%>'">
+						onclick="window.location.href='./ManagerBus?submit=edit&unitID=<%=e.getBusID()%>'">
 						<i class="fa fa-edit"></i>
 					</button></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-danger btn-sm"
-						onclick="window.location.href='./ManagerUnit?submit=delete&unitID=<%=e.getUnitID()%>'">
+						onclick="window.location.href='./ManagerBus?submit=delete&unitID=<%=e.getBusID()%>'">
 						<i class="fa fa-trash-o"></i>
 					</button></td>
 			</tr>
@@ -140,10 +145,12 @@ width: 100px; */
 		</tbody>
 		<tfoot>
 			<tr>
-				<th style="text-align: left">Mã đơn vị</th>
-				<th style="text-align: left">Tên đơn vị</th>
-				<th style="text-align: left">Số điện thoại</th>
-				<th style="text-align: left">Email</th>
+				<th style="text-align: left">Mã xe</th>
+				<th style="text-align: left">Biển số xe</th>
+				<th style="text-align: left">Loại xe</th>
+				<th style="text-align: left">Ngày sản xuất</th>
+				<th style="text-align: left">Ngày bảo hành</th>
+				<th style="text-align: left">Mã tuyến</th>
 				<th style="text-align: left">Sửa</th>
 				<th style="text-align: left">Xóa</th>
 			</tr>
@@ -152,20 +159,20 @@ width: 100px; */
 	<!-- 	<table class="table1" style="width: 50%; display: none"> -->
 	<div class="containt-top">
 		<div class="top-content">
-			<h1>Danh sách đơn vị quản lý</h1>
+			<h1>Danh sách Xe Buýt</h1>
 		</div>
 		<div class="bnt-add">
 			<button type="button" class="btn btn-sm btn-primary"
-				onclick="window.location.href='./addUnit.jsp'">Thêm</button>
+				onclick="window.location.href='./addBus.jsp'">Thêm</button>
 		</div>
 		<div class="bnt-rollback">
 			<button type="button" class="btn btn-sm btn-primary"
-				onclick="window.location.href='./ManagerUnit?submit=rollback'">Hoàn
+				onclick="window.location.href='./ManagerBus?submit=rollback'">Hoàn
 				tác</button>
 		</div>
 	</div>
 	<table class="table table-striped table-bordered table-list table1"
-		style="width: 100%;">
+		style="width: 100%">
 		<thead>
 			<tr>
 				<!-- 
@@ -174,31 +181,38 @@ width: 100px; */
 	<th>Tên Trạm lượt về</th>
 	<th>Tên Chuyến</th>
 	 -->
-				<th style="text-align: left">Mã đơn vị</th>
-				<th style="text-align: left">Tên đơn vị</th>
-				<th style="text-align: left">Số điện thoại</th>
-				<th style="text-align: left">Email</th>
+
+				<th style="text-align: left">Mã xe</th>
+				<th style="text-align: left">Biển số xe</th>
+				<th style="text-align: left">Loại xe</th>
+				<th style="text-align: left">Ngày sản xuất</th>
+				<th style="text-align: left">Ngày bảo hành</th>
+				<th style="text-align: left">Mã tuyến</th>
 				<th style="text-align: left">Sửa</th>
 				<th style="text-align: left">Xóa</th>
+
+
 			</tr>
 		</thead>
 		<%
-			for (BusUnitManagerDetails e : chuyens) {
+			for (BusDetails e : chuyens) {
 		%>
 		<tbody>
 			<tr>
-				<td style="text-align: center"><%=e.getUnitID()%></td>
-				<td style="text-align: left"><%=e.getUnitName()%></td>
-				<td style="text-align: left"><%=e.getPhoneNumber()%></td>
-				<td style="text-align: left"><%=e.getEmail()%></td>
+				<td style="text-align: left"><%=e.getBusID()%></td>
+				<td style="text-align: left"><%=e.getLicensePlate()%></td>
+				<td style="text-align: left"><%=e.getKind()%></td>
+				<td style="text-align: left"><%=e.getManufactureDay()%></td>
+				<td style="text-align: left"><%=e.getLateGuaranteeDay()%></td>
+				<td style="text-align: center;"><%=e.getRouteID()%></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-info btn-sm"
-						onclick="window.location.href='./ManagerUnit?submit=edit&unitID=<%=e.getUnitID()%>'">
+						onclick="window.location.href='./ManagerBus?submit=edit&unitID=<%=e.getBusID()%>'">
 						<i class="fa fa-edit"></i>
 					</button></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-danger btn-sm"
-						onclick="window.location.href='./ManagerUnit?submit=delete&unitID=<%=e.getUnitID()%>'">
+						onclick="window.location.href='./ManagerBus?submit=delete&unitID=<%=e.getBusID()%>'">
 						<i class="fa fa-trash-o"></i>
 					</button></td>
 			</tr>
@@ -209,12 +223,16 @@ width: 100px; */
 		</tbody>
 		<tfoot>
 			<tr>
-				<th style="text-align: left">Mã đơn vị</th>
-				<th style="text-align: left">Tên đơn vị</th>
-				<th style="text-align: left">Số điện thoại</th>
-				<th style="text-align: left">Email</th>
+				<th style="text-align: left">Mã xe</th>
+				<th style="text-align: left">Biển số xe</th>
+				<th style="text-align: left">Loại xe</th>
+				<th style="text-align: left">Ngày sản xuất</th>
+				<th style="text-align: left">Ngày bảo hành</th>
+				<th style="text-align: left">Mã tuyến</th>
 				<th style="text-align: left">Sửa</th>
 				<th style="text-align: left">Xóa</th>
+
+
 			</tr>
 		</tfoot>
 	</table>

@@ -1,31 +1,28 @@
 package dao;
 
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 
-import model.BusDetails;
+import model.BusUnitManagerDetails;
 
-public class BusDAO {
+public class UnitDAO {
 	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
 //	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
 //			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
-	String INSERT_BusTemp_SQL = "INSERT INTO BusTemp"
-			+ "  (busID,licensePlate,kind , manufactureDay,lateGuaranteeDay,routeID,id) VALUES ";
-	String INSERT_Bus_SQL = "INSERT INTO Bus"
-			+ "  (busID,licensePlate,kind , manufactureDay,lateGuaranteeDay,routeID) VALUES ";
+	String INSERT_BusUnitManagerTemp_SQL = "INSERT INTO BusUnitManagerTemp"
+			+ "  (unitID,unitName,phoneNumber , Email,id) VALUES ";
+	String INSERT_BusUnitManager_SQL = "INSERT INTO BusUnitManager" + "  (unitID,unitName,phoneNumber , Email) VALUES ";
 	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
-	public BusDAO() {
+	public UnitDAO() {
 
 	}
 
-	public int edit(BusDetails bus, String unitID) throws ClassNotFoundException, SQLException {
+	public int edit(BusUnitManagerDetails unit, String unitID) throws ClassNotFoundException, SQLException {
 		int result = 0;
 //		Class.forName("org.hsqldb.jdbcDriver");
 		Class.forName(driver);
@@ -48,7 +45,7 @@ public class BusDAO {
 //			try (PreparedStatement insert = connection
 //					.prepareStatement(INSERT_ACCOUNT_SQL + " (?, ?, ?, " + "(N'Quốc Khánh Trịnh Lê Ka')" + ", ?,?,?);")) {
 			try (PreparedStatement insert = connection.prepareStatement(
-					"UPDATE Bus SET licensePlate = ?, kind= ?, manufactureDay= ?, lateGuaranteeDay= ?, routeID= ? WHERE BusID = ?;")) {
+					"UPDATE BusUnitManager SET unitName = ?, phoneNumber= ?, Email= ? WHERE unitID = ?;")) {
 //				String driverID = rs0.getNString("driverID");
 //				String fullName = rs0.getNString("fullName");
 //				Date birthday = rs0.getDate("birthday");
@@ -59,14 +56,10 @@ public class BusDAO {
 //				int salary = rs0.getInt("salary");
 //				String driverLicense = rs0.getNString("driverLicense");
 //				String BusID = rs0.getNString("BusID");
-				insert.setString(1, bus.getLicensePlate());
-				insert.setString(2, bus.getKind());
-				insert.setDate(3,
-						java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(bus.getManufactureDay())));
-				insert.setDate(4,
-						java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(bus.getLateGuaranteeDay())));
-				insert.setInt(5, bus.getRouteID());
-				insert.setString(6, unitID);
+				insert.setString(1, unit.getUnitName());
+				insert.setString(2, unit.getPhoneNumber());
+				insert.setString(3, unit.getEmail());
+				insert.setString(4, unitID);
 //				insert.executeUpdate();
 				result = insert.executeUpdate();
 
@@ -77,7 +70,7 @@ public class BusDAO {
 
 	}
 
-	public int add(BusDetails bus) throws ClassNotFoundException, SQLException {
+	public int add(BusUnitManagerDetails unitDetails) throws ClassNotFoundException, SQLException {
 		int result = 0;
 //		Class.forName("org.hsqldb.jdbcDriver");
 		Class.forName(driver);
@@ -99,8 +92,9 @@ public class BusDAO {
 
 //			try (PreparedStatement insert = connection
 //					.prepareStatement(INSERT_ACCOUNT_SQL + " (?, ?, ?, " + "(N'Quốc Khánh Trịnh Lê Ka')" + ", ?,?,?);")) {
-			try (PreparedStatement insert = connection
-					.prepareStatement(INSERT_Bus_SQL + " (?,?,(N'" + bus.getKind() + "'),?,?,?);")) {
+			try (PreparedStatement insert = connection.prepareStatement(
+					INSERT_BusUnitManager_SQL + " ((N'" + unitDetails.getUnitID() + "'),(N'" + unitDetails.getUnitName()
+							+ "'),(N'" + unitDetails.getPhoneNumber() + "'),(N'" + unitDetails.getEmail() + "'));")) {
 				// 1private String accountID;
 //				2private String accountName;
 //				3private String password;
@@ -110,13 +104,6 @@ public class BusDAO {
 //				7private String phoneNumber;
 //				insert.setString(1, account.getPassword() + account.getAccountName());
 //				insert.executeUpdate();
-				insert.setString(1, bus.getBusID());
-				insert.setString(2, bus.getLicensePlate());
-				insert.setDate(3,
-						java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(bus.getManufactureDay())));
-				insert.setDate(4,
-						java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(bus.getLateGuaranteeDay())));
-				insert.setInt(5, bus.getRouteID());
 				result = insert.executeUpdate();
 
 			}
@@ -126,7 +113,7 @@ public class BusDAO {
 
 	}
 
-	public boolean delete(String id) throws ClassNotFoundException, SQLException {
+	public boolean deleteUnit(String id) throws ClassNotFoundException, SQLException {
 		boolean result = false;
 
 		Connection con = DriverManager.getConnection(connectionUrl);
@@ -136,16 +123,15 @@ public class BusDAO {
 		try {
 
 			Class.forName(driver);
-			ResultSet rs0 = stmt.executeQuery("select * from Bus WHERE BusID='" + id + "';");
+			ResultSet rs0 = stmt.executeQuery("select * from BusUnitManager WHERE unitID='" + id + "';");
 			while (rs0.next()) {
-				String busID = rs0.getNString("BusID");
-				String licensePlate = rs0.getNString("licensePlate");
-				String kind = rs0.getNString("kind");
-				Date manufactureDay = rs0.getDate("manufactureDay");
-				Date lateGuaranteeDay = rs0.getDate("lateGuaranteeDay");
-				int routeID = rs0.getInt("routeID");
+				String unitID = rs0.getNString("unitID");
+				String unitName = rs0.getNString("unitName");
+				String phoneNumber = rs0.getNString("phoneNumber");
+				String email = rs0.getNString("Email");
 
-				try (PreparedStatement insert = con.prepareStatement(INSERT_BusTemp_SQL + " (?, ?, ?,?,?,?,?);")) {
+				try (PreparedStatement insert = con
+						.prepareStatement(INSERT_BusUnitManagerTemp_SQL + " (?, ?, ?,?,?);")) {
 					// 1private String accountID;
 //			2private String accountName;
 //			3private String password;
@@ -154,22 +140,18 @@ public class BusDAO {
 //			6private String email;
 //			7private String phoneNumber;
 //			insert.setString(1, account.getPassword() + account.getAccountName());
-					insert.setString(1, busID);
-					insert.setString(2, licensePlate);
-					insert.setString(3, kind);
-					insert.setDate(4,
-							java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format((manufactureDay))));
-					insert.setDate(5,
-							java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format((lateGuaranteeDay))));
-					insert.setInt(6, routeID);
-					insert.setFloat(7, System.currentTimeMillis() + getMaxID());
+					insert.setString(1, unitID);
+					insert.setString(2, unitName);
+					insert.setString(3, phoneNumber);
+					insert.setString(4, email);
+					insert.setFloat(5, System.currentTimeMillis() + getMaxID());
 //				int rs1 = insert.executeUpdate();
 
 					insert.executeUpdate();
 //					insert.close();
 				}
 				Statement stmt1 = con.createStatement();
-				int rs2 = stmt1.executeUpdate("delete from Bus where busID='" + id + "';");
+				int rs2 = stmt1.executeUpdate("delete from BusUnitManager where unitID='" + id + "';");
 				if (rs2 > 0) {
 					result = true;
 				}
@@ -212,7 +194,7 @@ public class BusDAO {
 		try {
 
 			Class.forName(driver);
-			ResultSet rs0 = stmt.executeQuery("select max(id) as maxID from BusTemp;");
+			ResultSet rs0 = stmt.executeQuery("select max(id) as maxID from BusUnitManagerTemp;");
 			if (rs0.next()) {
 				result = rs0.getFloat("maxID");
 			} else {
@@ -235,15 +217,15 @@ public class BusDAO {
 		try {
 
 			Class.forName(driver);
-			ResultSet rs0 = stmt.executeQuery("select * from BusTemp where id=(select max(id) from BusTemp);");
+			ResultSet rs0 = stmt.executeQuery(
+					"select * from BusUnitManagerTemp where id=(select max(id) from BusUnitManagerTemp);");
 			while (rs0.next()) {
-				String busID = rs0.getNString("BusID");
-				String licensePlate = rs0.getNString("licensePlate");
-				String kind = rs0.getNString("kind");
-				Date manufactureDay = rs0.getDate("manufactureDay");
-				Date lateGuaranteeDay = rs0.getDate("lateGuaranteeDay");
-				int routeID = rs0.getInt("routeID");
-				try (PreparedStatement insert = con.prepareStatement(INSERT_Bus_SQL + " (?, ?, ?,?, ?,?);")) {
+				String unitID = rs0.getNString("unitID");
+				String unitName = rs0.getNString("unitName");
+				String phoneNumber = rs0.getNString("phoneNumber");
+				String email = rs0.getNString("Email");
+
+				try (PreparedStatement insert = con.prepareStatement(INSERT_BusUnitManager_SQL + " (?, ?, ?,?);")) {
 					// 1private String accountID;
 //		2private String accountName;
 //		3private String password;
@@ -252,21 +234,18 @@ public class BusDAO {
 //		6private String email;
 //		7private String phoneNumber;
 //		insert.setString(1, account.getPassword() + account.getAccountName());
-					insert.setString(1, busID);
-					insert.setString(2, licensePlate);
-					insert.setString(3, kind);
-					insert.setDate(4,
-							java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format((manufactureDay))));
-					insert.setDate(5,
-							java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format((lateGuaranteeDay))));
-					insert.setInt(6, routeID);
+					insert.setString(1, unitID);
+					insert.setString(2, unitName);
+					insert.setString(3, phoneNumber);
+					insert.setString(4, email);
 //			int rs1 = insert.executeUpdate();
 
 					insert.executeUpdate();
 					insert.close();
 				}
 				Statement stmt1 = con.createStatement();
-				stmt1.executeUpdate("delete from BusTemp where id=(select max(id) from BusTemp);");
+				stmt1.executeUpdate(
+						"delete from BusUnitManagerTemp where id=(select max(id) from BusUnitManagerTemp);");
 				con.commit();
 				stmt1.close();
 			}
@@ -296,13 +275,11 @@ public class BusDAO {
 	}
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-//		System.out.println(new BusDAO().delete("bus015"));
+//		System.out.println(new BusDAO().deleteUnit("u18"));
 //		new BusDAO().rollback();
-		BusDetails busDetails = new BusDetails("bus016", "51B-043.21", "2 tầng", new Date(2010 - 1900, 2 - 1, 28),
-				new Date(2015 - 1900, 3 - 1, 12), 3);
-//		System.out.println(new BusDAO().add(busDetails));
-		System.out.println(new BusDAO().edit(busDetails, "bus016"));
-//		System.out.println(new BusDAO().getMaxID());
+//		BusUnitManagerDetails unitDetails = new BusUnitManagerDetails("u19", "Khanh", "878787", "khanh@gmail.com");
+//		System.out.println(new BusDAO().add(unitDetails));
+		System.out.println(new UnitDAO().getMaxID());
 
 	}
 }

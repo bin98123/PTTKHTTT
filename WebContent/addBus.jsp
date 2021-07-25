@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" href="./img/bus-icon.png">
+
 <style type="text/css">
 .contain-info1 {
 	display: flex;
@@ -21,7 +22,7 @@
 		</div>
 		<div class="right-path1"
 			style="float: left; height: 100%; margin-left: 300px">
-			<jsp:include page="BusTest.jsp" />
+			<jsp:include page="addBusTest.jsp" />
 		</div>
 	</div>
 </body>
