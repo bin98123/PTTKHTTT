@@ -540,7 +540,7 @@ public class Chuyen {
 //		System.out.println(new Chuyen().getList().contains("Đại học Nông Lâm"));
 //		System.out.println(new Chuyen().getBuses());
 //		System.out.println(new Chuyen().getBusesUnitManager());
-		System.out.println(new Chuyen().getChuyens());
+		System.out.println(new Chuyen().getBusRoute());
 //		System.out.println(new Chuyen().getBusRoute());
 	}
 //

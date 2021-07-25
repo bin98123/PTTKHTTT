@@ -23,7 +23,7 @@
 			style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto; padding: 20px;">
 			<div class="col-sm-12">
 
-				<h2 class="myclass" style="color: blue;">Thêm Xe Buýt</h2>
+				<h2 class="myclass" style="color: blue;">Thêm Tuyến Xe</h2>
 				<form action="Route" method="post">
 					<div class="form-group">
 						<label>Mã Tuyến Xe</label> <input type="text" class="form-control"
