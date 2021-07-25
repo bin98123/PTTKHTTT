@@ -134,12 +134,12 @@ td, th {
 				<td style="text-align: left"><%=e.getKindRoute()%></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-info btn-sm"
-						onclick="window.location.href='./ManagerRoute?submit=edit&unitID=<%=e.getUnitID()%>'">
+						onclick="window.location.href='./ManagerRoute?submit=edit&unitID=<%=e.getRouteID()%>'">
 						<i class="fa fa-edit"></i>
 					</button></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-danger btn-sm"
-						onclick="window.location.href='./ManagerRoute?submit=delete&unitID=<%=e.getUnitID()%>'">
+						onclick="window.location.href='./ManagerRoute?submit=delete&unitID=<%=e.getRouteID()%>'">
 						<i class="fa fa-trash-o"></i>
 					</button></td>
 
@@ -219,12 +219,12 @@ td, th {
 				<td style="text-align: left"><%=e.getKindRoute()%></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-info btn-sm"
-						onclick="window.location.href='./ManagerRoute?submit=edit&unitID=<%=e.getUnitID()%>'">
+						onclick="window.location.href='./ManagerRoute?submit=edit&unitID=<%=e.getRouteID()%>'">
 						<i class="fa fa-edit"></i>
 					</button></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-danger btn-sm"
-						onclick="window.location.href='./ManagerRoute?submit=delete&unitID=<%=e.getUnitID()%>'">
+						onclick="window.location.href='./ManagerRoute?submit=delete&unitID=<%=e.getRouteID()%>'">
 						<i class="fa fa-trash-o"></i>
 					</button></td>
 			</tr>

@@ -39,7 +39,7 @@ public class RouteDAO {
 		try {
 
 			Class.forName(driver);
-			ResultSet rs0 = stmt.executeQuery("select max(id) as maxID from BusRoute;");
+			ResultSet rs0 = stmt.executeQuery("select max(id) as maxID from BusRouteTemp;");
 			if (rs0.next()) {
 				result = rs0.getFloat("maxID");
 			} else {
