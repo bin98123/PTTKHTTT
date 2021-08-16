@@ -72,10 +72,12 @@ public class ManagerRouteServlet extends HttpServlet {
 //			int unitID = Integer.parseInt(unitIDTxt);
 			RouteDAO dao = new RouteDAO();
 			try {
-				if (dao.delete(unitID)) {
+				if (dao.delete(unitID) == true) {
+					session.setAttribute("value", null);
 					request.getRequestDispatcher("/ManagerRoute.jsp").forward(request, response);
 
 				} else {
+					session.setAttribute("value", "error");
 					request.getRequestDispatcher("/ManagerRoute.jsp").forward(request, response);
 
 				}

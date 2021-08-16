@@ -27,11 +27,11 @@
 				<form action="Driver" method="post">
 					<div class="form-group">
 						<label>Mã tài xế</label> <input type="text" class="form-control"
-							name="id" placeholder="Enter id">
+							name="id" placeholder="Nhập id">
 					</div>
 					<div class="form-group">
 						<label>Họ và tên</label> <input type="text" class="form-control"
-							name="name" placeholder="Enter name">
+							name="name" placeholder="Nhập họ tên">
 					</div>
 					<div class="form-group">
 						<label>Ngày sinh</label> <input type="text" class="form-control"
@@ -48,11 +48,11 @@
 					</div>
 					<div class="form-group">
 						<label>Địa chỉ</label> <input type="text" class="form-control"
-							name="address" placeholder="Enter address">
+							name="address" placeholder="Nhập địa chỉ">
 					</div>
 					<div class="form-group">
 						<label>Quê quán</label> <input type="text" class="form-control"
-							name="country" placeholder="Enter country">
+							name="country" placeholder="Nhập quê quán">
 					</div>
 					<div class="form-group">
 						<label>Ngày bắt đầu hợp đồng</label> <input type="text"
@@ -60,11 +60,11 @@
 					</div>
 					<div class="form-group">
 						<label>Lương</label> <input type="text" class="form-control"
-							name="salary" placeholder="Enter salary">
+							name="salary" placeholder="Nhập lương tài xế">
 					</div>
 					<div class="form-group">
 						<label>Bằng lái</label> <input type="text" class="form-control"
-							name="license" placeholder="Enter license">
+							name="license" placeholder="Nhập bằng lái xe">
 					</div>
 					<div class="form-group">
 						<label>Mã xe</label>

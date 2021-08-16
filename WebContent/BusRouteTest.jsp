@@ -46,7 +46,7 @@ td, th {
 </head>
 <body>
 	<%
-		List<BusRouteDetails> chuyen = (List<BusRouteDetails>) request.getAttribute("listBusRoute");
+		List<BusRouteDetails> chuyen = (List<BusRouteDetails>) request.getAttribute("listRoute");
 	String none = (String) request.getAttribute("none");
 	Chuyen c = new Chuyen();
 	List<BusRouteDetails> chuyens = new ArrayList<BusRouteDetails>();
@@ -61,7 +61,7 @@ td, th {
 	<%-- 	<%@ include file="test.jsp" %> --%>
 	<div class="top">
 		<div class="contain-search">
-			<form action="SearchUnitServlet" medthod="post">
+			<form action="SearchRouteServlet" medthod="post">
 				<input class="search-box" type="text" name="txtSearch" size="15px">
 				<input class="btn btn-sm btn-primary search-btn" type="submit"
 					name="btnSearch" value="Search">

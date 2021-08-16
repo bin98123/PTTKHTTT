@@ -66,11 +66,25 @@ width: 100px; */
 	-->
 <meta charset="utf-8">
 <title>Insert title here</title>
-
+<%
+	String value = (String) session.getAttribute("valueUnit");
+if (value == null) {
+	value = "";
+}
+if (value != "") {
+%>
+<script>
+		alert("Không Thể Xóa Đơn Vị Đang Được Sử Dụng!");
+	
+		</script>
+<%
+	}
+session.removeAttribute("valueUnit");
+%>
 </head>
 <body>
 	<%
-		List<BusUnitManagerDetails> chuyen = (List<BusUnitManagerDetails>) request.getAttribute("listBusUnit");
+		List<BusUnitManagerDetails> chuyen = (List<BusUnitManagerDetails>) request.getAttribute("listManaBusUnit");
 	String none = (String) request.getAttribute("none");
 	Chuyen c = new Chuyen();
 	List<BusUnitManagerDetails> chuyens = new ArrayList<BusUnitManagerDetails>();
@@ -85,7 +99,7 @@ width: 100px; */
 	<%-- 	<%@ include file="test.jsp" %> --%>
 	<div class="top">
 		<div class="contain-search">
-			<form action="SearchUnitServlet" medthod="post">
+			<form action="ManagerSearchUnitServlet" medthod="post">
 				<input class="search-box" type="text" name="txtSearch" size="15px">
 				<input class="btn btn-sm btn-primary search-btn" type="submit"
 					name="btnSearch" value="Search">

@@ -58,10 +58,12 @@ public class ManagerDriverServlet extends HttpServlet {
 			String unitID = request.getParameter("unitID");
 			DriverDAO dao = new DriverDAO();
 			try {
-				if (dao.deleteDriver(unitID)) {
+				if (dao.deleteDriver(unitID) == true) {
+					session.setAttribute("valueDriver", null);
 					request.getRequestDispatcher("/ManagerDriver.jsp").forward(request, response);
 
 				} else {
+					session.setAttribute("valueDriver", "error");
 					request.getRequestDispatcher("/ManagerDriver.jsp").forward(request, response);
 
 				}

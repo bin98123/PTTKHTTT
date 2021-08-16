@@ -67,11 +67,25 @@ td, th {
 	-->
 <meta charset="utf-8">
 <title>Insert title here</title>
-
+<%
+	String value = (String) session.getAttribute("value");
+if (value == null) {
+	value = "";
+}
+if (value != "") {
+%>
+<script>
+		alert("Không Thể Xóa Tuyến Xe Đang Được Sử Dụng!");
+	
+		</script>
+<%
+	}
+session.removeAttribute("value");
+%>
 </head>
 <body>
 	<%
-		List<BusRouteDetails> chuyen = (List<BusRouteDetails>) request.getAttribute("listBusRoute");
+		List<BusRouteDetails> chuyen = (List<BusRouteDetails>) request.getAttribute("listManaRoute");
 	String none = (String) request.getAttribute("none");
 	Chuyen c = new Chuyen();
 	List<BusRouteDetails> chuyens = new ArrayList<BusRouteDetails>();
@@ -86,7 +100,7 @@ td, th {
 	<%-- 	<%@ include file="test.jsp" %> --%>
 	<div class="top">
 		<div class="contain-search">
-			<form action="SearchUnitServlet" medthod="post">
+			<form action="ManagerSearchRouteServlet" medthod="post">
 				<input class="search-box" type="text" name="txtSearch" size="15px">
 				<input class="btn btn-sm btn-primary search-btn" type="submit"
 					name="btnSearch" value="Search">

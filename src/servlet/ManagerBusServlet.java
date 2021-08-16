@@ -72,10 +72,12 @@ public class ManagerBusServlet extends HttpServlet {
 //			int unitID = (int) unitID0;
 			BusDAO dao = new BusDAO();
 			try {
-				if (dao.delete(unitID)) {
+				if (dao.delete(unitID) == true) {
+					session.setAttribute("valueBus", null);
 					request.getRequestDispatcher("/ManagerBus.jsp").forward(request, response);
 
 				} else {
+					session.setAttribute("valueBus", "error");
 					request.getRequestDispatcher("/ManagerBus.jsp").forward(request, response);
 
 				}

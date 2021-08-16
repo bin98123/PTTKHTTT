@@ -67,11 +67,25 @@ td, th {
 	-->
 <meta charset="utf-8">
 <title>Insert title here</title>
-
+<%
+	String value = (String) session.getAttribute("valueDriver");
+if (value == null) {
+	value = "";
+}
+if (value != "") {
+%>
+<script>
+		alert("Không Thể Xóa Tài Xế Đang Được Sử Dụng!");
+	
+		</script>
+<%
+	}
+session.removeAttribute("valueDriver");
+%>
 </head>
 <body>
 	<%
-		List<DriverDetails> chuyen = (List<DriverDetails>) request.getAttribute("listBusUnit");
+		List<DriverDetails> chuyen = (List<DriverDetails>) request.getAttribute("listManaDriver");
 	String none = (String) request.getAttribute("none");
 	Chuyen c = new Chuyen();
 	List<DriverDetails> chuyens = new ArrayList<DriverDetails>();
@@ -86,7 +100,7 @@ td, th {
 	<%-- 	<%@ include file="test.jsp" %> --%>
 	<div class="top">
 		<div class="contain-search">
-			<form action="SearchDriver" medthod="post">
+			<form action="ManagerSearchDriver" medthod="post">
 				<input class="search-box" type="text" name="txtSearch" size="15px">
 				<input class="btn btn-sm btn-primary search-btn" type="submit"
 					name="btnSearch" value="Search">

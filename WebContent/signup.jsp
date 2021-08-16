@@ -191,6 +191,7 @@
 	if (errorSignUp == null) {
 		errorSignUp = "";
 	}
+	session.removeAttribute("errorSignUp");
 	%>
 	<form action="SignUp" method="post">
 		<div class="containerApp">

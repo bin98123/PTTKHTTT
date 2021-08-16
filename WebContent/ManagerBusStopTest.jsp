@@ -66,11 +66,25 @@ td, th {
 	-->
 <meta charset="utf-8">
 <title>Insert title here</title>
-
+<%
+	String value = (String) session.getAttribute("valueStop");
+if (value == null) {
+	value = "";
+}
+if (value != "") {
+%>
+<script>
+		alert("Không Thể Xóa Trạm Dừng Đang Được Sử Dụng!");
+	
+		</script>
+<%
+	}
+session.removeAttribute("valueStop");
+%>
 </head>
 <body>
 	<%
-		List<ChuyenDetails> chuyen = (List<ChuyenDetails>) request.getAttribute("list1");
+		List<ChuyenDetails> chuyen = (List<ChuyenDetails>) request.getAttribute("manalist1");
 	String none = (String) request.getAttribute("none");
 	Chuyen c = new Chuyen();
 	List<ChuyenDetails> chuyens = new ArrayList<ChuyenDetails>();
@@ -85,7 +99,7 @@ td, th {
 	<%-- 	<%@ include file="test.jsp" %> --%>
 	<div class="top">
 		<div class="contain-search">
-			<form action="SearchServlet" medthod="post">
+			<form action="ManagerSearchServlet" medthod="post">
 				<input class="search-box" type="text" name="txtSearch" size="15px">
 				<input class="btn btn-sm btn-primary search-btn" type="submit"
 					name="btnSearch" value="Search">

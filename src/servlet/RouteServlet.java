@@ -54,7 +54,7 @@ public class RouteServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		// routeID
-		int id = Integer.parseInt(request.getParameter("routeID"));
+		int id = Integer.parseInt(request.getParameter("idRoute"));
 
 		// unitID
 		String unitID = request.getParameter("des");

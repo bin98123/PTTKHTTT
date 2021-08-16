@@ -60,11 +60,12 @@
 					<div class="form-group">
 						<label>Ngày sản xuất</label> <input type="text"
 							class="form-control" name="manu"
-							placeholder="Nhập ngày sản xuất">
+							placeholder="Nhập ngày sản xuất: dd/mm/yyyy">
 					</div>
 					<div class="form-group">
 						<label>Ngày bảo hành</label> <input type="text"
-							class="form-control" name="gua" placeholder="Nhập ngày bảo hành">
+							class="form-control" name="gua"
+							placeholder="Nhập ngày bảo hành: dd/mm/yyyy">
 					</div>
 
 

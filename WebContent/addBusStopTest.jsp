@@ -47,11 +47,11 @@
 
 					<div class="form-group">
 						<label>STT</label> <input type="text" class="form-control"
-							name="name" placeholder="Enter name">
+							name="name" placeholder="Nhập stt trạm dừng">
 					</div>
 					<div class="form-group">
 						<label>Tên Trạm</label> <input type="text" class="form-control"
-							name="busStop" placeholder="Enter address">
+							name="busStop" placeholder="Nhập tên trạm">
 					</div>
 
 					<!-- 					<div class="form-group"> -->

@@ -31,7 +31,7 @@
 					</div>
 
 					<div class="form-group">
-						<label>Mã Đơn Vị</label>
+						<label>Mã Tuyến</label>
 						<!-- 						<input list="dess" name="des" class="" -->
 						<!-- 							type="text" required="" id="des" placeholder="bus0XX"> -->
 						<!-- 						<datalist id="dess"> -->
@@ -50,7 +50,7 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<label>Tên Tuyến</label>
+						<label>Tên Đơn Vị</label>
 						<!-- 						<input list="dess" name="des" class="" -->
 						<!-- 							type="text" required="" id="des" placeholder="bus0XX"> -->
 						<!-- 						<datalist id="dess"> -->
@@ -81,12 +81,12 @@
 							class="form-control" name="break" placeholder="Nhập số">
 					</div>
 					<div class="form-group">
-						<label>Lộ Trinh Lượt Đi</label> <input type="text"
-							class="form-control" name="go" placeholder="Nhập ngày bảo hành">
+						<label>Lộ Trình Lượt Đi</label> <input type="text"
+							class="form-control" name="go" placeholder="Nhập trạm bắt đầu">
 					</div>
 					<div class="form-group">
-						<label>Lộ Trinh Lượt Về</label> <input type="text"
-							class="form-control" name="back" placeholder="Nhập ngày bảo hành">
+						<label>Lộ Trình Lượt Về</label> <input type="text"
+							class="form-control" name="back" placeholder="Nhập trạm kết thúc">
 					</div>
 					<div class="form-group">
 						<label>Loại Tuyến</label> <input type="text" class="form-control"

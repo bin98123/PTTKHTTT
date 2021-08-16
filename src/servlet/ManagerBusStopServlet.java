@@ -78,9 +78,11 @@ public class ManagerBusStopServlet extends HttpServlet {
 			BusStopDAO dao = new BusStopDAO();
 			try {
 				if (dao.delete(unitID, serial)) {
+					session.setAttribute("valueStop", null);
 					request.getRequestDispatcher("/ManagerBusStop.jsp").forward(request, response);
 
 				} else {
+					session.setAttribute("valueStop","error");
 					request.getRequestDispatcher("/ManagerBusStop.jsp").forward(request, response);
 
 				}

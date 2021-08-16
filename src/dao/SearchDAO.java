@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.BusDetails;
+import model.BusRouteDetails;
 import model.BusUnitManagerDetails;
 import model.DriverDetails;
 
@@ -225,6 +226,68 @@ public class SearchDAO {
 				chuyen.setUnitName(rs.getNString("unitName"));
 				chuyen.setPhoneNumber(rs.getNString("phoneNumber"));
 				chuyen.setEmail(rs.getNString("email"));
+//				System.out.println(rs.getNString("TenTram"));
+				chuyens.add(chuyen);
+//				for (ChuyenDetails chuyenDetails : chuyens) {
+//					chuyen.setChuyenID(rs.getInt("ChuyenID"));
+//					chuyen.setLuotDi(rs.getString("LUOTDI"));
+//					chuyen.setLuotVe(rs.getString("LUOTVE"));
+//					chuyen.setTenChuyen(rs.getString("TENCHUYEN"));
+//					chuyen.setID(rs.getFloat("ID"));
+//					System.out.println(rs.getFloat("ID"));
+//					chuyen.setSTT(rs.getInt("STT"));
+//					System.out.println(rs.getInt("STT"));
+//					chuyen.setTemTram(rs.getString("TenTram"));
+//					System.out.println(rs.getString("TenTram"));
+//					chuyens.add(chuyen);
+//				}
+			}
+			result = chuyens;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+//		if (available != 0) {
+//			return true;
+//		}
+		return chuyens;
+
+	}
+
+	public List<BusRouteDetails> getSearcRoute(String txtSearch) {
+		List<BusRouteDetails> result = new ArrayList<BusRouteDetails>();
+		List<BusRouteDetails> chuyens = new ArrayList<BusRouteDetails>();
+		int available = 0;
+		try {
+
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from BusRoute where routeID like N'%" + txtSearch
+					+ "%' or unitID like N'%" + txtSearch + "%' or routeName like N'%" + txtSearch
+					+ "%' or timeStart like N'%" + txtSearch + "%' or timeEnd like N'%" + txtSearch
+					+ "%' or timeBreak like N'%" + txtSearch + "%' or startLocation like N'%" + txtSearch
+					+ "%' or endLocation like N'%" + txtSearch + "%' or kindRoute like N'%" + txtSearch + "%'");
+			while (rs.next()) {
+				BusRouteDetails chuyen = new BusRouteDetails();
+//				available++;
+//				System.out.println("Khanh");
+//				chuyen.setID(rs.getFloat("routeID"));
+////				System.out.println(rs.getFloat("ID"));
+//				chuyen.setSTT(rs.getInt("SERIAL"));
+////				System.out.println(rs.getInt("STT"));
+//				chuyen.setTemTram(rs.getNString("NAMEBUSSTOP"));
+				chuyen.setRouteID(rs.getInt("routeID"));
+				chuyen.setUnitID(rs.getNString("unitID"));
+				chuyen.setRouteName(rs.getNString("routeName"));
+				chuyen.setTimeStart(rs.getNString("timeStart"));
+				chuyen.setTimeEnd(rs.getNString("timeEnd"));
+				chuyen.setTimeBreak(rs.getDouble("timeBreak"));
+				chuyen.setStartLocation(rs.getNString("startLocation"));
+				chuyen.setEndLocation(rs.getNString("endLocation"));
+				chuyen.setKindRoute(rs.getNString("kindRoute"));
 //				System.out.println(rs.getNString("TenTram"));
 				chuyens.add(chuyen);
 //				for (ChuyenDetails chuyenDetails : chuyens) {

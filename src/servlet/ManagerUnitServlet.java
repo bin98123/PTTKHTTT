@@ -54,10 +54,12 @@ public class ManagerUnitServlet extends HttpServlet {
 			String unitID = request.getParameter("unitID");
 			UnitDAO dao = new UnitDAO();
 			try {
-				if (dao.deleteUnit(unitID)) {
+				if (dao.deleteUnit(unitID) == true) {
+					session.setAttribute("valueUnit", null);
 					request.getRequestDispatcher("/ManagerUnit.jsp").forward(request, response);
 
 				} else {
+					session.setAttribute("valueUnit", "error");
 					request.getRequestDispatcher("/ManagerUnit.jsp").forward(request, response);
 
 				}

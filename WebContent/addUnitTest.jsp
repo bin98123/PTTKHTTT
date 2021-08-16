@@ -27,20 +27,19 @@
 				<form action="Unit" method="post">
 					<div class="form-group">
 						<label>Mã đơn vị</label> <input type="text" class="form-control"
-							name="id" placeholder="Enter id">
+							name="id" placeholder="Nhập mã đơn vị">
 					</div>
 					<div class="form-group">
 						<label>Tên đơn vị</label> <input type="text" class="form-control"
-							name="name" placeholder="Enter name">
+							name="name" placeholder="Nhập tên đơn vị">
 					</div>
 					<div class="form-group">
 						<label>Số điện thoại</label> <input type="text"
-							class="form-control" name="phoneNumber"
-							placeholder="Enter phone number">
+							class="form-control" name="phoneNumber" placeholder="Nhập SĐT">
 					</div>
 					<div class="form-group">
 						<label>Email</label> <input type="text" class="form-control"
-							name="email" placeholder="Enter email">
+							name="email" placeholder="Nhập email">
 					</div>
 					<button type="submit" class="btn btn-primary">Save</button>
 					<button type="reset" class="btn btn-primary">Cancel</button>
