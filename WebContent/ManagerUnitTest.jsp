@@ -44,14 +44,20 @@ display: table-row; */
 }
 
 .bnt-add {
-	float: right;
-	margin-left: 330px; /*
-width: 100px; */
+	float: left;
+	margin-left: 330px;
+	/* width: 100px; */
 }
 
 .bnt-rollback {
 	float: right;
-	margin-right: 80px;
+}
+
+.bnt-export {
+	float: right;
+}
+.bnt-import {
+	float: right;
 }
 
 .top-content {
@@ -176,6 +182,16 @@ session.removeAttribute("valueUnit");
 			<button type="button" class="btn btn-sm btn-primary"
 				onclick="window.location.href='./ManagerUnit?submit=rollback'">Hoàn
 				tác</button>
+		</div>
+		<div class="bnt-export">
+			<a class="btn btn-sm btn-primary" href="Download_Unit.jsp"> <i
+				class="fas fa-file-upload"></i> <span>Xuất file Excel</span>
+			</a>
+		</div>
+		<div class="bnt-import">
+			<a class="btn btn-sm btn-primary" href="Upload_Unit.jsp"> <i
+				class="fas fa-file-upload"></i> <span>Nhập file Excel</span>
+			</a>
 		</div>
 	</div>
 	<table class="table table-striped table-bordered table-list table1"

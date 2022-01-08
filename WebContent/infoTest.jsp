@@ -79,7 +79,7 @@ input.name_in::-webkit-input-placeholder {
 }
 
 input::-webkit-input-placeholder {
-	font-size: 28px;
+	font-size: 26px;
 	text-align: left;
 	width: 438px;
 	/* line-height: 3;/*chiều cao trong khung*/
@@ -147,7 +147,7 @@ input::-webkit-input-placeholder {
 	margin: 15px;
 	flex-direction: column;
 	border-radius: 10px 10px;
-	font-size: 28px;
+	font-size: 26px;
 }
 
 .top-info {
@@ -265,16 +265,16 @@ if (accountDetails1 != null) {
 				<div class="left-content">
 					<!-- 				<div class="contain_name_in"> -->
 					<input placeholder="Họ và tên" class="name_in" name="name_in"
-						type="text">
+						type="text" required="required">
 					<!-- 					 <input -->
 					<!-- 						placeholder="Tên" class="name_in" type="text"> -->
 					<!-- 				</div> -->
 					<input placeholder="Ngày sinh: dd/mm/yyyy" class="address_in"
-						name="birthday_in" type="text"> <input
+						name="birthday_in" type="text" required="required"> <input
 						placeholder="Email: name@example.com" class="email_in"
-						name="email_in" type="text"> <input
+						name="email_in" type="text" required="required"> <input
 						placeholder="Số điện thoại" class="phoneNumber_in"
-						name="phoneNumber_in" type="text">
+						name="phoneNumber_in" type="text" required="required">
 					<div class="contain_bnt_edit">
 						<button class="btn btn-primary btn-lg bnt-edit update"
 							type="submit">Cập nhật</button>

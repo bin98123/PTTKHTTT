@@ -40,4 +40,9 @@ public class BusStopDetails {
 		this.nameBusStop = nameBusStop;
 	}
 
+	@Override
+	public String toString() {
+		return "BusStopDetails [routeID=" + routeID + ", serial=" + serial + ", nameBusStop=" + nameBusStop + "]";
+	}
+
 }

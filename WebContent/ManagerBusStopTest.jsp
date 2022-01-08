@@ -43,16 +43,21 @@ td, th {
 }
 
 .bnt-add {
-	float: right;
+	float: left;
 	margin-left: 330px;
 	/* width: 100px; */
 }
 
 .bnt-rollback {
 	float: right;
-	margin-right: 80px;
 }
 
+.bnt-export {
+	float: right;
+}
+.bnt-import{
+float: right;
+}
 .top-content {
 	float: left;
 	/* width: 100px; */
@@ -174,6 +179,16 @@ session.removeAttribute("valueStop");
 			<button type="button" class="btn btn-sm btn-primary"
 				onclick="window.location.href='./ManagerBusStop?submit=rollback'">Hoàn
 				tác</button>
+		</div>
+		<div class="bnt-export">
+			<a class="btn btn-sm btn-primary" href="Download_BusStop.jsp"> <i
+				class="fas fa-file-upload"></i> <span>Xuất file Excel</span>
+			</a>
+		</div>
+<div class="bnt-import">
+			<a class="btn btn-sm btn-primary" href="Upload_BusStop.jsp"> <i
+				class="fas fa-file-upload"></i> <span>Nhập file Excel</span>
+			</a>
 		</div>
 	</div>
 	<table class="table table-striped table-bordered table-list table1"

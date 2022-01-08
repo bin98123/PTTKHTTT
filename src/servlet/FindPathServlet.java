@@ -69,7 +69,6 @@ public class FindPathServlet extends HttpServlet {
 			try {
 				List<String> path = findPath.search(start, des);
 				System.out.println(start + " " + des);
-
 				session.setAttribute("desInput", des);
 				session.setAttribute("startInput", start);
 				session.setAttribute("path", path);

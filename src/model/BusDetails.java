@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class BusDetails {
 	private String busID;
@@ -15,6 +15,7 @@ public class BusDetails {
 		return "BusDetails [busID=" + busID + ", licensePlate=" + licensePlate + ", kind=" + kind + ", manufactureDay="
 				+ manufactureDay + ", lateGuaranteeDay=" + lateGuaranteeDay + ", routeID=" + routeID + "]";
 	}
+
 	public BusDetails(String busID, String licensePlate, String kind, Date manufactureDay, Date lateGuaranteeDay,
 			int routeID) {
 		super();
@@ -25,8 +26,9 @@ public class BusDetails {
 		this.lateGuaranteeDay = lateGuaranteeDay;
 		this.routeID = routeID;
 	}
+
 	public BusDetails() {
-		
+
 	}
 
 	public String getBusID() {

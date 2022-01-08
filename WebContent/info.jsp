@@ -1,3 +1,5 @@
+<%@page import="dao.LoginDAO"%>
+<%@page import="dao.AccountDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.AccountDetails"%>
 <%@ page import="java.util.*"%>
@@ -112,8 +114,10 @@ body {
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
 </head>
 <body>
+
 	<div class="left">
 		<nav class="sidebar">
 			<ul>
@@ -126,8 +130,8 @@ body {
 					<li onclick="info.submit();"><input type="hidden"
 						id="info-btn" value="info" /><a>Thông tin cá nhân</a></li>
 				</form>
-				<form id="statistic" action="Manager" method="post">
-					<li onclick="statistic.submit();"><input name="home"
+				<form id="statistic" action="Manager" method="get">
+					<li onclick="statistic.submit();"><input name="action"
 						type="hidden" id="statistic-btn" value="statistic" /><a>Thống
 							kê</a></li>
 				</form>
@@ -145,6 +149,18 @@ body {
 					%>
 				</form>
 				<%
+					AccountDao dao = new AccountDao();
+				if (accountDetails != null) {
+					//session.setMaxInactiveInterval(5);
+					session.setMaxInactiveInterval(1800);
+					dao.loginUser((String) session.getAttribute("currentUser"));
+					System.out.println((String) session.getAttribute("currentUser"));
+				} else if ((String) session.getAttribute("currentUser") == null) {
+					session.invalidate();
+					dao.logoutUser();
+				}
+				%>
+				<%
 					if (accountDetails != null) {
 					session.setMaxInactiveInterval(1800);
 				%>
@@ -152,28 +168,28 @@ body {
 						class="fas fa-caret-down first"></span>
 				</a>
 					<ul class="manager-show">
-						<form id="managerBusRoute" action="Manager" method="post">
-							<li onclick="managerBusRoute.submit();"><input name="home"
+						<form id="managerBusRoute" action="Manager" method="get">
+							<li onclick="managerBusRoute.submit();"><input name="action"
 								type="hidden" id="manager-route-btn" value="manager-route" /><a>Quản
 									lý Tuyến Xe</a></li>
 						</form>
-						<form id="managerUnit" action="Manager" method="post">
-							<li onclick="managerUnit.submit();"><input name="home"
+						<form id="managerUnit" action="Manager" method="get">
+							<li onclick="managerUnit.submit();"><input name="action"
 								type="hidden" id="manager-unit-btn" value="manager-unit" /><a>Quản
 									lý Đơn vị</a></li>
 						</form>
-						<form id="managerDriver" action="Manager" method="post">
-							<li onclick="managerDriver.submit();"><input name="home"
+						<form id="managerDriver" action="Manager" method="get">
+							<li onclick="managerDriver.submit();"><input name="action"
 								type="hidden" id="manager-driver-btn" value="manager-driver" /><a>Quản
 									lý Tài Xế</a></li>
 						</form>
-						<form id="managerBus" action="Manager" method="post">
-							<li onclick="managerBus.submit();"><input name="home"
+						<form id="managerBus" action="Manager" method="get">
+							<li onclick="managerBus.submit();"><input name="action"
 								type="hidden" id="manager-bus-btn" value="manager-bus" /><a>Quản
 									lý Xe Buýt</a></li>
 						</form>
-						<form id="managerStop" action="Manager" method="post">
-							<li onclick="managerStop.submit();"><input name="home"
+						<form id="managerStop" action="Manager" method="get">
+							<li onclick="managerStop.submit();"><input name="action"
 								type="hidden" id="manager-stop-btn" value="manager-stop" /><a>Quản
 									lý Trạm Dừng</a></li>
 						</form>
@@ -186,42 +202,55 @@ body {
 
 				</a>
 					<ul class="search-show">
-						<form id="myForm1" action="Manager" method="post">
-							<li onclick="myForm1.submit();"><input name="home"
+						<form id="myForm1" action="Manager" method="get">
+							<li onclick="myForm1.submit();"><input name="action"
 								type="hidden" id="search-bus-router-btn"
 								value="search-bus-router" /><a>Tra cứu Tuyến Xe</a></li>
 						</form>
-						<form id="myForm2" action="Manager" method="post">
-							<li onclick="myForm2.submit();"><input name="home"
+						<form id="myForm2" action="Manager" method="get">
+							<li onclick="myForm2.submit();"><input name="action"
 								type="hidden" id="search-unit-btn" value="search-unit" /><a>Tra
 									cứu Đơn vị</a></li>
 						</form>
-						<form id="myForm3" action="Manager" method="post">
-							<li onclick="myForm3.submit();"><input name="home"
+						<form id="myForm3" action="Manager" method="get">
+							<li onclick="myForm3.submit();"><input name="action"
 								type="hidden" id="search-bus-driver-btn"
 								value="search-bus-driver" /><a>Tra cứu Tài Xế</a></li>
 						</form>
-						<form id="myForm4" action="Manager" method="post">
-							<li onclick="myForm4.submit();"><input name="home"
+						<form id="myForm4" action="Manager" method="get">
+							<li onclick="myForm4.submit();"><input name="action"
 								type="hidden" id="search-bus-btn" value="search-bus" /><a>Tra
 									cứu Xe Buýt</a></li>
 						</form>
-						<form id="myForm5" action="Manager" method="post">
-							<li onclick="myForm5.submit();"><input name="home"
+						<form id="myForm5" action="Manager" method="get">
+							<li onclick="myForm5.submit();"><input name="action"
 								type="hidden" id="search-busStop-btn" value="search-busStop" /><a>Tra
 									cứu Trạm Dừng</a></li>
 						</form>
 					</ul></li>
-				<form id="exit" action="Manager" method="post">
-					<li onclick="exit.submit();"><input name="home" type="hidden"
+				<%
+					if (accountDetails != null) {
+				%>
+				<form id="exit" action="Manager" method="get">
+					<li onclick="exit.submit();"><input name="action" type="hidden"
 						id="exit-btn" value="exit" /><a>Thoát</a></li>
 				</form>
+				<%
+					} ;
+				%>
+				<%
+					if (accountDetails == null) {
+				%>
+				<form id="exitGuess" action="index.jsp" method="post">
+					<li onclick="exitGuess.submit();"><input name="action"
+						type="hidden" id="exitGuess-btn" value="exitGuess" /><a>Thoát</a></li>
+				</form>
+				<%
+					} ;
+				%>
 			</ul>
 		</nav>
-
-
 	</div>
-
 
 
 	<div class="right1"></div>

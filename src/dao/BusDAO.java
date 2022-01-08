@@ -1,7 +1,24 @@
 package dao;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.sql.Date;
+import java.util.List;
+import java.util.Vector;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +28,7 @@ import java.text.SimpleDateFormat;
 
 import model.BusDetails;
 
-public class BusDAO {
+public class BusDAO implements POI_API_DAO {
 	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
 //	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
 //			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
@@ -22,6 +39,34 @@ public class BusDAO {
 	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
 	public BusDAO() {
+
+	}
+
+	public int getCountNumberOfBus() {
+		int count = 0;
+		try {
+
+			Class.forName(driver);
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select count(busID) as counts from Bus;");
+			while (rs.next()) {
+//				if (rs.getTime("expireHour") == null) {
+//					available = new java.sql.Time(23, 0, 0);
+//				} else if (rs.getTime("expireHour") != null) {
+				count = rs.getInt("counts");
+//				System.out.println(name);
+//				System.out.println(count);
+
+//				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+		return count;
 
 	}
 
@@ -77,31 +122,86 @@ public class BusDAO {
 
 	}
 
+	public void getBuses() {
+		String busID;
+		try {
+
+			Class.forName(driver);
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Bus;");
+			while (rs.next()) {
+//				if (rs.getTime("expireHour") == null) {
+//					available = new java.sql.Time(23, 0, 0);
+//				} else if (rs.getTime("expireHour") != null) {
+				busID = rs.getString("busID");
+				System.out.println(busID);
+
+//				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+
+	}
+
+	public int checkExist(BusDetails busDetails) {
+		int count = 0;
+		try {
+
+			Class.forName(driver);
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Bus where busID like '" + busDetails.getBusID() + "';");
+			while (rs.next()) {
+//				if (rs.getTime("expireHour") == null) {
+//					available = new java.sql.Time(23, 0, 0);
+//				} else if (rs.getTime("expireHour") != null) {
+				count++;
+//				System.out.println(name);
+//				System.out.println(count);
+
+//				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+		return count;
+
+	}
+
 	public int add(BusDetails bus) throws ClassNotFoundException, SQLException {
 		int result = 0;
 //		Class.forName("org.hsqldb.jdbcDriver");
 		Class.forName(driver);
 //		try (Connection connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/examples", "sa", ""))
-		try (Connection connection = DriverManager.getConnection(connectionUrl))
+		if (checkExist(bus) == 0) {
+			try (Connection connection = DriverManager.getConnection(connectionUrl))
 
-		{
+			{
 
-			// Step 3: Execute the query or update query
-			try {
-				Statement statement = connection.createStatement();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+				// Step 3: Execute the query or update query
+				try {
+					Statement statement = connection.createStatement();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 //			String uName = user.getUserName();
 //			String uIGName = user.getUserNameIG();
 //			String uEmail = user.getUserEmail();
 
 //			try (PreparedStatement insert = connection
 //					.prepareStatement(INSERT_ACCOUNT_SQL + " (?, ?, ?, " + "(N'Quốc Khánh Trịnh Lê Ka')" + ", ?,?,?);")) {
-			try (PreparedStatement insert = connection
-					.prepareStatement(INSERT_Bus_SQL + " (?,?,(N'" + bus.getKind() + "'),?,?,?);")) {
-				// 1private String accountID;
+				try (PreparedStatement insert = connection
+						.prepareStatement(INSERT_Bus_SQL + " (?,?,(N'" + bus.getKind() + "'),?,?,?);")) {
+					// 1private String accountID;
 //				2private String accountName;
 //				3private String password;
 //				4private String fullName;
@@ -110,17 +210,18 @@ public class BusDAO {
 //				7private String phoneNumber;
 //				insert.setString(1, account.getPassword() + account.getAccountName());
 //				insert.executeUpdate();
-				insert.setString(1, bus.getBusID());
-				insert.setString(2, bus.getLicensePlate());
-				insert.setDate(3,
-						java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(bus.getManufactureDay())));
-				insert.setDate(4,
-						java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(bus.getLateGuaranteeDay())));
-				insert.setInt(5, bus.getRouteID());
-				result = insert.executeUpdate();
+					insert.setString(1, bus.getBusID());
+					insert.setString(2, bus.getLicensePlate());
+					insert.setDate(3,
+							java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(bus.getManufactureDay())));
+					insert.setDate(4, java.sql.Date
+							.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(bus.getLateGuaranteeDay())));
+					insert.setInt(5, bus.getRouteID());
+					result = insert.executeUpdate();
+
+				}
 
 			}
-
 		}
 		return result;
 
@@ -295,6 +396,76 @@ public class BusDAO {
 		}
 	}
 
+	// export excel file
+	@Override
+	public HSSFWorkbook getExportExel() {
+		HSSFWorkbook wb = new HSSFWorkbook();
+		HSSFSheet sheet = wb.createSheet();
+		HSSFRow row = sheet.createRow(0);
+		HSSFCell cell = row.createCell(0);
+		row = sheet.createRow(0);
+
+		cell = row.createCell(0);
+		cell.setCellValue("busID");
+		cell = row.createCell(1);
+		cell.setCellValue("licensePlate");
+		cell = row.createCell(2);
+		cell.setCellValue("kind");
+		cell = row.createCell(3);
+		cell.setCellValue("manufactureDay");
+		cell = row.createCell(4);
+		cell.setCellValue("lateGuaranteeDay");
+		cell = row.createCell(5);
+		cell.setCellValue("routeID");
+
+		try {
+			String busID;
+			String licensePlate;
+			String kind;
+			Date manufactureDay;
+			Date lateGuaranteeDay;
+			int routeID;
+			List<String> list = new ArrayList<String>();
+			String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+			Class.forName(driver);
+			String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Bus;");
+			int i = 1;
+			while (rs.next()) {
+				busID = rs.getString("busID");
+				licensePlate = rs.getString("licensePlate");
+				kind = rs.getString("kind");
+				manufactureDay = rs.getDate("manufactureDay");
+				lateGuaranteeDay = rs.getDate("lateGuaranteeDay");
+				routeID = rs.getInt("routeID");
+				list.add(0, busID);
+				list.add(1, licensePlate);
+				list.add(2, kind);
+				list.add(3, "" + manufactureDay);
+				list.add(4, "" + lateGuaranteeDay);
+				list.add(5, "" + routeID);
+
+				row = sheet.createRow(i);
+
+				for (int j = 0; j < list.size(); j++) {
+					cell = row.createCell(j);
+					cell.setCellValue(list.get(j));
+				}
+				list = new ArrayList<String>();
+				i++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+		return wb;
+
+	}
+
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 //		System.out.println(new BusDAO().delete("bus015"));
 //		new BusDAO().rollback();
@@ -303,6 +474,150 @@ public class BusDAO {
 //		System.out.println(new BusDAO().add(busDetails));
 		System.out.println(new BusDAO().edit(busDetails, "bus016"));
 //		System.out.println(new BusDAO().getMaxID());
+		System.out.println(new BusDAO().getCountNumberOfBus());
+		System.out.println("kiểm tra đã tồn tại: " + new BusDAO().checkExist(busDetails));
+		new BusDAO().getBuses();
 
 	}
+
+	/////////////////////////////////////////////////
+	// Import From file Excel
+	@Override
+	public void selectFile() throws IOException, ClassNotFoundException, SQLException {
+		JFrame parentFrame = new JFrame();
+
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
+		fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
+			@Override
+			public boolean accept(java.io.File file) {
+				return (file.getName().toLowerCase().endsWith(".xls"));
+			}
+
+			@Override
+			public String getDescription() {
+				return "Microsoft Excel 97-2003 Worksheet";
+			}
+		});
+
+		fileChooser.setDialogTitle("Specify a file to save");
+
+//		FileChooser fileChooser = new FileChooser();
+//		fileChooser.setTitle("Open Resource File");
+
+		int userSelection = fileChooser.showSaveDialog(parentFrame);
+
+		if (userSelection == JFileChooser.APPROVE_OPTION) {
+			File fileToSave = fileChooser.getSelectedFile();
+//			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+
+//		String fileName = "C:\\Users\\quockhanh156\\Downloads\\Accounts.xls";
+			String fileName = fileToSave.getAbsolutePath();
+			// Read an Excel File from C:\\test.xls and Store in a Vector
+			Vector dataHolder = readExcelFile(fileName);
+			// Print the data read
+//			printCellDataToConsole(dataHolder);
+			for (int j = 0; j < printCellDataToConsole(dataHolder, fileName).size(); j++) {
+				if (!printCellDataToConsole(dataHolder, fileName).get(j).toString().equals("")) {
+					BusDAO dao = new BusDAO();
+					dao.add(printCellDataToConsole(dataHolder, fileName).get(j));
+//					System.out.println(printCellDataToConsole(dataHolder, fileName).get(j));
+				}
+			}
+
+//			System.exit(0);
+		}
+	}
+
+	@Override
+	public Vector readExcelFile(String fileName) {
+		/**
+		 * --Define a Vector --Holds Vectors Of Cells
+		 */
+		Vector cellVectorHolder = new Vector();
+		try {
+			/** Creating Input Stream **/
+			// InputStream myInput= ReadExcelFile.class.getResourceAsStream( fileName );
+			FileInputStream myInput = new FileInputStream(fileName);
+			/** Create a POIFSFileSystem object **/
+			POIFSFileSystem myFileSystem = new POIFSFileSystem(myInput);
+			/** Create a workbook using the File System **/
+			HSSFWorkbook myWorkBook = new HSSFWorkbook(myFileSystem);
+			/** Get the first sheet from workbook **/
+			HSSFSheet mySheet = myWorkBook.getSheetAt(0);
+			int rowTotal = mySheet.getLastRowNum();
+
+			if ((rowTotal > 0) || (mySheet.getPhysicalNumberOfRows() > 0)) {
+				rowTotal++;
+			}
+			int row = rowTotal - 1;
+			/** We now need something to iterate through the cells. **/
+			Iterator rowIter = mySheet.rowIterator();
+			while (rowIter.hasNext()) {
+				HSSFRow myRow = (HSSFRow) rowIter.next();
+				Iterator cellIter = myRow.cellIterator();
+				Vector cellStoreVector = new Vector();
+				while (cellIter.hasNext()) {
+					HSSFCell myCell = (HSSFCell) cellIter.next();
+					cellStoreVector.addElement(myCell);
+				}
+				cellVectorHolder.addElement(cellStoreVector);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cellVectorHolder;
+	}
+
+	private List<BusDetails> printCellDataToConsole(Vector dataHolder, String fileName) throws IOException {
+		FileInputStream myInput = new FileInputStream(fileName);
+		/** Create a POIFSFileSystem object **/
+		POIFSFileSystem myFileSystem = new POIFSFileSystem(myInput);
+		/** Create a workbook using the File System **/
+		HSSFWorkbook myWorkBook = new HSSFWorkbook(myFileSystem);
+		/** Get the first sheet from workbook **/
+		HSSFSheet mySheet = myWorkBook.getSheetAt(0);
+		int rowTotal = mySheet.getLastRowNum();
+
+		if ((rowTotal > 0) || (mySheet.getPhysicalNumberOfRows() > 0)) {
+			rowTotal++;
+		}
+		List<BusDetails> ListBusDetails = new ArrayList<BusDetails>();
+		BusDetails busDetails = new BusDetails();
+		List<String> containListBus = new ArrayList<String>();
+		try {
+
+			for (int i = 1; i < rowTotal; i++) {
+				Vector cellStoreVector = (Vector) dataHolder.elementAt(i);
+				for (int j = 0; j < cellStoreVector.size(); j++) {
+					HSSFCell myCell = (HSSFCell) cellStoreVector.elementAt(j);
+					String stringCellValue = myCell.toString();
+//					System.out.print(stringCellValue + "\t");
+					containListBus.add(j, stringCellValue);
+					// Print Each cell here
+
+				}
+				busDetails = new BusDetails(containListBus.get(0), containListBus.get(1), containListBus.get(2),
+						java.sql.Date.valueOf((containListBus.get(3))), java.sql.Date.valueOf((containListBus.get(4))),
+						Integer.parseInt(containListBus.get(5)));
+				ListBusDetails.add(i - 1, busDetails);
+				busDetails = new BusDetails();
+//				System.out.println(containListBus);
+//				System.out.println(containListBus.get(3));
+//				System.out.println(containListBus.get(5));
+//				System.out.println(busDetails);
+//				System.out.println();
+				if (ListBusDetails.get(i - 1).toString().equals("")) {
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ListBusDetails;
+	}
+
+	/////////////////////////////////////////////////
 }

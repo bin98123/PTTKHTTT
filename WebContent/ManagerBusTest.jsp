@@ -4,6 +4,11 @@
 <%@ page import="dao.ChuyenDetails"%>
 <%@ page import="model.BusDetails"%>
 <%@ page import="controller.*"%>
+<%@page import="org.apache.poi.hssf.usermodel.HSSFWorkbook"%>
+<%@page import="java.io.*"%>
+<%@page import="java.util.*"%>
+<%@page import="javax.swing.*"%>
+<%@page import="javax.swing.JFileChooser"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +39,18 @@ td, th {
 	width: 50%;
 }
 
+.inputfile {
+	width: 91px;
+	float: right;
+	margin-right: 30px;
+	color: red;
+}
+
+#file-name {
+	display: none;
+	color: red;
+}
+
 .containt-top {
 	display: flex;
 }
@@ -44,14 +61,21 @@ td, th {
 }
 
 .bnt-add {
-	float: right;
+	float: left;
 	margin-left: 330px;
 	/* width: 100px; */
 }
 
 .bnt-rollback {
 	float: right;
-	margin-right: 80px;
+}
+
+.bnt-export {
+	float: right;
+}
+
+.bnt-import {
+	float: right;
 }
 
 .top-content {
@@ -151,6 +175,7 @@ session.removeAttribute("valueBus");
 						onclick="window.location.href='./ManagerBus?submit=delete&unitID=<%=e.getBusID()%>'">
 						<i class="fa fa-trash-o"></i>
 					</button></td>
+
 			</tr>
 
 			<%
@@ -184,7 +209,31 @@ session.removeAttribute("valueBus");
 				onclick="window.location.href='./ManagerBus?submit=rollback'">Hoàn
 				tác</button>
 		</div>
+		<div class="bnt-export">
+			<a class="btn btn-sm btn-primary" href="Download_Bus.jsp"> <i
+				class="fas fa-file-download"></i> <span>Xuất file Excel</span>
+			</a>
+		</div>
+		<div class="bnt-import">
+			<a class="btn btn-sm btn-primary" href="Upload_Bus.jsp"> <i
+				class="fas fa-file-upload"></i> <span>Nhập file Excel</span>
+			</a>
+		</div>
+		<%
+			// 				session.setAttribute("timesImp", "1");
+		%>
+		<!-- 		<div class="inputfile-box"> -->
+
+		<!-- 			<label className="btn btn-info btn-lg"> <a -->
+		<!-- 				class="btn btn-sm btn-primary"> <i class="fas fa-file-upload"></i> -->
+		<!-- 					<span>Nhập file Excel</span> -->
+		<!-- 			</a> <input id="valueTemp" type="file" style="display: none" -->
+		<!-- 				/> -->
+		<!-- 			</label> -->
+		<!-- 		</div> -->
+
 	</div>
+
 	<table class="table table-striped table-bordered table-list table1"
 		style="width: 100%">
 		<thead>
@@ -250,12 +299,24 @@ session.removeAttribute("valueBus");
 			</tr>
 		</tfoot>
 	</table>
+	<!-- 	<input class="box__file" type="file" name="files[]" id="file" -->
+	<!-- 		data-multiple-caption="{count} files selected" multiple /> -->
+
 	<script type="text/javascript">
 <!-- 	<script> -->
 	document.getElementById("example").style.display= "<%=none%>";
 	document.getElementById("default").style.display= "<%=none%>
+
 		";
 		// 	document.getElementById("example").style.display="none";
 	</script>
+	<script type="text/javascript">
+	
+// 	document.getElementById('valueTemp').onchange = function () {
+// // 		var cookieValue = document.getElementById('valueTemp');
+// 		var cookieValue1 = document.getElementsByClass('inputfile').getAttribute('value');
+// 		  alert('Selected file: ' + cookieValue1);
+// 		};
+
 </body>
 </html>

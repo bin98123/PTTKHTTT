@@ -1,6 +1,11 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import dao.AccountDao;
 
 /**
  * Servlet implementation class ManagerServlet
@@ -42,14 +49,52 @@ public class ManagerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		AccountDao dao = new AccountDao();
 		// home
-		String home = request.getParameter("home");
+		String home = request.getParameter("action");
 		if (home.equals("exit")) {
 //		request.getRequestDispatcher("./login.jsp");
+			try {
+				LocalDate date = java.time.LocalDate.now();
+				long currentTime = System.currentTimeMillis();
+				long totalSeconds = (currentTime + 1000) / 1000;
+
+				long currentSecond = totalSeconds % 60;
+
+				long totalMinutes = (totalSeconds + 60) / 60;
+
+				long currentMinutes = (totalMinutes) % 60;
+
+				long totalHour = (totalMinutes) / 60;
+
+				long currentHour = totalHour % 24;
+//				if (currentHour == 23 && currentMinutes >= 55) {
+//					currentHour = 0;
+//				}
+				LocalTime time = java.time.LocalTime.of((int) (currentHour), (int) (currentMinutes),
+						(int) currentSecond);
+				java.sql.Date sqlDate = java.sql.Date.valueOf(date);
+				java.sql.Time sqlTimeCurrent = java.sql.Time.valueOf(time);
+				String userName = (String) session.getAttribute("currentUser");
+				dao.setExpireTimeUser(userName, sqlTimeCurrent, sqlDate);
+				dao.logoutUser((String) session.getAttribute("currentUser"));
+				// dao.logoutUser();
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println((String) session.getAttribute("currentUser"));
 			session.invalidate();
 			request.getRequestDispatcher("./index.jsp").forward(request, response);
 		} else if (home.equals("findPath")) {
 			request.getRequestDispatcher("./findPath.jsp").forward(request, response);
+		}
+		// search
+//		String search = request.getParameter("search");
+		else if (home.equals("exitGuess")) {
+//		request.getRequestDispatcher("./login.jsp");
+			session.invalidate();
+			request.getRequestDispatcher("./index.jsp").forward(request, response);
 		}
 		// search
 //		String search = request.getParameter("search");

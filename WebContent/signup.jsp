@@ -25,7 +25,12 @@
 	font-family: "Segoe UI";
 	background: #ffff;
 }
-
+.guess{
+color: green;
+position:relative;	
+top:-50px;
+left: 200px;
+}
 .containerApp .MainForm {
 	background: #75b9e6;
 	height: 500px;
@@ -38,6 +43,7 @@
 	width: 400px;
 	height: 430px;
 	margin: auto;
+	margin-top: -45px;
 	border-radius: 10px;
 }
 
@@ -68,7 +74,7 @@
 .containerApp .overview .DinhForm .fontPhu {
 	text-align: right;
 	padding-right: 30px;
-	margin-top: -60px;
+	margin-top: -45px;
 	font-size: 20px;
 }
 
@@ -92,6 +98,10 @@
 	font-size: 40px;
 	margin-top: 5px;
 }
+.textdangki {
+position: relative;
+top:-20px;
+}
 
 .error {
 	margin-left: 20px;
@@ -99,7 +109,6 @@
 }
 
 .containerApp .MainForm .NoiDungForm input[type="submit"] {
-	background: #11605b;
 	color: white;
 	font-size: 1.2em;
 	padding: 3px;
@@ -184,6 +193,10 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
 </head>
 <body>
 	<%
@@ -219,7 +232,7 @@
 									style="float: right;">
 							</div>
 							<p class="NDung">
-								<label for="taikhoan">E-MAIL: </label> <input name="email"
+								<label for="taikhoan" style="width: 100px;">E-MAIL: </label> <input name="email"
 									type="email" required="" id="dangki">
 							</p>
 							<p class="NDung">
@@ -237,10 +250,13 @@
 								<label>MẬT KHẨU: </label> <input name="password" type="password"
 									required="" id="dangki">
 							</p>
-							<div style="margin-top: 5px;" class="submit NoiDung j-between">
+							<div style="margin:auto;margin-top:-15px;" class="submit NoiDung j-between">
 								<input class="btn btn-primary btn-lg" type="submit"
 									value=" Đăng kí ">
 							</div>
+							<a class="guess NoiDung j-between" href="./home.jsp">
+									Quên mật khẩu?
+								</a>
 						</div>
 					</div>
 				</div>

@@ -13,6 +13,8 @@
 @import "flex";
 .guess{
 color: green;
+position: relative;
+top:-8px;
 }
 .containerApp {
 	margin-top: 100px;
@@ -185,6 +187,9 @@ color: green;
 									value="Đăng nhập"> 
 							<a class="guess" href="./home.jsp">
 									Vào nhanh không cần đăng nhập
+								</a>
+								<a class="guess" href="./home.jsp">
+									Quên mật khẩu?
 								</a>
 							</div>
 						</div>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="dao.ChuyenDetails"%>
+<%@ page import="dao.*"%>
 <%@ page import="controller.*"%>
 <!DOCTYPE html>
 <html>
@@ -27,6 +27,13 @@
 p {
 	font-weight: bold;
 }
+.des{
+outline: none;
+}
+.start{
+
+outline: none;
+}
 </style>
 <%
 	String desInput = (String) session.getAttribute("desInput");
@@ -43,7 +50,7 @@ if (startInput == null) {
 	<form action="find" method="post">
 		<div class="findPath">
 			<p class="start">- Điểm đi:</p>
-			<input list="starts" name="start" class="" type="text" required=""
+			<input list="starts" name="start" class="start" type="text" required=""
 				id="start" value="<%=startInput%>">
 			<datalist id="starts">
 				<%
@@ -64,7 +71,7 @@ if (startInput == null) {
 				
 			</datalist>
 			<p class="des">- Điểm đến:</p>
-			<input list="dess" name="des" class="" type="text" required=""
+			<input list="dess" name="des" class="des" type="text" required=""
 				id="des" value="<%=desInput%>">
 			<datalist id="dess">
 				<%
