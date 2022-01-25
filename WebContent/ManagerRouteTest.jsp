@@ -205,9 +205,15 @@ session.removeAttribute("value");
 				class="fas fa-file-upload"></i> <span>Xuất file Excel</span>
 			</a>
 		</div>
-	<div class="bnt-import">
+		<div class="bnt-import">
 			<a class="btn btn-sm btn-primary" href="Upload_Route.jsp"> <i
 				class="fas fa-file-upload"></i> <span>Nhập file Excel</span>
+			</a>
+		</div>
+		<div class="bnt-deleteAll">
+			<a class="btn btn-sm btn-danger"
+				onclick="window.location.href='./ManagerRoute?submit=deleteAll'">
+				<i class="fa fa-trash-o"></i> <span>Xóa hết</span>
 			</a>
 		</div>
 	</div>

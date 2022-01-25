@@ -188,7 +188,7 @@ top:-8px;
 							<a class="guess" href="./home.jsp">
 									Vào nhanh không cần đăng nhập
 								</a>
-								<a class="guess" href="./home.jsp">
+								<a class="guess" href="./ForgetPassWord.jsp">
 									Quên mật khẩu?
 								</a>
 							</div>

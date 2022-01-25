@@ -219,6 +219,12 @@ session.removeAttribute("valueBus");
 				class="fas fa-file-upload"></i> <span>Nhập file Excel</span>
 			</a>
 		</div>
+		<div class="bnt-deleteAll">
+			<a class="btn btn-sm btn-danger"
+				onclick="window.location.href='./ManagerBus?submit=deleteAll'"> <i
+				class="fa fa-trash-o"></i> <span>Xóa hết</span>
+			</a>
+		</div>
 		<%
 			// 				session.setAttribute("timesImp", "1");
 		%>

@@ -237,14 +237,14 @@ top:-20px;
 							</p>
 							<p class="NDung">
 								<label for="taikhoan">SĐT: </label> <input name="phoneNumber"
-									type="tel" id="dangki">
+									type="tel" required="required" id="dangki">
 							</p>
 							<p class="NDung">
-								NGÀY SINH: </label> <input name="birthday" type="text" id="dangki">
+								NGÀY SINH: </label> <input name="birthday" type="text"required="required" id="dangki">
 							</p>
 							<p class="Taikhoan">
 								<label>TÊN TÀI KHOẢN: </label> <input name="accountName"
-									type="text" id="dangki">
+									type="text" required="required" id="dangki">
 							</p>
 							<p class="Taikhoan">
 								<label>MẬT KHẨU: </label> <input name="password" type="password"
@@ -254,7 +254,7 @@ top:-20px;
 								<input class="btn btn-primary btn-lg" type="submit"
 									value=" Đăng kí ">
 							</div>
-							<a class="guess NoiDung j-between" href="./home.jsp">
+							<a class="guess NoiDung j-between" href="./ForgetPassWord.jsp">
 									Quên mật khẩu?
 								</a>
 						</div>

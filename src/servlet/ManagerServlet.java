@@ -135,6 +135,8 @@ public class ManagerServlet extends HttpServlet {
 			// Tuyến xe
 		} else if (home.equals("manager-route")) {
 			request.getRequestDispatcher("./ManagerRoute.jsp").forward(request, response);
+		} else if (home.equals("login")) {
+			request.getRequestDispatcher("./login.jsp").forward(request, response);
 		}
 	}
 }

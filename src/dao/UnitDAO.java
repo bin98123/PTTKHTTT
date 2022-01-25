@@ -164,6 +164,87 @@ public class UnitDAO implements POI_API_DAO {
 		return result;
 
 	}
+	public boolean deleteAll() throws ClassNotFoundException, SQLException {
+		boolean result = false;
+
+		Connection con = DriverManager.getConnection(connectionUrl);
+
+		Statement stmt = con.createStatement();
+		con.setAutoCommit(false);
+		try {
+
+			Class.forName(driver);
+//			ResultSet rs0 = stmt
+//					.executeQuery("select * from BusStop WHERE routeID=" + id + " and serial=" + serialIn + ";");
+//			while (rs0.next()) {
+//				int routeID = rs0.getInt("routeID");
+//				int serial = rs0.getInt("serial");
+//				String nameBusStop = rs0.getNString("nameBusStop");
+			float currentTime = System.currentTimeMillis() + getMaxID();
+			String INSERT_BusStopTemp = "INSERT INTO BusUnitManagerTemp"
+					+ "  (unitID,unitName,phoneNumber , Email)";
+			try (PreparedStatement insert = con.prepareStatement(INSERT_BusStopTemp
+					+ " SELECT unitID,unitName,phoneNumber , Email from BusUnitManager;")) {
+				// 1private String accountID;
+//			2private String accountName;
+//			3private String password;
+//			4private String fullName;
+//			5private Date birthday;
+//			6private String email;
+//			7private String phoneNumber;
+//			insert.setString(1, account.getPassword() + account.getAccountName());
+//					insert.setInt(1, routeID);
+//					insert.setInt(2, serial);
+//					insert.setNString(3, nameBusStop);
+//				insert.setFloat(1, System.currentTimeMillis() + getMaxID());
+//				int rs1 = insert.executeUpdate();
+
+				insert.executeUpdate();
+
+//					insert.close();
+			}
+//			Statement stmt2 = con.createStatement();
+			PreparedStatement insert1 = con
+					.prepareStatement("UPDATE BusUnitManagerTemp " + "SET id = " + currentTime + "where id is null;");
+			insert1.executeUpdate();
+			con.commit();
+			if (con != null)
+				con.rollback();
+			////
+
+			Statement stmt1 = con.createStatement();
+			int rs2 = stmt1.executeUpdate("delete from BusUnitManager;");
+			if (rs2 > 0) {
+				result = true;
+			}
+			con.commit();
+//				stmt1.close();
+//			}
+//		rs.close();
+//		con.close();
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			try {
+				if (con != null)
+					con.rollback();
+			} catch (SQLException se2) {
+				se2.printStackTrace();
+			} // Ket thuc khoi try
+
+		} catch (Exception e) {
+			// Xu ly cac loi cho Class.forName
+			e.printStackTrace();
+
+		}
+		return result;
+	}
 
 	public boolean deleteUnit(String id) throws ClassNotFoundException, SQLException {
 		boolean result = false;

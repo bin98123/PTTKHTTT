@@ -35,7 +35,10 @@ public class ChuyenXe {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "*Chuyến " + id + ": \n" + printList() + "\n";
+		if (this.id > 0) {
+			return "*Chuyến xe buýt lượt đi " + id + ": \n" + printList() + "\n";
+		} else
+			return "*Chuyến xe buýt lượt về " + Math.abs(id) + ": \n" + printList() + "\n";
 	}
 
 }

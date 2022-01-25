@@ -33,43 +33,41 @@
 	margin-bottom: 20px;
 }
 
-<%String color = (String) session.getAttribute("errorChangePassColor");
+<%String color = (String) session.getAttribute("errorForgetPassColor ");
 if (color == null) {
 	color = "black";
 
 }%>
-h4 {
+h5 {
 	color: <%=color%>;
 }
 </style>
 <meta charset="utf-8">
-<title>Thay Đổi Mật Khẩu Tài Khoản</title>
+<title>Quên Mật Khẩu</title>
+</head>
 <%
-	String error = (String) session.getAttribute("errorChangePass111");
+	String error = (String) session.getAttribute("errorForgetPass");
 if (error == null) {
 	error = "";
+
 }
 %>
-</head>
 <body>
-	<form action="ChangePassword" method="post">
-		<h4>
-			<%=error%>
-		</h4>
+	<form action="ForgetPassword" method="post">
+		<h4>Lấy Lại Mật Khẩu</h4>
 		<%
-			session.removeAttribute("errorChangePass111");
-		session.removeAttribute("errorChangePassColor");
+			session.removeAttribute("errorForgetPass");
+		session.removeAttribute("errorForgetPassColor");
 		%>
-		<div class="contain_change_pass">
-			<input placeholder="Nhập Mật Khẩu Hiện Tại" class="current_pass"
-				name="current_pass" type="password" required="required"> <input
-				placeholder="Nhập Mật Khẩu Mới" class="new_pass" name="new_pass"
-				type="password"required="required"> <input placeholder="Xác Nhận Mật Khẩu Mới"
-				class="new_pass_con" name="new_pass_con" type="password"required="required">
-		</div>
-		<button type="submit" class="btn btn-primary">Lưu</button>
+		<h5><%=error%>
+		</h5>
+
+		<input placeholder="Địa Chỉ Email Của Bạn" class="new_pass"
+			name="email" type="text" required="required" size="30">
+		<button type="submit" class="btn btn-primary">Gửi yêu cầu lấy lại mật
+			khẩu</button>
 		<button type="button" class="btn btn-danger"
-			onclick="window.location.href='./homeTest.jsp'">Return</button>
+			onclick="window.location.href='./login.jsp'">Trở Về</button>
 	</form>
 </body>
 </html>

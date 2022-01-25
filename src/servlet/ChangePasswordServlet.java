@@ -63,8 +63,11 @@ public class ChangePasswordServlet extends HttpServlet {
 				accountDao = new AccountDao();
 				String id = (String) session.getAttribute("accountID");
 				boolean check = accountDao.checkPassword(currentPass, id);
+				System.out.println("MK nhập đúng? " + check);
 
 				if (check == true) {
+					session.removeAttribute("errorChangePass111");
+					session.removeAttribute("errorChangePassColor");
 //					Chuyen c = new Chuyen();
 //					List<ChuyenDetails> chuyens = new ArrayList<ChuyenDetails>();
 //					chuyens = c.getChuyens();
@@ -78,17 +81,34 @@ public class ChangePasswordServlet extends HttpServlet {
 //					session.setAttribute("user",
 //							new AccountDetails(null, userName, userPassword, null, null, null, null));
 //					session.setAttribute("user", accountDetails);
-					accountDao.changePassword(pass, id);
-					System.out.println(accountDao.checkPassword(currentPass, id));
-					System.out.println(id);
-					request.getRequestDispatcher("/changePassword.jsp").forward(request, response);
-				} else {
+					if (pass.equals(pass_con)) {
+						accountDao.changePassword(pass, id);
+						System.out.println(accountDao.checkPassword(currentPass, id));
+						System.out.println(id);
+						String error = "Mật khẩu đã được update!!!";
+						String color = "green";
+						session.setAttribute("errorChangePass111", error);
+						session.setAttribute("errorChangePassColor", color);
+						request.getRequestDispatcher("/changePassword.jsp").forward(request, response);
+					} else {
+						String error = "Mật khẩu xác nhận lại không khớp!!!";
+						String color = "yellow";
+						session.setAttribute("errorChangePass111", error);
+						session.setAttribute("errorChangePassColor", color);
+						request.getRequestDispatcher("/changePassword.jsp").forward(request, response);
+					}
+				} else if (check == false) {
+					session.removeAttribute("errorChangePass111");
 					// username: 'Khanh'
 					// password: '12345'
 //					String userDetails = "Invalid Username or Password. Username and Password are case-sensitive.";
 //					String userDetails = "Invalid Username or Password.";
 //					String userDetails = "Tên đăng nhập hoặc mật khẩu không hợp lệ.";
 //					session.setAttribute("Invalid", userDetails);
+					String error = "Mật khẩu không đúng!";
+					String color = "red";
+					session.setAttribute("errorChangePass111", error);
+					session.setAttribute("errorChangePassColor", color);
 					request.getRequestDispatcher("/changePassword.jsp").forward(request, response);
 
 				}

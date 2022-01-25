@@ -39,7 +39,7 @@ public class Chuyen {
 				ChuyenDetails chuyen = new ChuyenDetails();
 //				available++;
 //				System.out.println("Khanh");
-				chuyen.setID(rs.getFloat("routeID"));
+				chuyen.setID(rs.getInt("routeID"));
 //				System.out.println(rs.getFloat("ID"));
 				chuyen.setSTT(rs.getInt("serial"));
 //				System.out.println(rs.getInt("STT"));

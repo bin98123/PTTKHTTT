@@ -8,7 +8,7 @@ public class ChuyenDetails {
 //	private String luotDi;
 //	private String luotVe;
 //	private String tenChuyen;
-	private float ID;
+	private int ID;
 	private int STT;
 	private String temTram;
 
@@ -16,7 +16,7 @@ public class ChuyenDetails {
 
 	}
 
-	public ChuyenDetails(float ID, int STT, String temTram) {
+	public ChuyenDetails(int ID, int STT, String temTram) {
 		super();
 		this.ID = ID;
 		this.STT = STT;
@@ -55,11 +55,11 @@ public class ChuyenDetails {
 //		return tenChuyen;
 //	}
 
-	public float getID() {
+	public int getID() {
 		return ID;
 	}
 
-	public void setID(float iD) {
+	public void setID(int iD) {
 		ID = iD;
 	}
 

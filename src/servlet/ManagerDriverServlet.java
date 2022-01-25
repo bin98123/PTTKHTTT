@@ -72,6 +72,22 @@ public class ManagerDriverServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		} else if (submit.equals("deleteAll")) {
+			DriverDAO dao = new DriverDAO();
+			try {
+				if (dao.deleteAll()) {
+					session.setAttribute("valueDriver", null);
+					request.getRequestDispatcher("/ManagerDriver.jsp").forward(request, response);
+
+				} else {
+					session.setAttribute("valueDriver", "error");
+					request.getRequestDispatcher("/ManagerDriver.jsp").forward(request, response);
+
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if (submit.equals("add")) {
 
 		}

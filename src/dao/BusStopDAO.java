@@ -33,7 +33,7 @@ public class BusStopDAO implements POI_API_DAO {
 	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
 //	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
 //			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
-	String INSERT_BusStopTemp_SQL = "INSERT INTO BusStopTemp" + "  (routeID , serial , nameBusStop,id) VALUES ";
+	String INSERT_BusStopTemp_SQL = "INSERT INTO BusStopTemp0" + "  (routeID , serial , nameBusStop,id) VALUES ";
 	String INSERT_BusStop_SQL = "INSERT INTO BusStop" + "  (routeID , serial , nameBusStop)  VALUES ";
 	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
@@ -51,7 +51,7 @@ public class BusStopDAO implements POI_API_DAO {
 		try {
 
 			Class.forName(driver);
-			ResultSet rs0 = stmt.executeQuery("select max(id) as maxID from BusStopTemp;");
+			ResultSet rs0 = stmt.executeQuery("select max(id) as maxID from BusStopTemp0;");
 			if (rs0.next()) {
 				result = rs0.getFloat("maxID");
 			} else {
@@ -262,6 +262,87 @@ public class BusStopDAO implements POI_API_DAO {
 		return result;
 	}
 
+	public boolean deleteAll() throws ClassNotFoundException, SQLException {
+		boolean result = false;
+
+		Connection con = DriverManager.getConnection(connectionUrl);
+
+		Statement stmt = con.createStatement();
+		con.setAutoCommit(false);
+		try {
+
+			Class.forName(driver);
+//			ResultSet rs0 = stmt
+//					.executeQuery("select * from BusStop WHERE routeID=" + id + " and serial=" + serialIn + ";");
+//			while (rs0.next()) {
+//				int routeID = rs0.getInt("routeID");
+//				int serial = rs0.getInt("serial");
+//				String nameBusStop = rs0.getNString("nameBusStop");
+			float currentTime = System.currentTimeMillis() + getMaxID();
+			String INSERT_BusStopTemp = "INSERT INTO BusStopTemp0" + "  (routeID , serial , nameBusStop)";
+			try (PreparedStatement insert = con
+					.prepareStatement(INSERT_BusStopTemp + " SELECT routeID , serial , nameBusStop from BusStop;")) {
+				// 1private String accountID;
+//			2private String accountName;
+//			3private String password;
+//			4private String fullName;
+//			5private Date birthday;
+//			6private String email;
+//			7private String phoneNumber;
+//			insert.setString(1, account.getPassword() + account.getAccountName());
+//					insert.setInt(1, routeID);
+//					insert.setInt(2, serial);
+//					insert.setNString(3, nameBusStop);
+//				insert.setFloat(1, System.currentTimeMillis() + getMaxID());
+//				int rs1 = insert.executeUpdate();
+
+				insert.executeUpdate();
+
+//					insert.close();
+			}
+//			Statement stmt2 = con.createStatement();
+			PreparedStatement insert1 = con
+					.prepareStatement("UPDATE BusStopTemp0 " + "SET id = " + currentTime + "where id is null;");
+			insert1.executeUpdate();
+			con.commit();
+			if (con != null)
+				con.rollback();
+			
+			////
+			Statement stmt1 = con.createStatement();
+			int rs2 = stmt1.executeUpdate("delete from BusStop;");
+			if (rs2 > 0) {
+				result = true;
+			}
+			con.commit();
+//				stmt1.close();
+//			}
+//		rs.close();
+//		con.close();
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			try {
+				if (con != null)
+					con.rollback();
+			} catch (SQLException se2) {
+				se2.printStackTrace();
+			} // Ket thuc khoi try
+
+		} catch (Exception e) {
+			// Xu ly cac loi cho Class.forName
+			e.printStackTrace();
+
+		}
+		return result;
+	}
+
 	public void rollback() throws SQLException {
 //	select * from BusUnitManagerTemp where id=(select max(id) from BusUnitManagerTemp);
 		Connection con = DriverManager.getConnection(connectionUrl);
@@ -272,7 +353,7 @@ public class BusStopDAO implements POI_API_DAO {
 
 			Class.forName(driver);
 
-			ResultSet rs0 = stmt.executeQuery("select * from BusStopTemp where id=(select max(id) from BusStopTemp);");
+			ResultSet rs0 = stmt.executeQuery("select * from BusStopTemp0 where id=(select max(id) from BusStopTemp0);");
 			while (rs0.next()) {
 				int routeID = rs0.getInt("routeID");
 				int serial = rs0.getInt("serial");
@@ -296,7 +377,7 @@ public class BusStopDAO implements POI_API_DAO {
 					insert.close();
 				}
 				Statement stmt1 = con.createStatement();
-				stmt1.executeUpdate("delete from BusStopTemp where id=(select max(id) from BusStopTemp);");
+				stmt1.executeUpdate("delete from BusStopTemp0 where id=(select max(id) from BusStopTemp0);");
 				con.commit();
 				stmt1.close();
 			}
@@ -388,7 +469,8 @@ public class BusStopDAO implements POI_API_DAO {
 //		System.out.println(new DriverDAO().edit(driverDetails, "d01"));
 //		BusStopDetails busStopDetails = new BusStopDetails(0, 0, "Bến xe buýt Sài Gòn");
 //		System.out.println(new BusStopDAO().edit(busStopDetails, 19, 1));
-		System.out.println(new BusStopDAO().checkExist(new BusStopDetails(88, 0, "Cát Lái")));
+//		System.out.println(new BusStopDAO().checkExist(new BusStopDetails(88, 0, "Cát Lái")));
+		System.out.println(new BusStopDAO().deleteAll());
 	}
 
 	/////////////////////////////////////////////////

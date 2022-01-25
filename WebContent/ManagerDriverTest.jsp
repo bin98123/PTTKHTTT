@@ -223,6 +223,12 @@ session.removeAttribute("valueDriver");
 				class="fas fa-file-upload"></i> <span>Nhập file Excel</span>
 			</a>
 		</div>
+		<div class="bnt-deleteAll">
+			<a class="btn btn-sm btn-danger"
+				onclick="window.location.href='./ManagerDriver?submit=deleteAll'"> <i
+				class="fa fa-trash-o"></i> <span>Xóa hết</span>
+			</a>
+		</div>
 	</div>
 	<!-- 	<table class="table1" style="width: 100%;"> -->
 	<table class="table table-striped table-bordered table-list table1"

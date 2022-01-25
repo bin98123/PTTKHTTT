@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.DriverDAO;
 import dao.UnitDAO;
 
 /**
@@ -68,6 +69,22 @@ public class ManagerUnitServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		} else if (submit.equals("deleteAll")) {
+			UnitDAO dao = new UnitDAO();
+			try {
+				if (dao.deleteAll()) {
+					session.setAttribute("valueUnit", null);
+					request.getRequestDispatcher("/ManagerUnit.jsp").forward(request, response);
+
+				} else {
+					session.setAttribute("valueUnit", "error");
+					request.getRequestDispatcher("/ManagerUnit.jsp").forward(request, response);
+
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}

@@ -123,18 +123,29 @@ body {
 			<ul>
 				<%
 					AccountDetails accountDetails = (AccountDetails) session.getAttribute("user");
-				if (accountDetails != null) {
+				if (accountDetails == null) {
+				%>
+				<form id="myForm7" action="Manager" method="get">
+					<li onclick="myForm7.submit();"><input name="action"
+						type="hidden" id="login-btn" value="login" /><a>Đăng nhập</a></li>
+				</form>
+				<%
+					}
+				%>
+				<%
+					if (accountDetails != null) {
 					session.setMaxInactiveInterval(1800);
 				%>
+
 				<form id="info" action="homeTest.jsp" method="post">
 					<li onclick="info.submit();"><input type="hidden"
 						id="info-btn" value="info" /><a>Thông tin cá nhân</a></li>
 				</form>
-				<form id="statistic" action="Manager" method="get">
-					<li onclick="statistic.submit();"><input name="action"
-						type="hidden" id="statistic-btn" value="statistic" /><a>Thống
-							kê</a></li>
-				</form>
+<!-- 				<form id="statistic" action="Manager" method="get"> -->
+<!-- 					<li onclick="statistic.submit();"><input name="action" -->
+<!-- 						type="hidden" id="statistic-btn" value="statistic" /><a>Thống -->
+<!-- 							kê</a></li> -->
+<!-- 				</form> -->
 				<%
 					} ;
 				%>
@@ -156,7 +167,7 @@ body {
 					dao.loginUser((String) session.getAttribute("currentUser"));
 					System.out.println((String) session.getAttribute("currentUser"));
 				} else if ((String) session.getAttribute("currentUser") == null) {
-					session.invalidate();
+					// 					session.invalidate();
 					dao.logoutUser();
 				}
 				%>
@@ -197,6 +208,9 @@ body {
 				<%
 					} ;
 				%>
+				<%
+					if (accountDetails != null) {
+				%>
 				<li><a href="#" class="search-bnt">Tra cứu <span
 						class="fas fa-caret-down second"></span>
 
@@ -222,18 +236,27 @@ body {
 								type="hidden" id="search-bus-btn" value="search-bus" /><a>Tra
 									cứu Xe Buýt</a></li>
 						</form>
+						<%
+							}
+						%>
 						<form id="myForm5" action="Manager" method="get">
 							<li onclick="myForm5.submit();"><input name="action"
 								type="hidden" id="search-busStop-btn" value="search-busStop" /><a>Tra
 									cứu Trạm Dừng</a></li>
 						</form>
-					</ul></li>
+
+					</ul> <%
+ 	if (accountDetails != null) {
+ %></li>
+				<%
+					}
+				%>
 				<%
 					if (accountDetails != null) {
 				%>
 				<form id="exit" action="Manager" method="get">
-					<li onclick="exit.submit();"><input name="action" type="hidden"
-						id="exit-btn" value="exit" /><a>Thoát</a></li>
+					<li onclick="exit.submit();"><input name="action"
+						type="hidden" id="exit-btn" value="exit" /><a>Thoát</a></li>
 				</form>
 				<%
 					} ;

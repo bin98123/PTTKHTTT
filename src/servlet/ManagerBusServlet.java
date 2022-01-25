@@ -86,6 +86,22 @@ public class ManagerBusServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		} else if (submit.equals("deleteAll")) {
+			BusDAO dao = new BusDAO();
+			try {
+				if (dao.deleteAll()) {
+					session.setAttribute("valueBus", null);
+					request.getRequestDispatcher("/ManagerBus.jsp").forward(request, response);
+
+				} else {
+					session.setAttribute("valueBus", "error");
+					request.getRequestDispatcher("/ManagerBus.jsp").forward(request, response);
+
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if (submit.equals("add")) {
 
 		}

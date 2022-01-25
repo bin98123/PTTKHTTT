@@ -42,6 +42,7 @@ td, th {
 	
 }
 
+
 .bnt-add {
 	float: left;
 	margin-left: 330px;
@@ -55,11 +56,13 @@ td, th {
 .bnt-export {
 	float: right;
 }
-.bnt-import{
-float: right;
+
+.bnt-import {
+	float: right;
 }
+
 .top-content {
-	float: left;
+	float: right;		
 	/* width: 100px; */
 }
 </style>
@@ -133,6 +136,7 @@ session.removeAttribute("valueStop");
 		</thead>
 		<%
 			for (ChuyenDetails e : chuyen) {
+			// 				if (e.getID() > 0) {
 		%>
 		<tbody>
 			<tr>
@@ -153,7 +157,8 @@ session.removeAttribute("valueStop");
 			</tr>
 
 			<%
-				}
+				// 				}
+			}
 			%>
 		</tbody>
 		<tfoot>
@@ -169,7 +174,7 @@ session.removeAttribute("valueStop");
 	<!-- 	<table class="table1" style="width: 50%; display: none"> -->
 	<div class="containt-top">
 		<div class="top-content">
-			<h1>Danh sách Trạm Dừng</h1>
+			<h1>Danh Sách Trạm Dừng Lượt Đi</h1>
 		</div>
 		<div class="bnt-add">
 			<button type="button" class="btn btn-sm btn-primary"
@@ -185,9 +190,15 @@ session.removeAttribute("valueStop");
 				class="fas fa-file-upload"></i> <span>Xuất file Excel</span>
 			</a>
 		</div>
-<div class="bnt-import">
+		<div class="bnt-import">
 			<a class="btn btn-sm btn-primary" href="Upload_BusStop.jsp"> <i
 				class="fas fa-file-upload"></i> <span>Nhập file Excel</span>
+			</a>
+		</div>
+		<div class="bnt-deleteAll">
+			<a class="btn btn-sm btn-danger"
+				onclick="window.location.href='./ManagerBusStop?submit=deleteAll'">
+				<i class="fa fa-trash-o"></i> <span>Xóa hết</span>
 			</a>
 		</div>
 	</div>
@@ -212,6 +223,7 @@ session.removeAttribute("valueStop");
 		</thead>
 		<%
 			for (ChuyenDetails e : chuyens) {
+			if (e.getID() > 0) {
 		%>
 		<tbody>
 			<tr>
@@ -233,6 +245,94 @@ session.removeAttribute("valueStop");
 
 			<%
 				}
+			}
+			%>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th style="text-align: left">Mã số Chuyến</th>
+				<th style="text-align: left">STT</th>
+				<th style="text-align: left">Tên Trạm</th>
+				<th style="text-align: left">Sửa</th>
+				<th style="text-align: left">Xóa</th>
+
+			</tr>
+		</tfoot>
+	</table>
+	<div class="containt-top">
+		<div class="top-content">
+			<h1>Danh Sách Trạm Dừng Lượt Về</h1>
+		</div>
+		<div class="bnt-add">
+			<button type="button" class="btn btn-sm btn-primary"
+				onclick="window.location.href='./addBusStop.jsp'">Thêm</button>
+		</div>
+		<div class="bnt-rollback">
+			<button type="button" class="btn btn-sm btn-primary"
+				onclick="window.location.href='./ManagerBusStop?submit=rollback'">Hoàn
+				tác</button>
+		</div>
+		<div class="bnt-export">
+			<a class="btn btn-sm btn-primary" href="Download_BusStop.jsp"> <i
+				class="fas fa-file-upload"></i> <span>Xuất file Excel</span>
+			</a>
+		</div>
+		<div class="bnt-import">
+			<a class="btn btn-sm btn-primary" href="Upload_BusStop.jsp"> <i
+				class="fas fa-file-upload"></i> <span>Nhập file Excel</span>
+			</a>
+		</div>
+		<div class="bnt-deleteAll">
+			<a class="btn btn-sm btn-danger"
+				onclick="window.location.href='./ManagerBusStop?submit=deleteAll'">
+				<i class="fa fa-trash-o"></i> <span>Xóa hết</span>
+			</a>
+		</div>
+	</div>
+	<table class="table table-striped table-bordered table-list table1"
+		style="width: 100%">
+		<thead>
+			<tr>
+				<!-- 
+	<th>Mã số Chuyến</th>
+	<th>Tên trạm lượt đi</th>
+	<th>Tên Trạm lượt về</th>
+	<th>Tên Chuyến</th>
+	 -->
+
+				<th style="text-align: left">Mã số Chuyến</th>
+				<th style="text-align: left">STT</th>
+				<th style="text-align: left">Tên Trạm</th>
+				<th style="text-align: left">Sửa</th>
+				<th style="text-align: left">Xóa</th>
+
+			</tr>
+		</thead>
+		<%
+			for (ChuyenDetails e : chuyens) {
+			if (e.getID() < 0) {
+		%>
+		<tbody>
+			<tr>
+				<td style="text-align: left"><%=Math.abs(e.getID())%></td>
+				<td style="text-align: left"><%=e.getSTT()%></td>
+
+				<td style="text-align: left"><%=e.getTemTram()%></td>
+				<td style="text-align: center; line-height: inherit;"><button
+						type="button" class="btn btn-info btn-sm"
+						onclick="window.location.href='./ManagerBusStop?submit=edit&unitID=<%=e.getID()%>&serial=<%=e.getSTT()%>'">
+						<i class="fa fa-edit"></i>
+					</button></td>
+				<td style="text-align: center; line-height: inherit;"><button
+						type="button" class="btn btn-danger btn-sm"
+						onclick="window.location.href='./ManagerBusStop?submit=delete&unitID=<%=e.getID()%>&serial=<%=e.getSTT()%>'">
+						<i class="fa fa-trash-o"></i>
+					</button></td>
+			</tr>
+
+			<%
+				}
+			}
 			%>
 		</tbody>
 		<tfoot>
@@ -248,10 +348,14 @@ session.removeAttribute("valueStop");
 	</table>
 	<script type="text/javascript">
 <!-- 	<script> -->
-	document.getElementById("example").style.display= "<%=none%>";
-	document.getElementById("default").style.display= "<%=none%>
-		";
+	document.getElementById("example").style.display= "<%=none%>"
+				;
+	document.getElementById("default").style.display="<%=none%>
+		"
+				;
 		// 	document.getElementById("example").style.display="none";
-	</script>
+	
+				</script>
+
 </body>
 </html>

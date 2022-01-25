@@ -82,7 +82,7 @@ public class ManagerBusStopServlet extends HttpServlet {
 					request.getRequestDispatcher("/ManagerBusStop.jsp").forward(request, response);
 
 				} else {
-					session.setAttribute("valueStop","error");
+					session.setAttribute("valueStop", "error");
 					request.getRequestDispatcher("/ManagerBusStop.jsp").forward(request, response);
 
 				}
@@ -90,7 +90,22 @@ public class ManagerBusStopServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if (submit.equals("deleteAll")) {
+			BusStopDAO dao = new BusStopDAO();
+			try {
+				if (dao.deleteAll()) {
+					session.setAttribute("valueStop", null);
+					request.getRequestDispatcher("/ManagerBusStop.jsp").forward(request, response);
 
+				} else {
+					session.setAttribute("valueStop", "error");
+					request.getRequestDispatcher("/ManagerBusStop.jsp").forward(request, response);
+
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if (submit.equals("add")) {
 
 		}

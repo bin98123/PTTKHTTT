@@ -63,7 +63,7 @@ public class AccountDao implements POI_API_DAO {
 					+ txtSearch + "%' or TenTram like N'%" + txtSearch + "%'");
 			while (rs.next()) {
 				ChuyenDetails chuyen = new ChuyenDetails();
-				chuyen.setID(rs.getFloat("ID"));
+				chuyen.setID(rs.getInt("ID"));
 				chuyen.setSTT(rs.getInt("STT"));
 				chuyen.setTemTram(rs.getNString("TenTram"));
 				chuyens.add(chuyen);
@@ -441,6 +441,28 @@ public class AccountDao implements POI_API_DAO {
 
 	}
 
+	public String getPasswordByMail(String email) {
+		String result = null;
+		try {
+
+			Class.forName(driver);
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select password from Account where email='" + email + "';");
+			while (rs.next()) {
+				result = rs.getString("password");
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+		return result;
+
+	}
+
 	public boolean checkPassword(String passInput, String id) {
 		if (passInput.equals(getPassword(id))) {
 			return true;
@@ -610,8 +632,9 @@ public class AccountDao implements POI_API_DAO {
 		}
 	}
 
-	public void changePassword(String pass, String id) throws ClassNotFoundException, SQLException {
+	public int changePassword(String pass, String id) throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
+		int result = 0;
 //		try (Connection connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/examples", "sa", ""))
 		try (Connection connection = DriverManager.getConnection(connectionUrl))
 
@@ -645,11 +668,12 @@ public class AccountDao implements POI_API_DAO {
 				insert.setString(1, pass);
 				insert.setNString(2, id);
 //				insert.executeUpdate();
-				insert.executeUpdate();
+				result = insert.executeUpdate();
 
 			}
 
 		}
+		return result;
 
 	}
 
@@ -795,8 +819,10 @@ public class AccountDao implements POI_API_DAO {
 //		System.out.println(new AccountDao().checkExistExpireTime("khang"));
 //		System.out.println(new AccountDao().getExpireDate("khang"));
 //		System.out.println(new AccountDao().getExpireTime("khang"));
-		new AccountDao().getAccounts();
-		new AccountDao().getCountNumberOfAccounts();
+//		new AccountDao().getAccounts();
+//		new AccountDao().getCountNumberOfAccounts();
+//		new AccountDao().getPasswordByMail("18130112@st.hcmuaf.edu.vn");
+		System.out.println(new AccountDao().getPasswordByMail("1813"));
 		// new AccountDao().loginUser("khang");
 
 //		System.out.println();

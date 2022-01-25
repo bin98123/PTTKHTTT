@@ -1,4 +1,3 @@
-package mail;
 
 import java.util.Properties;
 import java.util.logging.Level;
@@ -73,6 +72,6 @@ public class Mail {
 	public static void main(String[] args) throws MessagingException {
 //		new Mail().sendMail("tranhungd264@gmail.com");
 		// gửi ko đc có thể do phần mềm diệt virus
-		new Mail().sendMail("quockhanhtl156@gmail.com");
+		new model.MailAPI().sendMail("quockhanhtl156@gmail.com");
 	}
 }

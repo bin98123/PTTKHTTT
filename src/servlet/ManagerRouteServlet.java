@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.BusStopDAO;
+import dao.DriverDAO;
 import dao.RouteDAO;
 import model.BusRouteDetails;
 
@@ -86,6 +87,22 @@ public class ManagerRouteServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		} else if (submit.equals("deleteAll")) {
+			RouteDAO dao = new RouteDAO();
+			try {
+				if (dao.deleteAll()) {
+					session.setAttribute("value", null);
+					request.getRequestDispatcher("/ManagerRoute.jsp").forward(request, response);
+
+				} else {
+					session.setAttribute("value", "error");
+					request.getRequestDispatcher("/ManagerRoute.jsp").forward(request, response);
+
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if (submit.equals("add")) {
 
 		}

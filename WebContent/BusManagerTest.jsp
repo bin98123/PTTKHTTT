@@ -32,6 +32,19 @@ td, th {
 .contain-search {
 	float: right;
 }
+
+<%String display = (String) session.getAttribute("none");
+if (display == null) {
+	display = "none";
+
+}%>
+.example {
+	display: <%=display%>;
+}
+
+.exampleDefault {
+	display: <%=display%>;
+}
 </style>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <!-- <link rel="stylesheet"
@@ -67,7 +80,9 @@ td, th {
 			</form>
 		</div>
 	</div>
-	<h1 id="default">Danh sách Trạm Dừng</h1>
+	<h1 id="exampleDefault">
+		<Danh Sách Trạm Dừng Tìm Được>
+	</h1>
 	<table class="table table-striped table-bordered table-list example"
 		id="example" style="width: 100%">
 		<thead>
@@ -108,7 +123,7 @@ td, th {
 		</tfoot>
 	</table>
 	<!-- 	<table class="table1" style="width: 50%; display: none"> -->
-	<h1>Danh sách Trạm Dừng</h1>
+	<h1>Danh Sách Trạm Dừng Lượt Đi</h1>
 	<table class="table table-striped table-bordered table-list table1"
 		style="width: 100%">
 		<thead>
@@ -127,6 +142,7 @@ td, th {
 		</thead>
 		<%
 			for (ChuyenDetails e : chuyens) {
+			if (e.getID() > 0) {
 		%>
 		<tbody>
 			<tr>
@@ -138,6 +154,49 @@ td, th {
 
 			<%
 				}
+			}
+			%>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th style="text-align: left">Mã số Chuyến</th>
+				<th style="text-align: left">STT</th>
+				<th style="text-align: left">Tên Trạm</th>
+			</tr>
+		</tfoot>
+	</table>
+	<h1>Danh Sách Trạm Dừng Lượt Về</h1>
+	<table class="table table-striped table-bordered table-list table1"
+		style="width: 100%">
+		<thead>
+			<tr>
+				<!-- 
+	<th>Mã số Chuyến</th>
+	<th>Tên trạm lượt đi</th>
+	<th>Tên Trạm lượt về</th>
+	<th>Tên Chuyến</th>
+	 -->
+
+				<th style="text-align: left">Mã số Chuyến</th>
+				<th style="text-align: left">STT</th>
+				<th style="text-align: left">Tên Trạm</th>
+			</tr>
+		</thead>
+		<%
+			for (ChuyenDetails e : chuyens) {
+			if (e.getID() < 0) {
+		%>
+		<tbody>
+			<tr>
+				<td style="text-align: left"><%=Math.abs(e.getID())%></td>
+				<td style="text-align: left"><%=e.getSTT()%></td>
+
+				<td style="text-align: left"><%=e.getTemTram()%></td>
+			</tr>
+
+			<%
+				}
+			}
 			%>
 		</tbody>
 		<tfoot>

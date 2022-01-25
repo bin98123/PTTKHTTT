@@ -56,6 +56,7 @@ display: table-row; */
 .bnt-export {
 	float: right;
 }
+
 .bnt-import {
 	float: right;
 }
@@ -191,6 +192,12 @@ session.removeAttribute("valueUnit");
 		<div class="bnt-import">
 			<a class="btn btn-sm btn-primary" href="Upload_Unit.jsp"> <i
 				class="fas fa-file-upload"></i> <span>Nhập file Excel</span>
+			</a>
+		</div>
+		<div class="bnt-deleteAll">
+			<a class="btn btn-sm btn-danger"
+				onclick="window.location.href='./ManagerUnit?submit=deleteAll'">
+				<i class="fa fa-trash-o"></i> <span>Xóa hết</span>
 			</a>
 		</div>
 	</div>
