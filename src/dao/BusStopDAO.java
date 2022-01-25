@@ -26,7 +26,9 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 import model.BusDetails;
+import model.BusRouteDetails;
 import model.BusStopDetails;
+import model.BusUnitManagerDetails;
 import model.DriverDetails;
 
 public class BusStopDAO implements POI_API_DAO {
@@ -113,7 +115,155 @@ public class BusStopDAO implements POI_API_DAO {
 
 	}
 
-	public int checkExist(BusStopDetails busDetails) {
+	public List<BusStopDetails> getChuyens() {
+		List<BusStopDetails> result = new ArrayList<BusStopDetails>();
+		List<BusStopDetails> chuyens = new ArrayList<BusStopDetails>();
+		int available = 0;
+		try {
+
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from BusStop ORDER BY routeID DESC,serial ASC");
+			while (rs.next()) {
+				BusStopDetails chuyen = new BusStopDetails();
+//				available++;
+//				System.out.println("Khanh");
+				chuyen.setRouteID(rs.getInt("routeID"));
+//				System.out.println(rs.getFloat("ID"));
+				chuyen.setSerial(rs.getInt("serial"));
+//				System.out.println(rs.getInt("STT"));
+				chuyen.setNameBusStop(rs.getNString("nameBusStop"));
+//				System.out.println(rs.getNString("TenTram"));
+//				if (!chuyens.contains(chuyen)) {
+				chuyens.add(chuyen);
+//				}
+//				for (BusStopDetails BusStopDetails : chuyens) {
+//					chuyen.setChuyenID(rs.getInt("ChuyenID"));
+//					chuyen.setLuotDi(rs.getString("LUOTDI"));
+//					chuyen.setLuotVe(rs.getString("LUOTVE"));
+//					chuyen.setTenChuyen(rs.getString("TENCHUYEN"));
+//					chuyen.setID(rs.getFloat("ID"));
+//					System.out.println(rs.getFloat("ID"));
+//					chuyen.setSTT(rs.getInt("STT"));
+//					System.out.println(rs.getInt("STT"));
+//					chuyen.setTemTram(rs.getString("TenTram"));
+//					System.out.println(rs.getString("TenTram"));
+//					chuyens.add(chuyen);
+//				}
+			}
+			result = chuyens;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+//		if (available != 0) {
+//			return true;
+//		}
+		return chuyens;
+
+	}
+
+	public List<BusStopDetails> getTrams() {
+		List<BusStopDetails> result = new ArrayList<BusStopDetails>();
+		List<BusStopDetails> chuyens = new ArrayList<BusStopDetails>();
+		int available = 0;
+		try {
+
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select distinct nameBusStop from BusStop");
+			while (rs.next()) {
+				BusStopDetails chuyen = new BusStopDetails();
+//				available++;
+//				System.out.println("Khanh");
+//				chuyen.setID(rs.getFloat("ID"));
+////				System.out.println(rs.getFloat("ID"));
+//				chuyen.setSTT(rs.getInt("STT"));
+//				System.out.println(rs.getInt("STT"));
+				chuyen.setNameBusStop(rs.getNString("nameBusStop"));
+//				System.out.println(rs.getNString("TenTram"));
+				chuyens.add(chuyen);
+//				for (BusStopDetails BusStopDetails : chuyens) {
+//					chuyen.setChuyenID(rs.getInt("ChuyenID"));
+//					chuyen.setLuotDi(rs.getS	tring("LUOTDI"));
+//					chuyen.setLuotVe(rs.getString("LUOTVE"));
+//					chuyen.setTenChuyen(rs.getString("TENCHUYEN"));
+//					chuyen.setID(rs.getFloat("ID"));
+//					System.out.println(rs.getFloat("ID"));
+//					chuyen.setSTT(rs.getInt("STT"));
+//					System.out.println(rs.getInt("STT"));
+//					chuyen.setTemTram(rs.getString("TenTram"));
+//					System.out.println(rs.getString("TenTram"));
+//					chuyens.add(chuyen);
+//				}
+			}
+			result = chuyens;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+//		if (available != 0) {
+//			return true;
+//		}
+		return chuyens;
+
+	}
+
+	public List<String> getList() {
+		List<String> result = new ArrayList<String>();
+		try {
+
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from BusStop");
+			while (rs.next()) {
+//				BusStopDetails chuyen = new BusStopDetails();
+//				available++;
+//				System.out.println("Khanh");
+//				chuyen.setID(rs.getFloat("ID"));
+//				System.out.println(rs.getFloat("ID"));
+//				chuyen.setSTT(rs.getInt("STT"));
+//				System.out.println(rs.getInt("STT"));
+//				chuyen.setTemTram(rs.getNString("TenTram"));
+//				System.out.println(rs.getNString("TenTram"));
+				result.add(rs.getNString("nameBusStop"));
+//				for (BusStopDetails BusStopDetails : chuyens) {
+//					chuyen.setChuyenID(rs.getInt("ChuyenID"));
+//					chuyen.setLuotDi(rs.getString("LUOTDI"));
+//					chuyen.setLuotVe(rs.getString("LUOTVE"));
+//					chuyen.setTenChuyen(rs.getString("TENCHUYEN"));
+//					chuyen.setID(rs.getFloat("ID"));
+//					System.out.println(rs.getFloat("ID"));
+//					chuyen.setSTT(rs.getInt("STT"));
+//					System.out.println(rs.getInt("STT"));
+//					chuyen.setTemTram(rs.getString("TenTram"));
+//					System.out.println(rs.getString("TenTram"));
+//					chuyens.add(chuyen);
+//				}
+			}
+//			result = chuyens;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+//		if (available != 0) {
+//			return true;
+//		}
+
+		return result;
+
+	}
+
+		public int checkExist(BusStopDetails busDetails) {
 		int count = 0;
 		try {
 
@@ -307,7 +457,7 @@ public class BusStopDAO implements POI_API_DAO {
 			con.commit();
 			if (con != null)
 				con.rollback();
-			
+
 			////
 			Statement stmt1 = con.createStatement();
 			int rs2 = stmt1.executeUpdate("delete from BusStop;");
@@ -353,7 +503,8 @@ public class BusStopDAO implements POI_API_DAO {
 
 			Class.forName(driver);
 
-			ResultSet rs0 = stmt.executeQuery("select * from BusStopTemp0 where id=(select max(id) from BusStopTemp0);");
+			ResultSet rs0 = stmt
+					.executeQuery("select * from BusStopTemp0 where id=(select max(id) from BusStopTemp0);");
 			while (rs0.next()) {
 				int routeID = rs0.getInt("routeID");
 				int serial = rs0.getInt("serial");

@@ -11,11 +11,13 @@
 <title>Đăng nhập Quản lý hệ thống xe bus</title>
 <style>
 @import "flex";
-.guess{
-color: green;
-position: relative;
-top:-8px;
+
+.guess {
+	color: green;
+	position: relative;
+	top: -8px;
 }
+
 .containerApp {
 	margin-top: 100px;
 	padding: 50px;
@@ -184,13 +186,9 @@ top:-8px;
 							</div>
 							<div style="margin-top: 30px;" class="submit NoiDung j-between">
 								<input class="btn btn-primary btn-lg" type="submit"
-									value="Đăng nhập"> 
-							<a class="guess" href="./home.jsp">
-									Vào nhanh không cần đăng nhập
-								</a>
-								<a class="guess" href="./ForgetPassWord.jsp">
-									Quên mật khẩu?
-								</a>
+									value="Đăng nhập"> <a class="guess" href="./home.jsp">
+									Vào nhanh không cần đăng nhập </a> <a class="guess"
+									href="./ForgetPassWord.jsp"> Quên mật khẩu? </a>
 							</div>
 						</div>
 					</div>

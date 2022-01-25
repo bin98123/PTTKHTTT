@@ -1,3 +1,4 @@
+<%@page import="dao.RouteDAO"%>
 <%@page import="controller.Chuyen"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -42,7 +43,7 @@
 						<select name="des" id="des">
 							<%
 								List<BusRouteDetails> busList = new ArrayList<BusRouteDetails>();
-							Chuyen c = new Chuyen();
+							RouteDAO c = new RouteDAO();
 							busList = c.getRouteName();
 							for (BusRouteDetails bus : busList) {
 							%>

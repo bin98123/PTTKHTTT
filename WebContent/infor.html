@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,9 +34,8 @@
 							name="birthday" placeholder="dd/mm/yyyy">
 					</div>
 					<div class="form-group">
-						 <label class="container">Male <input
-							type="checkbox" checked="checked"> <span
-							class="checkmark"></span>
+						<label class="container">Male <input type="checkbox"
+							checked="checked"> <span class="checkmark"></span>
 						</label>
 					</div>
 					<div class="form-group">
@@ -56,23 +55,16 @@
 							name="salary" placeholder="Enter salary">
 					</div>
 					<div class="form-group">
-						<label>Driver License</label> <input type="text" class="form-control"
-							name="name" placeholder="Enter name">
+						<label>Driver License</label> <input type="text"
+							class="form-control" name="name" placeholder="Enter name">
 					</div>
 					<div class="form-group">
-						<label>Bus ID</label> 
-						<input list="dess" name="des" class="" type="text" required=""
-				id="des" value="<%=desInput%>">
-			<datalist id="dess">
-				<%
-					for (ChuyenDetails chuyen : chuyens) {
-				%>
-				<option value="<%=chuyen.getTemTram()%>">
-					<%
-						}
-					%>
-				
-			</datalist>
+						<label>Bus ID</label> <input list="dess" name="des" class=""
+							type="text" required="" id="des" value="<%=desInput%>">
+						<datalist id="dess">
+							<% for (ChuyenDetails chuyen : chuyens) { %>
+							<option value="<%=chuyen.getTemTram()%>"><% } %>
+						</datalist>
 					</div>
 
 					<div class="form-group">

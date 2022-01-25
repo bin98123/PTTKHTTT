@@ -42,6 +42,61 @@ public class BusDAO implements POI_API_DAO {
 
 	}
 
+	public List<BusDetails> getBusesList() {
+		List<BusDetails> result = new ArrayList<BusDetails>();
+		List<BusDetails> chuyens = new ArrayList<BusDetails>();
+		int available = 0;
+		try {
+
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Bus");
+			while (rs.next()) {
+				BusDetails chuyen = new BusDetails();
+//				available++;
+//				System.out.println("Khanh");
+//				chuyen.setID(rs.getFloat("ID"));
+////				System.out.println(rs.getFloat("ID"));
+//				chuyen.setSTT(rs.getInt("STT"));
+				chuyen.setBusID(rs.getNString("BusID"));
+				chuyen.setLicensePlate(rs.getNString("licensePlate"));
+				chuyen.setKind(rs.getNString("kind"));
+				chuyen.setManufactureDay(rs.getDate("ManufactureDay"));
+				chuyen.setLateGuaranteeDay(rs.getDate("LateGuaranteeDay"));
+				chuyen.setRouteID(rs.getInt("RouteID"));
+//				System.out.println(rs.getInt("STT"));
+//				chuyen.setTemTram(rs.getNString("nameBusStop"));
+//				System.out.println(rs.getNString("TenTram"));
+				chuyens.add(chuyen);
+//				for (ChuyenDetails chuyenDetails : chuyens) {
+//					chuyen.setChuyenID(rs.getInt("ChuyenID"));
+//					chuyen.setLuotDi(rs.getS	tring("LUOTDI"));
+//					chuyen.setLuotVe(rs.getString("LUOTVE"));
+//					chuyen.setTenChuyen(rs.getString("TENCHUYEN"));
+//					chuyen.setID(rs.getFloat("ID"));
+//					System.out.println(rs.getFloat("ID"));
+//					chuyen.setSTT(rs.getInt("STT"));
+//					System.out.println(rs.getInt("STT"));
+//					chuyen.setTemTram(rs.getString("TenTram"));
+//					System.out.println(rs.getString("TenTram"));
+//					chuyens.add(chuyen);
+//				}
+			}
+			result = chuyens;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+//		if (available != 0) {
+//			return true;
+//		}
+		return chuyens;
+
+	}
+
 	public int getCountNumberOfBus() {
 		int count = 0;
 		try {
@@ -386,6 +441,55 @@ public class BusDAO implements POI_API_DAO {
 
 		}
 		return result;
+	}
+
+	public List<BusDetails> getBusID() {
+		List<BusDetails> result = new ArrayList<BusDetails>();
+		List<BusDetails> chuyens = new ArrayList<BusDetails>();
+		int available = 0;
+		try {
+
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select distinct BusID from Bus");
+			while (rs.next()) {
+				BusDetails chuyen = new BusDetails();
+//				available++;
+//				System.out.println("Khanh");
+//				chuyen.setID(rs.getFloat("ID"));
+////				System.out.println(rs.getFloat("ID"));
+//				chuyen.setSTT(rs.getInt("STT"));
+//				System.out.println(rs.getInt("STT"));
+				chuyen.setBusID(rs.getNString("BusID"));
+//				System.out.println(rs.getNString("TenTram"));
+				chuyens.add(chuyen);
+//				for (BusStopDetails BusStopDetails : chuyens) {
+//					chuyen.setChuyenID(rs.getInt("ChuyenID"));
+//					chuyen.setLuotDi(rs.getString("LUOTDI"));
+//					chuyen.setLuotVe(rs.getString("LUOTVE"));
+//					chuyen.setTenChuyen(rs.getString("TENCHUYEN"));
+//					chuyen.setID(rs.getFloat("ID"));
+//					System.out.println(rs.getFloat("ID"));
+//					chuyen.setSTT(rs.getInt("STT"));
+//					System.out.println(rs.getInt("STT"));
+//					chuyen.setTemTram(rs.getString("TenTram"));
+//					System.out.println(rs.getString("TenTram"));
+//					chuyens.add(chuyen);
+//				}
+			}
+			result = chuyens;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+//		if (available != 0) {
+//			return true;
+//		}
+		return chuyens;
+
 	}
 
 	public float getMaxID() throws SQLException, ClassNotFoundException {

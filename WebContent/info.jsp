@@ -141,11 +141,11 @@ body {
 					<li onclick="info.submit();"><input type="hidden"
 						id="info-btn" value="info" /><a>Thông tin cá nhân</a></li>
 				</form>
-<!-- 				<form id="statistic" action="Manager" method="get"> -->
-<!-- 					<li onclick="statistic.submit();"><input name="action" -->
-<!-- 						type="hidden" id="statistic-btn" value="statistic" /><a>Thống -->
-<!-- 							kê</a></li> -->
-<!-- 				</form> -->
+				<!-- 				<form id="statistic" action="Manager" method="get"> -->
+				<!-- 					<li onclick="statistic.submit();"><input name="action" -->
+				<!-- 						type="hidden" id="statistic-btn" value="statistic" /><a>Thống -->
+				<!-- 							kê</a></li> -->
+				<!-- 				</form> -->
 				<%
 					} ;
 				%>

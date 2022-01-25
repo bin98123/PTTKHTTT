@@ -462,6 +462,27 @@ public class AccountDao implements POI_API_DAO {
 		return result;
 
 	}
+	public String getAccountNameByMail(String email) {
+		String result = null;
+		try {
+			
+			Class.forName(driver);
+			
+			Connection con = DriverManager.getConnection(connectionUrl);
+			
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select accountName from Account where email='" + email + "';");
+			while (rs.next()) {
+				result = rs.getString("accountName");
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+		return result;
+		
+	}
 
 	public boolean checkPassword(String passInput, String id) {
 		if (passInput.equals(getPassword(id))) {

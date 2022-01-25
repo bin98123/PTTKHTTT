@@ -1,3 +1,4 @@
+<%@page import="dao.BusDAO"%>
 <%@page import="controller.Chuyen"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -23,7 +24,7 @@
 			style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto; padding: 20px;">
 			<div class="col-sm-12">
 
-				<h2 class="myclass" style="color:blue;">Bus Driver</h2>
+				<h2 class="myclass" style="color: blue;">Bus Driver</h2>
 				<form action="#" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label>ID</label> <input type="text" class="form-control"
@@ -64,11 +65,11 @@
 					</div>
 					<div class="form-group">
 						<label>Bus ID</label> <input list="dess" name="des" class=""
-							type="text" required="" id="des"  placeholder="bus0XX">
+							type="text" required="" id="des" placeholder="bus0XX">
 						<datalist id="dess">
 							<%
 								List<BusDetails> busList = new ArrayList<BusDetails>();
-							Chuyen c = new Chuyen();
+							BusDAO c = new BusDAO();
 							busList = c.getBusID();
 							for (BusDetails bus : busList) {
 							%>

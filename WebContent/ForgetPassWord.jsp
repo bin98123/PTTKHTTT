@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" href="./img/bus-icon.png">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
@@ -33,11 +35,13 @@
 	margin-bottom: 20px;
 }
 
-<%String color = (String) session.getAttribute("errorForgetPassColor ");
-if (color == null) {
-	color = "black";
+<%
+String color = (String) session.getAttribute( "errorForgetPassColor ") ;
+if (color == null) {color = "black";
+	
+}
 
-}%>
+%>
 h5 {
 	color: <%=color%>;
 }
@@ -64,8 +68,8 @@ if (error == null) {
 
 		<input placeholder="Địa Chỉ Email Của Bạn" class="new_pass"
 			name="email" type="text" required="required" size="30">
-		<button type="submit" class="btn btn-primary">Gửi yêu cầu lấy lại mật
-			khẩu</button>
+		<button type="submit" class="btn btn-primary">Gửi yêu cầu lấy
+			lại mật khẩu</button>
 		<button type="button" class="btn btn-danger"
 			onclick="window.location.href='./login.jsp'">Trở Về</button>
 	</form>

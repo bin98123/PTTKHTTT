@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="dao.ChuyenDetails"%>
+<%@ page import="dao.*"%>
 <%@ page import="controller.*"%>
 <%@ page import="model.*"%>
 <!DOCTYPE html>
@@ -48,9 +48,9 @@ td, th {
 	<%
 		List<BusDetails> chuyen = (List<BusDetails>) request.getAttribute("listBus");
 	String none = (String) request.getAttribute("none");
-	Chuyen c = new Chuyen();
+	BusDAO c = new BusDAO();
 	List<BusDetails> chuyens = new ArrayList<BusDetails>();
-	chuyens = c.getBuses();
+	chuyens = c.getBusesList();
 	if (none == null || none == "") {
 		none = "none";
 	}

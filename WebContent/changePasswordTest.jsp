@@ -33,7 +33,7 @@
 	margin-bottom: 20px;
 }
 
-<%String color = (String) session.getAttribute("errorChangePassColor");
+<%String color = (String) session.getAttribute("errorChangePassColor ");
 if (color == null) {
 	color = "black";
 
@@ -55,17 +55,16 @@ if (error == null) {
 	<form action="ChangePassword" method="post">
 		<h4>
 			<%=error%>
-		</h4>
-		<%
-			session.removeAttribute("errorChangePass111");
-		session.removeAttribute("errorChangePassColor");
+		</h4session.removeAttribute("errorChangePass111");
+			session.removeAttribute("errorChangePassColor");");
 		%>
 		<div class="contain_change_pass">
 			<input placeholder="Nhập Mật Khẩu Hiện Tại" class="current_pass"
 				name="current_pass" type="password" required="required"> <input
 				placeholder="Nhập Mật Khẩu Mới" class="new_pass" name="new_pass"
-				type="password"required="required"> <input placeholder="Xác Nhận Mật Khẩu Mới"
-				class="new_pass_con" name="new_pass_con" type="password"required="required">
+				type="password" required="required"> <input
+				placeholder="Xác Nhận Mật Khẩu Mới" class="new_pass_con"
+				name="new_pass_con" type="password" required="required">
 		</div>
 		<button type="submit" class="btn btn-primary">Lưu</button>
 		<button type="button" class="btn btn-danger"

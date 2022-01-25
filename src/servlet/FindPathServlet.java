@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Chuyen;
+import dao.BusStopDAO;
 import dao.ChuyenDetails;
 import dao.ChuyenXeDB;
+import model.BusStopDetails;
 
 /**
  * Servlet implementation class FindPathServlet
@@ -52,7 +54,7 @@ public class FindPathServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		boolean ok = false;
-		Chuyen c = new Chuyen();
+		BusStopDAO c = new BusStopDAO();
 		List<String> chuyens = new ArrayList<String>();
 
 		HttpSession session = request.getSession();

@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="dao.*"%>
+<%@ page import="model.*"%>
 <%@ page import="controller.*"%>
 <!DOCTYPE html>
 <html>
@@ -27,12 +28,13 @@
 p {
 	font-weight: bold;
 }
-.des{
-outline: none;
-}
-.start{
 
-outline: none;
+.des {
+	outline: none;
+}
+
+.start {
+	outline: none;
 }
 </style>
 <%
@@ -50,21 +52,21 @@ if (startInput == null) {
 	<form action="find" method="post">
 		<div class="findPath">
 			<p class="start">- Điểm đi:</p>
-			<input list="starts" name="start" class="start" type="text" required=""
-				id="start" value="<%=startInput%>">
+			<input list="starts" name="start" class="start" type="text"
+				required="" id="start" value="<%=startInput%>">
 			<datalist id="starts">
 				<%
-					Chuyen c = new Chuyen();
-				List<ChuyenDetails> chuyens = new ArrayList<ChuyenDetails>();
+					BusStopDAO c = new BusStopDAO();
+				List<BusStopDetails> chuyens = new ArrayList<BusStopDetails>();
 				chuyens = c.getTrams();
 				if (chuyens == null) {
-					for (ChuyenDetails chuyen : chuyens) {
-						chuyen.setTemTram("");
+					for (BusStopDetails chuyen : chuyens) {
+						chuyen.setNameBusStop("");
 					}
 				}
-				for (ChuyenDetails chuyen : chuyens) {
+				for (BusStopDetails chuyen : chuyens) {
 				%>
-				<option value="<%=chuyen.getTemTram()%>">
+				<option value="<%=chuyen.getNameBusStop()%>">
 					<%
 						}
 					%>
@@ -75,9 +77,9 @@ if (startInput == null) {
 				id="des" value="<%=desInput%>">
 			<datalist id="dess">
 				<%
-					for (ChuyenDetails chuyen : chuyens) {
+					for (BusStopDetails chuyen : chuyens) {
 				%>
-				<option value="<%=chuyen.getTemTram()%>">
+				<option value="<%=chuyen.getNameBusStop()%>">
 					<%
 						}
 					%>

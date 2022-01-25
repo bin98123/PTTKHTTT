@@ -1,7 +1,8 @@
+<%@page import="dao.BusStopDAO"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="dao.ChuyenDetails"%>
+<%@ page import="model.BusStopDetails"%>
 <%@ page import="controller.*"%>
 <!DOCTYPE html>
 <html>
@@ -42,7 +43,6 @@ td, th {
 	
 }
 
-
 .bnt-add {
 	float: left;
 	margin-left: 330px;
@@ -62,7 +62,7 @@ td, th {
 }
 
 .top-content {
-	float: right;		
+	float: right;
 	/* width: 100px; */
 }
 </style>
@@ -92,10 +92,10 @@ session.removeAttribute("valueStop");
 </head>
 <body>
 	<%
-		List<ChuyenDetails> chuyen = (List<ChuyenDetails>) request.getAttribute("manalist1");
+		List<BusStopDetails> chuyen = (List<BusStopDetails>) request.getAttribute("manalist1");
 	String none = (String) request.getAttribute("none");
-	Chuyen c = new Chuyen();
-	List<ChuyenDetails> chuyens = new ArrayList<ChuyenDetails>();
+	BusStopDAO c = new BusStopDAO();
+	List<BusStopDetails> chuyens = new ArrayList<BusStopDetails>();
 	chuyens = c.getChuyens();
 	if (none == null || none == "") {
 		none = "none";
@@ -135,23 +135,22 @@ session.removeAttribute("valueStop");
 			</tr>
 		</thead>
 		<%
-			for (ChuyenDetails e : chuyen) {
+			for (BusStopDetails e : chuyen) {
 			// 				if (e.getID() > 0) {
 		%>
 		<tbody>
 			<tr>
-				<td style="text-align: left"><%=e.getID()%></td>
-				<td style="text-align: left"><%=e.getSTT()%></td>
-
-				<td style="text-align: left"><%=e.getTemTram()%></td>
+				<td style="text-align: left"><%=e.getRouteID()%></td>
+				<td style="text-align: left"><%=e.getSerial()%></td>
+				<td style="text-align: left"><%=e.getNameBusStop()%></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-info btn-sm"
-						onclick="window.location.href='./ManagerBusStop?submit=edit&unitID=<%=e.getID()%>&serial=<%=e.getSTT()%>'">
+						onclick="window.location.href='./ManagerBusStop?submit=edit&unitID=<%=e.getRouteID()%>&serial=<%=e.getSerial()%>'">
 						<i class="fa fa-edit"></i>
 					</button></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-danger btn-sm"
-						onclick="window.location.href='./ManagerBusStop?submit=delete&unitID=<%=e.getID()%>&serial=<%=e.getSTT()%>'">
+						onclick="window.location.href='./ManagerBusStop?submit=delete&unitID=<%=e.getRouteID()%>&serial=<%=e.getSerial()%>'">
 						<i class="fa fa-trash-o"></i>
 					</button></td>
 			</tr>
@@ -222,23 +221,22 @@ session.removeAttribute("valueStop");
 			</tr>
 		</thead>
 		<%
-			for (ChuyenDetails e : chuyens) {
-			if (e.getID() > 0) {
+			for (BusStopDetails e : chuyens) {
+			if (e.getRouteID() > 0) {
 		%>
 		<tbody>
 			<tr>
-				<td style="text-align: left"><%=e.getID()%></td>
-				<td style="text-align: left"><%=e.getSTT()%></td>
-
-				<td style="text-align: left"><%=e.getTemTram()%></td>
+				<td style="text-align: left"><%=e.getRouteID()%></td>
+				<td style="text-align: left"><%=e.getSerial()%></td>
+				<td style="text-align: left"><%=e.getNameBusStop()%></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-info btn-sm"
-						onclick="window.location.href='./ManagerBusStop?submit=edit&unitID=<%=e.getID()%>&serial=<%=e.getSTT()%>'">
+						onclick="window.location.href='./ManagerBusStop?submit=edit&unitID=<%=e.getRouteID()%>&serial=<%=e.getSerial()%>'">
 						<i class="fa fa-edit"></i>
 					</button></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-danger btn-sm"
-						onclick="window.location.href='./ManagerBusStop?submit=delete&unitID=<%=e.getID()%>&serial=<%=e.getSTT()%>'">
+						onclick="window.location.href='./ManagerBusStop?submit=delete&unitID=<%=e.getRouteID()%>&serial=<%=e.getSerial()%>'">
 						<i class="fa fa-trash-o"></i>
 					</button></td>
 			</tr>
@@ -309,23 +307,22 @@ session.removeAttribute("valueStop");
 			</tr>
 		</thead>
 		<%
-			for (ChuyenDetails e : chuyens) {
-			if (e.getID() < 0) {
+			for (BusStopDetails e : chuyens) {
+			if (e.getRouteID() < 0) {
 		%>
 		<tbody>
 			<tr>
-				<td style="text-align: left"><%=Math.abs(e.getID())%></td>
-				<td style="text-align: left"><%=e.getSTT()%></td>
-
-				<td style="text-align: left"><%=e.getTemTram()%></td>
+				<td style="text-align: left"><%=Math.abs(e.getRouteID())%></td>
+				<td style="text-align: left"><%=e.getSerial()%></td>
+				<td style="text-align: left"><%=e.getNameBusStop()%></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-info btn-sm"
-						onclick="window.location.href='./ManagerBusStop?submit=edit&unitID=<%=e.getID()%>&serial=<%=e.getSTT()%>'">
+						onclick="window.location.href='./ManagerBusStop?submit=edit&unitID=<%=e.getRouteID()%>&serial=<%=e.getSerial()%>'">
 						<i class="fa fa-edit"></i>
 					</button></td>
 				<td style="text-align: center; line-height: inherit;"><button
 						type="button" class="btn btn-danger btn-sm"
-						onclick="window.location.href='./ManagerBusStop?submit=delete&unitID=<%=e.getID()%>&serial=<%=e.getSTT()%>'">
+						onclick="window.location.href='./ManagerBusStop?submit=delete&unitID=<%=e.getRouteID()%>&serial=<%=e.getSerial()%>'">
 						<i class="fa fa-trash-o"></i>
 					</button></td>
 			</tr>

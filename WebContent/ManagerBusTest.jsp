@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="dao.ChuyenDetails"%>
+<%@ page import="dao.*"%>
 <%@ page import="model.BusDetails"%>
 <%@ page import="controller.*"%>
 <%@page import="org.apache.poi.hssf.usermodel.HSSFWorkbook"%>
@@ -111,9 +111,9 @@ session.removeAttribute("valueBus");
 	<%
 		List<BusDetails> chuyen = (List<BusDetails>) request.getAttribute("listManaBus");
 	String none = (String) request.getAttribute("none");
-	Chuyen c = new Chuyen();
+	BusDAO c = new BusDAO();
 	List<BusDetails> chuyens = new ArrayList<BusDetails>();
-	chuyens = c.getBuses();
+	chuyens = c.getBusesList();
 	if (none == null || none == "") {
 		none = "none";
 	}
@@ -221,8 +221,8 @@ session.removeAttribute("valueBus");
 		</div>
 		<div class="bnt-deleteAll">
 			<a class="btn btn-sm btn-danger"
-				onclick="window.location.href='./ManagerBus?submit=deleteAll'"> <i
-				class="fa fa-trash-o"></i> <span>Xóa hết</span>
+				onclick="window.location.href='./ManagerBus?submit=deleteAll'">
+				<i class="fa fa-trash-o"></i> <span>Xóa hết</span>
 			</a>
 		</div>
 		<%

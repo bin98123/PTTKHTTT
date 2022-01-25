@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="dao.ChuyenDetails"%>
+<%@ page import="dao.*"%>
 <%@ page import="controller.*"%>
 <%@ page import="model.*"%>
 <!DOCTYPE html>
@@ -48,7 +48,7 @@ td, th {
 	<%
 		List<DriverDetails> chuyen = (List<DriverDetails>) request.getAttribute("listDriver");
 	String none = (String) request.getAttribute("none");
-	Chuyen c = new Chuyen();
+	DriverDAO c = new DriverDAO();
 	List<DriverDetails> chuyens = new ArrayList<DriverDetails>();
 	chuyens = c.getDriver();
 	if (none == null || none == "") {

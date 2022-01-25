@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="dao.ChuyenDetails"%>
+<%@ page import="dao.*"%>
 <%@ page import="controller.*"%>
 <%@ page import="model.*"%>
 <!DOCTYPE html>
@@ -93,7 +93,7 @@ session.removeAttribute("valueUnit");
 	<%
 		List<BusUnitManagerDetails> chuyen = (List<BusUnitManagerDetails>) request.getAttribute("listManaBusUnit");
 	String none = (String) request.getAttribute("none");
-	Chuyen c = new Chuyen();
+	UnitDAO c = new UnitDAO();
 	List<BusUnitManagerDetails> chuyens = new ArrayList<BusUnitManagerDetails>();
 	chuyens = c.getBusesUnitManager();
 	if (none == null || none == "") {

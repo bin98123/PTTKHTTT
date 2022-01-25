@@ -1,7 +1,8 @@
+<%@page import="model.BusStopDetails"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="dao.ChuyenDetails"%>
+<%@ page import="dao.*"%>
 <%@ page import="controller.*"%>
 <!DOCTYPE html>
 <html>
@@ -33,11 +34,13 @@ td, th {
 	float: right;
 }
 
-<%String display = (String) session.getAttribute("none");
-if (display == null) {
-	display = "none";
+<%
+String display = (String) session.getAttribute( "none ") ;
+if (display == null) {display = "none";
+	
+}
 
-}%>
+%>
 .example {
 	display: <%=display%>;
 }
@@ -58,10 +61,10 @@ if (display == null) {
 </head>
 <body>
 	<%
-		List<ChuyenDetails> chuyen = (List<ChuyenDetails>) request.getAttribute("list1");
+		List<BusStopDetails> chuyen = (List<BusStopDetails>) request.getAttribute("list1");
 	String none = (String) request.getAttribute("none");
-	Chuyen c = new Chuyen();
-	List<ChuyenDetails> chuyens = new ArrayList<ChuyenDetails>();
+	BusStopDAO c = new BusStopDAO();
+	List<BusStopDetails> chuyens = new ArrayList<BusStopDetails>();
 	chuyens = c.getChuyens();
 	if (none == null || none == "") {
 		none = "none";
@@ -100,14 +103,13 @@ if (display == null) {
 			</tr>
 		</thead>
 		<%
-			for (ChuyenDetails e : chuyen) {
+			for (BusStopDetails e : chuyen) {
 		%>
 		<tbody>
 			<tr>
-				<td style="text-align: left"><%=e.getID()%></td>
-				<td style="text-align: left"><%=e.getSTT()%></td>
-
-				<td style="text-align: left"><%=e.getTemTram()%></td>
+				<td style="text-align: left"><%=e.getRouteID()%></td>
+				<td style="text-align: left"><%=e.getSerial()%></td>
+				<td style="text-align: left"><%=e.getNameBusStop()%></td>
 			</tr>
 
 			<%
@@ -141,15 +143,14 @@ if (display == null) {
 			</tr>
 		</thead>
 		<%
-			for (ChuyenDetails e : chuyens) {
-			if (e.getID() > 0) {
+			for (BusStopDetails e : chuyens) {
+			if (e.getSerial() > 0) {
 		%>
 		<tbody>
 			<tr>
-				<td style="text-align: left"><%=e.getID()%></td>
-				<td style="text-align: left"><%=e.getSTT()%></td>
-
-				<td style="text-align: left"><%=e.getTemTram()%></td>
+				<td style="text-align: left"><%=e.getRouteID()%></td>
+				<td style="text-align: left"><%=e.getSerial()%></td>
+				<td style="text-align: left"><%=e.getNameBusStop()%></td>
 			</tr>
 
 			<%
@@ -183,15 +184,14 @@ if (display == null) {
 			</tr>
 		</thead>
 		<%
-			for (ChuyenDetails e : chuyens) {
-			if (e.getID() < 0) {
+			for (BusStopDetails e : chuyens) {
+			if (e.getSerial() < 0) {
 		%>
 		<tbody>
 			<tr>
-				<td style="text-align: left"><%=Math.abs(e.getID())%></td>
-				<td style="text-align: left"><%=e.getSTT()%></td>
-
-				<td style="text-align: left"><%=e.getTemTram()%></td>
+				<td style="text-align: left"><%=Math.abs(e.getRouteID())%></td>
+				<td style="text-align: left"><%=e.getSerial()%></td>
+				<td style="text-align: left"><%=e.getNameBusStop()%></td>
 			</tr>
 
 			<%

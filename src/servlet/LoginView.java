@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import controller.Chuyen;
 import dao.AccountDao;
-import dao.ChuyenDetails;
+import dao.BusStopDetails;
 import dao.LoginDAO;
 import model.AccountDetails;
 
@@ -97,7 +97,7 @@ public class LoginView extends HttpServlet {
 					if (login == true) {
 						accountDao.loginUser(userName);
 						Chuyen c = new Chuyen();
-						List<ChuyenDetails> chuyens = new ArrayList<ChuyenDetails>();
+						List<BusStopDetails> chuyens = new ArrayList<BusStopDetails>();
 						chuyens = c.getChuyens();
 //					System.out.println(chuyens);
 						request.setAttribute("list", c.getChuyens());
@@ -156,9 +156,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controller.Chuyen;
 import dao.AccountDao;
-import dao.ChuyenDetails;
+import dao.BusStopDAO;
+import model.BusStopDetails;
 import dao.LoginDAO;
 import model.AccountDetails;
 
@@ -272,8 +272,8 @@ public class LoginView extends HttpServlet {
 //					System.out.println(date);
 					if (login == true) {
 						accountDao.loginUser(userName);
-						Chuyen c = new Chuyen();
-						List<ChuyenDetails> chuyens = new ArrayList<ChuyenDetails>();
+						BusStopDAO c = new BusStopDAO();
+						List<BusStopDetails> chuyens = new ArrayList<BusStopDetails>();
 						chuyens = c.getChuyens();
 //					System.out.println(chuyens);
 						request.setAttribute("list", c.getChuyens());
@@ -317,8 +317,8 @@ public class LoginView extends HttpServlet {
 //					System.out.println(date);
 						if (login == true) {
 							accountDao.loginUser(userName);
-							Chuyen c = new Chuyen();
-							List<ChuyenDetails> chuyens = new ArrayList<ChuyenDetails>();
+							BusStopDAO c = new BusStopDAO();
+							List<BusStopDetails> chuyens = new ArrayList<BusStopDetails>();
 							chuyens = c.getChuyens();
 //					System.out.println(chuyens);
 							request.setAttribute("list", c.getChuyens());

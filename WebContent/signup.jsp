@@ -25,12 +25,14 @@
 	font-family: "Segoe UI";
 	background: #ffff;
 }
-.guess{
-color: green;
-position:relative;	
-top:-50px;
-left: 200px;
+
+.guess {
+	color: green;
+	position: relative;
+	top: -50px;
+	left: 200px;
 }
+
 .containerApp .MainForm {
 	background: #75b9e6;
 	height: 500px;
@@ -98,9 +100,10 @@ left: 200px;
 	font-size: 40px;
 	margin-top: 5px;
 }
+
 .textdangki {
-position: relative;
-top:-20px;
+	position: relative;
+	top: -20px;
 }
 
 .error {
@@ -193,7 +196,7 @@ top:-20px;
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
@@ -232,15 +235,16 @@ top:-20px;
 									style="float: right;">
 							</div>
 							<p class="NDung">
-								<label for="taikhoan" style="width: 100px;">E-MAIL: </label> <input name="email"
-									type="email" required="" id="dangki">
+								<label for="taikhoan" style="width: 100px;">E-MAIL: </label> <input
+									name="email" type="email" required="" id="dangki">
 							</p>
 							<p class="NDung">
 								<label for="taikhoan">SĐT: </label> <input name="phoneNumber"
 									type="tel" required="required" id="dangki">
 							</p>
 							<p class="NDung">
-								NGÀY SINH: </label> <input name="birthday" type="text"required="required" id="dangki">
+								NGÀY SINH: </label> <input name="birthday" type="text"
+									required="required" id="dangki">
 							</p>
 							<p class="Taikhoan">
 								<label>TÊN TÀI KHOẢN: </label> <input name="accountName"
@@ -250,13 +254,13 @@ top:-20px;
 								<label>MẬT KHẨU: </label> <input name="password" type="password"
 									required="" id="dangki">
 							</p>
-							<div style="margin:auto;margin-top:-15px;" class="submit NoiDung j-between">
+							<div style="margin: auto; margin-top: -15px;"
+								class="submit NoiDung j-between">
 								<input class="btn btn-primary btn-lg" type="submit"
 									value=" Đăng kí ">
 							</div>
 							<a class="guess NoiDung j-between" href="./ForgetPassWord.jsp">
-									Quên mật khẩu?
-								</a>
+								Quên mật khẩu? </a>
 						</div>
 					</div>
 				</div>

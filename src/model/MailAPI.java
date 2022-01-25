@@ -33,6 +33,7 @@ public class MailAPI {
 //		String password = "xxxxxx";
 		AccountDao dao = new AccountDao();
 		String pass = dao.getPasswordByMail(recepient);
+		String name = dao.getAccountNameByMail(recepient);
 		if (pass != null) {
 			Session session = Session.getInstance(props, new Authenticator() {
 				@Override
@@ -42,7 +43,7 @@ public class MailAPI {
 
 				}
 			});
-			Message message = prepareMessge(pass, session, myAccountEmail, recepient);
+			Message message = prepareMessge(name, pass, session, myAccountEmail, recepient);
 			Transport.send(message);
 			result = 1;
 			System.out.println("Message have sent successfully!!!");
@@ -50,7 +51,7 @@ public class MailAPI {
 		return result;
 	}
 
-	private Message prepareMessge(String pass, Session session, String myAccountEmail, String recepient) {
+	private Message prepareMessge(String name, String pass, Session session, String myAccountEmail, String recepient) {
 		// TODO Auto-generated method stub
 		try {
 			Message message = new MimeMessage(session);
@@ -62,7 +63,7 @@ public class MailAPI {
 //					"Xin chào, \n Yêu cầu tạo tài khoản RacingGame đã được chấp nhận, vui lòng xác nhận qua đường liên kết! \n google.com");
 //			message.setText(
 //					"Hello,\n RacingGame account creation request has been accepted, please confirm the link! \n google.com");
-			String text = "Hello,\n Get password request has been accepted, " + "Your password is: " + pass
+			String text = "Hello," + name + "\n Get password request has been accepted, " + "Your password is: " + pass
 					+ "\n Please confirm the link! \n http://localhost:8080/PTTK-HTTT/login.jsp";
 			message.setText(text);
 //			message.setText(

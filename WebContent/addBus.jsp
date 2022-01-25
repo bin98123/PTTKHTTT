@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	<%@page import="dao.*"%>
-	<%@page import="model.*"%>
+<%@page import="dao.*"%>
+<%@page import="model.*"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,19 +17,19 @@
 </style>
 </head>
 <body>
-<%
-					AccountDao dao1 = new AccountDao();
-AccountDetails accountDetails1 = (AccountDetails) session.getAttribute("user");
-					if (accountDetails1 != null) {
-					//	session.setMaxInactiveInterval(5);
-						session.setMaxInactiveInterval(1800);
-					dao1.loginUser((String)session.getAttribute("currentUser"));
-					System.out.println((String)session.getAttribute("currentUser"));
-					}
-					 if ((String)session.getAttribute("currentUser") == null) {
-							dao1.logoutUser();
-							}
-				%>
+	<%
+		AccountDao dao1 = new AccountDao();
+	AccountDetails accountDetails1 = (AccountDetails) session.getAttribute("user");
+	if (accountDetails1 != null) {
+		//	session.setMaxInactiveInterval(5);
+		session.setMaxInactiveInterval(1800);
+		dao1.loginUser((String) session.getAttribute("currentUser"));
+		System.out.println((String) session.getAttribute("currentUser"));
+	}
+	if ((String) session.getAttribute("currentUser") == null) {
+		dao1.logoutUser();
+	}
+	%>
 	<div class="contain-path1">
 		<!-- 	style="flex-direction: row; background-color: yellow;flex-wrap: wrap;display: flex;"> -->
 		<div class="left-path1" style="float: left; height: 100%;">

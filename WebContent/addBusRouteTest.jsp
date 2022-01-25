@@ -1,3 +1,5 @@
+<%@page import="dao.UnitDAO"%>
+<%@page import="dao.RouteDAO"%>
 <%@page import="controller.Chuyen"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -38,7 +40,7 @@
 						<select name="des" id="des">
 							<%
 								List<BusRouteDetails> busRouteList = new ArrayList<BusRouteDetails>();
-							Chuyen c1 = new Chuyen();
+							RouteDAO c1 = new RouteDAO();
 							busRouteList = c1.getRouteName();
 							for (BusRouteDetails bus : busRouteList) {
 							%>
@@ -57,7 +59,7 @@
 						<select name="des0" id="des0">
 							<%
 								List<BusUnitManagerDetails> busList = new ArrayList<BusUnitManagerDetails>();
-							Chuyen c = new Chuyen();
+							UnitDAO c = new UnitDAO();
 							busList = c.getUnitID();
 							for (BusUnitManagerDetails bus : busList) {
 							%>

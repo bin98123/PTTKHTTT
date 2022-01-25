@@ -1,3 +1,4 @@
+<%@page import="dao.BusDAO"%>
 <%@page import="controller.Chuyen"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -26,7 +27,9 @@
 			style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto; padding: 20px;">
 			<div class="col-sm-12">
 
-				<h2 class="myclass" style="color: blue;">Chỉnh Sửa Tài Xế Có Mã Tài Xế: <%=id%></h2>
+				<h2 class="myclass" style="color: blue;">
+					Chỉnh Sửa Tài Xế Có Mã Tài Xế:
+					<%=id%></h2>
 				<form action="EditDriver" method="post">
 
 					<div class="form-group">
@@ -48,11 +51,11 @@
 					</div>
 					<div class="form-group">
 						<label>Địa chỉ</label> <input type="text" class="form-control"
-						name="address" placeholder="Nhập địa chỉ">
+							name="address" placeholder="Nhập địa chỉ">
 					</div>
 					<div class="form-group">
 						<label>Quê quán</label> <input type="text" class="form-control"
-						name="country" placeholder="Nhập quê quán">
+							name="country" placeholder="Nhập quê quán">
 					</div>
 					<div class="form-group">
 						<label>Ngày bắt đầu hợp đồng</label> <input type="text"
@@ -74,7 +77,7 @@
 						<select name="des" id="des">
 							<%
 								List<BusDetails> busList = new ArrayList<BusDetails>();
-							Chuyen c = new Chuyen();
+							BusDAO c = new BusDAO();
 							busList = c.getBusID();
 							for (BusDetails bus : busList) {
 							%>

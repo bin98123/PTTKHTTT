@@ -6,10 +6,10 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 <style type="text/css">
-h1{
-color: red;
-font-weight: bold;
-font-style: italic;
+h1 {
+	color: red;
+	font-weight: bold;
+	font-style: italic;
 }
 </style>
 </head>

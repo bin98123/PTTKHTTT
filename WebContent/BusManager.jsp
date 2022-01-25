@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="dao.ChuyenDetails"%>
+<%@ page import="dao.*"%>
+<%@ page import="model.*"%>
 <%@ page import="controller.*"%>
 <!DOCTYPE html>
 <html>
@@ -25,9 +26,9 @@ td, th {
 </head>
 <body>
 	<%
-	// List<ChuyenDetails> chuyen= (List<ChuyenDetails>)request.getAttribute("list");
-	Chuyen c = new Chuyen();
-	List<ChuyenDetails> chuyens = new ArrayList<ChuyenDetails>();
+		// List<BusStopDetails> chuyen= (List<BusStopDetails>)request.getAttribute("list");
+	BusStopDAO c = new BusStopDAO();
+	List<BusStopDetails> chuyens = new ArrayList<BusStopDetails>();
 	chuyens = c.getChuyens();
 	%>
 	<table class="table table-striped table-bordered mydatatable"
@@ -47,18 +48,17 @@ td, th {
 			</tr>
 		</thead>
 		<%
-		for (ChuyenDetails e : chuyens) {
+			for (BusStopDetails e : chuyens) {
 		%>
 		<tbody>
 			<tr>
-				<td  style="text-align: left"><%=e.getID()%></td>
-				<td style="text-align: left"><%=e.getSTT()%></td>
-
-				<td style="text-align: left"><%=e.getTemTram()%></td>
+				<td style="text-align: left"><%=e.getRouteID()%></td>
+				<td style="text-align: left"><%=e.getSerial()%></td>
+				<td style="text-align: left"><%=e.getNameBusStop()%></td>
 			</tr>
 
 			<%
-			}
+				}
 			%>
 		</tbody>
 		<tfoot>
@@ -89,7 +89,6 @@ td, th {
 		$('.mydatatable').DataTable({
 
 		});
-		
 	</script>
 	<!-- 
 <script type="text/javascript">$(document).ready( function () {

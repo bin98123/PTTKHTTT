@@ -18,7 +18,7 @@
 <%@page import="javax.swing.*"%>
 <%@page import="javax.swing.JFileChooser"%>
 <%
-// 	String timesImp = (String) session.getAttribute("timesImpBus");
+	// 	String timesImp = (String) session.getAttribute("timesImpBus");
 // if (timesImp.equals("1")) {
 BusDAO dao = new BusDAO();
 dao.selectFile();

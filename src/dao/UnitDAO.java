@@ -38,6 +38,107 @@ public class UnitDAO implements POI_API_DAO {
 	public UnitDAO() {
 
 	}
+	public List<BusUnitManagerDetails> getUnitID() {
+		List<BusUnitManagerDetails> result = new ArrayList<BusUnitManagerDetails>();
+		List<BusUnitManagerDetails> chuyens = new ArrayList<BusUnitManagerDetails>();
+		int available = 0;
+		try {
+
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select distinct unitID from BusUnitManager");
+			while (rs.next()) {
+				BusUnitManagerDetails chuyen = new BusUnitManagerDetails();
+//				available++;
+//				System.out.println("Khanh");
+//				chuyen.setID(rs.getFloat("ID"));
+////				System.out.println(rs.getFloat("ID"));
+//				chuyen.setSTT(rs.getInt("STT"));
+//				System.out.println(rs.getInt("STT"));
+				chuyen.setUnitID(rs.getString("unitID"));
+//				System.out.println(rs.getNString("TenTram"));
+				chuyens.add(chuyen);
+//				for (BusStopDetails BusStopDetails : chuyens) {
+//					chuyen.setChuyenID(rs.getInt("ChuyenID"));
+//					chuyen.setLuotDi(rs.getString("LUOTDI"));
+//					chuyen.setLuotVe(rs.getString("LUOTVE"));
+//					chuyen.setTenChuyen(rs.getString("TENCHUYEN"));
+//					chuyen.setID(rs.getFloat("ID"));
+//					System.out.println(rs.getFloat("ID"));
+//					chuyen.setSTT(rs.getInt("STT"));
+//					System.out.println(rs.getInt("STT"));
+//					chuyen.setTemTram(rs.getString("TenTram"));
+//					System.out.println(rs.getString("TenTram"));
+//					chuyens.add(chuyen);
+//				}
+			}
+			result = chuyens;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+//		if (available != 0) {
+//			return true;
+//		}
+		return chuyens;
+
+	}
+
+	public List<BusUnitManagerDetails> getBusesUnitManager() {
+		List<BusUnitManagerDetails> result = new ArrayList<BusUnitManagerDetails>();
+		List<BusUnitManagerDetails> chuyens = new ArrayList<BusUnitManagerDetails>();
+		int available = 0;
+		try {
+
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			Connection con = DriverManager.getConnection(connectionUrl);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from BusUnitManager");
+			while (rs.next()) {
+				BusUnitManagerDetails chuyen = new BusUnitManagerDetails();
+//				available++;
+//				System.out.println("Khanh");
+//				chuyen.setID(rs.getFloat("ID"));
+////				System.out.println(rs.getFloat("ID"));
+//				chuyen.setSTT(rs.getInt("STT"));
+				chuyen.setUnitID(rs.getNString("unitID"));
+				chuyen.setUnitName(rs.getNString("unitName"));
+				chuyen.setPhoneNumber(rs.getNString("phoneNumber"));
+				chuyen.setEmail(rs.getNString("EMAIL"));
+//				System.out.println(rs.getInt("STT"));
+//				chuyen.setTemTram(rs.getNString("nameBusStop"));
+//				System.out.println(rs.getNString("TenTram"));
+				chuyens.add(chuyen);
+//				for (BusStopDetails BusStopDetails : chuyens) {
+//					chuyen.setChuyenID(rs.getInt("ChuyenID"));
+//					chuyen.setLuotDi(rs.getS	tring("LUOTDI"));
+//					chuyen.setLuotVe(rs.getString("LUOTVE"));
+//					chuyen.setTenChuyen(rs.getString("TENCHUYEN"));
+//					chuyen.setID(rs.getFloat("ID"));
+//					System.out.println(rs.getFloat("ID"));
+//					chuyen.setSTT(rs.getInt("STT"));
+//					System.out.println(rs.getInt("STT"));
+//					chuyen.setTemTram(rs.getString("TenTram"));
+//					System.out.println(rs.getString("TenTram"));
+//					chuyens.add(chuyen);
+//				}
+			}
+			result = chuyens;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't running this process!!!");
+		}
+//		if (available != 0) {
+//			return true;
+//		}
+		return chuyens;
+
+	}
 
 	public int edit(BusUnitManagerDetails unit, String unitID) throws ClassNotFoundException, SQLException {
 		int result = 0;
@@ -164,6 +265,7 @@ public class UnitDAO implements POI_API_DAO {
 		return result;
 
 	}
+
 	public boolean deleteAll() throws ClassNotFoundException, SQLException {
 		boolean result = false;
 
@@ -181,10 +283,9 @@ public class UnitDAO implements POI_API_DAO {
 //				int serial = rs0.getInt("serial");
 //				String nameBusStop = rs0.getNString("nameBusStop");
 			float currentTime = System.currentTimeMillis() + getMaxID();
-			String INSERT_BusStopTemp = "INSERT INTO BusUnitManagerTemp"
-					+ "  (unitID,unitName,phoneNumber , Email)";
-			try (PreparedStatement insert = con.prepareStatement(INSERT_BusStopTemp
-					+ " SELECT unitID,unitName,phoneNumber , Email from BusUnitManager;")) {
+			String INSERT_BusStopTemp = "INSERT INTO BusUnitManagerTemp" + "  (unitID,unitName,phoneNumber , Email)";
+			try (PreparedStatement insert = con.prepareStatement(
+					INSERT_BusStopTemp + " SELECT unitID,unitName,phoneNumber , Email from BusUnitManager;")) {
 				// 1private String accountID;
 //			2private String accountName;
 //			3private String password;

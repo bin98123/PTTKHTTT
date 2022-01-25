@@ -1,3 +1,4 @@
+<%@page import="dao.RouteDAO"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
@@ -94,7 +95,7 @@ session.removeAttribute("value");
 	<%
 		List<BusRouteDetails> chuyen = (List<BusRouteDetails>) request.getAttribute("listManaRoute");
 	String none = (String) request.getAttribute("none");
-	Chuyen c = new Chuyen();
+	RouteDAO c = new RouteDAO();
 	List<BusRouteDetails> chuyens = new ArrayList<BusRouteDetails>();
 	chuyens = c.getBusRoute();
 	if (none == null || none == "") {
