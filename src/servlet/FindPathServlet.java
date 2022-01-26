@@ -74,7 +74,17 @@ public class FindPathServlet extends HttpServlet {
 				session.setAttribute("desInput", des);
 				session.setAttribute("startInput", start);
 				session.setAttribute("path", path);
-				request.getRequestDispatcher("./findPath.jsp").forward(request, response);
+				System.out.println("Đường đi tìm được là: " + path.isEmpty());
+				if (!path.isEmpty()) {
+					request.getRequestDispatcher("./findPath.jsp").forward(request, response);
+				} else {
+					List<String> path1 = new ArrayList<String>();
+					String error = "Không tìm được lộ trình có Điểm đi: '" + start + "' và điểm đến: '" + des
+							+ "' trong cùng 1 chuyến xe!!!!";
+					path1.add(error);
+					session.setAttribute("path", path1);
+					request.getRequestDispatcher("./findPath.jsp").forward(request, response);
+				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 //			String path = "Không tìm được đường đi!!!";

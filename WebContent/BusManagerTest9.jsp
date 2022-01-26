@@ -3,7 +3,6 @@
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="dao.*"%>
-<%@ page import="model.*"%>
 <%@ page import="controller.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -36,11 +35,13 @@ td, th {
 	float: right;
 }
 
-<%String display = (String) session.getAttribute("none ");
-if (display == null) {
-	display = "none";
+<%
+String display = (String) session.getAttribute( "none ") ;
+if (display == null) {display = "none";
+	
+}
 
-}%>
+%>
 .example {
 	display: <%=display%>;
 }
@@ -61,12 +62,13 @@ if (display == null) {
 </head>
 <body>
 	<%
-		List<BusStopDetails> chuyen = (List<BusStopDetails>) request.getAttribute("list1");
+		session.removeAttribute("listBusStop");
+	List<BusStopDetails> chuyen = (List<BusStopDetails>) request.getAttribute("list1");
 	String none = (String) request.getAttribute("none");
 	BusStopDAO c = new BusStopDAO();
 	List<BusStopDetails> chuyens = new ArrayList<BusStopDetails>();
+	session.setAttribute("listBusStop", chuyens);
 	chuyens = c.getChuyens();
-	request.setAttribute("listBusStop", chuyens);
 	if (none == null || none == "") {
 		none = "none";
 	}
@@ -84,45 +86,51 @@ if (display == null) {
 			</form>
 		</div>
 	</div>
-	<!-- 	<h1 id="exampleDefault"> -->
-	<!-- 		<Danh Sách Trạm Dừng Tìm Được> -->
-	<!-- 	</h1> -->
-	<!-- 	<table class="table table-striped table-bordered table-list example" -->
-	<!-- 		id="example" style="width: 100%"> -->
-	<!-- 		<thead> -->
-	<!-- 			<tr> -->
-	<!-- 				
-<!-- 	<th>Mã số Chuyến</th> -->
-	<!-- 	<th>Tên trạm lượt đi</th> -->
-	<!-- 	<th>Tên Trạm lượt về</th> -->
-	<!-- 	<th>Tên Chuyến</th> -->
-	<!-- 	 -->
+	<h1 id="exampleDefault">
+		<Danh Sách Trạm Dừng Tìm Được>
+	</h1>
+	<table class="table table-striped table-bordered table-list example"
+		id="example" style="width: 100%">
+		<thead>
+			<tr>
+				<!-- 
+	<th>Mã số Chuyến</th>
+	<th>Tên trạm lượt đi</th>
+	<th>Tên Trạm lượt về</th>
+	<th>Tên Chuyến</th>
+	 -->
 
-	<!-- 				<th style="text-align: left">Mã số Chuyến</th> -->
-	<!-- 				<th style="text-align: left">STT</th> -->
-	<!-- 				<th style="text-align: left">Tên Trạm</th> -->
-	<!-- 			</tr> -->
-	<!-- 		</thead> -->
-	<%-- 		<c:forEach items="${listBusStop}" var="li"> --%>
-	<!-- 			<tr> -->
-	<%-- 				<td style="text-align: left">${li.routeID}</td> --%>
-	<%-- 				<td style="text-align: left">${li.serial}</td> --%>
-	<%-- 				<td style="text-align: left">${li.nameBusStop}</td> --%>
-	<!-- 			</tr> -->
-	<%-- 						 </c:forEach> --%>
-	<!-- 		</tbody> -->
-	<!-- 			<tfoot> -->
-	<!-- 	<tr> -->
-	<!-- 		<th style="text-align: left">Mã số Chuyến</th> -->
-	<!-- 		<th style="text-align: left">STT</th> -->
-	<!-- 		<th style="text-align: left">Tên Trạm</th> -->
-	<!-- 	</tr> -->
-	<!-- 	</tfoot> -->
-	<!-- 	</table> -->
+				<th style="text-align: left">Mã số Chuyến</th>
+				<th style="text-align: left">STT</th>
+				<th style="text-align: left">Tên Trạm</th>
+			</tr>
+		</thead>
+		<%
+			for (BusStopDetails e : chuyen) {
+		%>
+		<tbody>
+			<tr>
+				<td style="text-align: left"><%=e.getRouteID()%></td>
+				<td style="text-align: left"><%=e.getSerial()%></td>
+				<td style="text-align: left"><%=e.getNameBusStop()%></td>
+			</tr>
+
+			<%
+				}
+			%>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th style="text-align: left">Mã số Chuyến</th>
+				<th style="text-align: left">STT</th>
+				<th style="text-align: left">Tên Trạm</th>
+			</tr>
+		</tfoot>
+	</table>
 	<!-- 	<table class="table1" style="width: 50%; display: none"> -->
 	<h1>Danh Sách Trạm Dừng Lượt Đi</h1>
 	<table class="table table-striped table-bordered table-list table1"
-		style="width: 70%">
+		style="width: 100%">
 		<thead>
 			<tr>
 				<!-- 
@@ -139,11 +147,11 @@ if (display == null) {
 		</thead>
 		<tbody>
 			<c:forEach items="${listBusStop}" var="li">
-				<c:if test="${li.routeID >=0}">
+				<c:if test="${li.getRouteID >=0}">
 					<tr>
-						<td style="text-align: left">${li.routeID}</td>
-						<td style="text-align: left">${li.serial}</td>
-						<td style="text-align: left">${li.nameBusStop}</td>
+						<td style="text-align: left">${li.getRouteID}</td>
+						<td style="text-align: left">${li.getSerial}</td>
+						<td style="text-align: left">${li.getNameBusStop}</td>
 					</tr>
 				</c:if>
 						 </c:forEach>
@@ -158,7 +166,7 @@ if (display == null) {
 	</table>
 	<h1>Danh Sách Trạm Dừng Lượt Về</h1>
 	<table class="table table-striped table-bordered table-list table1"
-		style="width: 70%">
+		style="width: 100%">
 		<thead>
 			<tr>
 				<!-- 
@@ -173,14 +181,14 @@ if (display == null) {
 				<th style="text-align: left">Tên Trạm</th>
 			</tr>
 		</thead>
-		<tbody>
+			<tbody>
 
-			<c:forEach items="${listBusStop}" var="li1">
-				<c:if test="${li1.routeID <0}">
+			<c:forEach items="${listBusStop}" var="li">
+				<c:if test="${li.getRouteID <0}">
 					<tr>
-						<td style="text-align: left">${Math.abs(li1.routeID)}</td>
-						<td style="text-align: left">${li1.serial}</td>
-						<td style="text-align: left">${li1.nameBusStop}</td>
+						<td style="text-align: left">${Math.abs(li.getRouteID)}</td>
+						<td style="text-align: left">${li.getSerial}</td>
+						<td style="text-align: left">${li.getNameBusStop}</td>
 					</tr>
 				</c:if>
 						 </c:forEach>
@@ -195,9 +203,8 @@ if (display == null) {
 	</table>
 	<script type="text/javascript">
 <!-- 	<script> -->
-	document.getElementById("example").style.display= "<%=none%>";
-	document.getElementById("default").style.display= "<%=none%>
-		";
+<%-- 	document.getElementById("example").style.display= "<%=none%>"; --%>
+<%-- 	document.getElementById("default").style.display= "<%=none%>"; --%>
 		// 	document.getElementById("example").style.display="none";
 	</script>
 </body>

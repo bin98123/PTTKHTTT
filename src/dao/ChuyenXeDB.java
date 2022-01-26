@@ -105,6 +105,7 @@ public class ChuyenXeDB {
 		if (chuyenxe == null) {
 			result.add(0, "");
 		}
+		System.out.println("dsfsfsfs là: " + result.isEmpty());
 		return result;
 	}
 
@@ -214,7 +215,7 @@ public class ChuyenXeDB {
 					}
 				}
 			} else {
-				System.out.println("Chuyến xe buýt lượt về số " + Math.abs(Integer.parseInt(routeID))  + ":");
+				System.out.println("Chuyến xe buýt lượt về số " + Math.abs(Integer.parseInt(routeID)) + ":");
 				if (path.getDes() > path.getStart()) {
 					for (int i = path.getStart(); i <= path.getDes(); i++) {
 						System.out.println(list.get(i));
