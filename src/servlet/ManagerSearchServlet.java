@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ChuyenDetails;
 import dao.SearchDAO;
+import model.BusStopDetails;
 
 /**
  * Servlet implementation class ManagerSearchServlet
@@ -60,13 +61,19 @@ public class ManagerSearchServlet extends HttpServlet {
 		try {
 			String txtSearch = request.getParameter("txtSearch");
 			SearchDAO searchDAO = new SearchDAO();
-			List<ChuyenDetails> listChuyens = new ArrayList<ChuyenDetails>();
+			List<BusStopDetails> listChuyens = new ArrayList<BusStopDetails>();
 			listChuyens = searchDAO.getSearch(txtSearch);
 
 			System.out.println(searchDAO.getSearch(txtSearch));
-			request.setAttribute("manalist1", searchDAO.getSearch(txtSearch));
-			request.setAttribute("none", "visible");
-			request.getRequestDispatcher("/ManagerBusStop.jsp").forward(request, response);
+			if (!listChuyens.isEmpty()) {
+				request.setAttribute("manalist1", searchDAO.getSearch(txtSearch));
+				request.setAttribute("none", "visible");
+				request.getRequestDispatcher("/ManagerBusStop.jsp").forward(request, response);
+			} else {
+				request.setAttribute("none", "none");
+				request.setAttribute("errorBusStopSearch", "Trạm dừng vừa tìm không tồn tại trong dữ liệu!");
+				request.getRequestDispatcher("/ManagerBusStop.jsp").forward(request, response);
+			}
 
 		} catch (Exception e) {
 			// TODO: handle exception

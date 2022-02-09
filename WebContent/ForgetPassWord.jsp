@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" href="./img/bus-icon.png">
 <link rel="stylesheet"
@@ -47,6 +48,7 @@ h5 {
 }
 </style>
 <meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
 <title>Quên Mật Khẩu</title>
 </head>
 <%

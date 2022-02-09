@@ -9,6 +9,7 @@ import java.util.List;
 
 import model.BusDetails;
 import model.BusRouteDetails;
+import model.BusStopDetails;
 import model.BusUnitManagerDetails;
 import model.DriverDetails;
 
@@ -17,9 +18,9 @@ public class SearchDAO {
 //	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
 //			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
 
-	public List<ChuyenDetails> getSearch(String txtSearch) {
-		List<ChuyenDetails> result = new ArrayList<ChuyenDetails>();
-		List<ChuyenDetails> chuyens = new ArrayList<ChuyenDetails>();
+	public List<BusStopDetails> getSearch(String txtSearch) {
+		List<BusStopDetails> result = new ArrayList<BusStopDetails>();
+		List<BusStopDetails> chuyens = new ArrayList<BusStopDetails>();
 		int available = 0;
 		try {
 
@@ -31,14 +32,14 @@ public class SearchDAO {
 			ResultSet rs = stmt.executeQuery("select * from BusStop where routeID like N'%" + txtSearch
 					+ "%' or SERIAL like N'%" + txtSearch + "%' or NAMEBUSSTOP like N'%" + txtSearch + "%'");
 			while (rs.next()) {
-				ChuyenDetails chuyen = new ChuyenDetails();
+				BusStopDetails chuyen = new BusStopDetails();
 //				available++;
 //				System.out.println("Khanh");
-				chuyen.setID(rs.getInt("routeID"));
+				chuyen.setRouteID(rs.getInt("routeID"));
 //				System.out.println(rs.getFloat("ID"));
-				chuyen.setSTT(rs.getInt("SERIAL"));
+				chuyen.setSerial(rs.getInt("SERIAL"));
 //				System.out.println(rs.getInt("STT"));
-				chuyen.setTemTram(rs.getNString("NAMEBUSSTOP"));
+				chuyen.setNameBusStop(rs.getNString("NAMEBUSSTOP"));
 //				System.out.println(rs.getNString("TenTram"));
 				chuyens.add(chuyen);
 //				for (ChuyenDetails chuyenDetails : chuyens) {

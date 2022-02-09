@@ -34,13 +34,13 @@ public class ForgetPassword extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession();
 		String email = request.getParameter("email");
 		MailAPI api = new MailAPI();
 		try {
 			if (api.sendMail(email) > 0) {
-				request.getRequestDispatcher("/index.jsp").forward(request, response);
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
 			} else {
 				String error = "Địa Chỉ Email không tồn tại trong dữ liệu!";
 				String color = "red";

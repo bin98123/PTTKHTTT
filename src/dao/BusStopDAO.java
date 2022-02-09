@@ -29,9 +29,14 @@ import model.BusDetails;
 import model.BusRouteDetails;
 import model.BusStopDetails;
 import model.BusUnitManagerDetails;
+import model.ChuyenXe;
 import model.DriverDetails;
+import model.Path;
 
 public class BusStopDAO implements POI_API_DAO {
+	private List<Integer> list = new ArrayList<>();
+	private ArrayList<String> tramqua;
+	private ArrayList<ChuyenXe> chuyenxe = new ArrayList<>();
 	private String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=PTTK;user=sa;password=root";
 //	private String connectionUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;"
 //			+ "databaseName=bin98123_PTTK;user=bin98123_PTTK;password=Khanhhuyen2410";
@@ -42,6 +47,221 @@ public class BusStopDAO implements POI_API_DAO {
 	public BusStopDAO() {
 
 	}
+
+	public Connection getConnect() throws SQLException, ClassNotFoundException {
+		Class.forName(driver);
+//		String dbURL = "jdbc:sqlserver://localhost:1433;databaseName=QuanLyXeBus;user=sa;password=root";
+		Connection con = DriverManager.getConnection(connectionUrl);
+		return con;
+	}
+
+//ds cac chuyen bus trong csdl
+	public List<Integer> getBus() throws SQLException, ClassNotFoundException {
+		Class.forName(driver);
+		Statement sta = getConnect().createStatement();
+		ResultSet re = sta.executeQuery("select distinct routeID from BusStop");
+		int id;
+
+		while (re.next()) {
+			id = re.getInt(1);
+			list.add(id);
+		}
+		return list;
+	}
+
+//	public ArrayList<ChuyenXe> search(String diemDi, String diemDen) throws SQLException {
+//		Statement sta = getConnect().createStatement();
+//		ResultSet re;
+//		int j = getBus().size();
+//
+//		for (int i = 0; i < j; i++) {
+//
+//			tramqua = new ArrayList<>();
+//
+//			re = sta.executeQuery(
+//					"select TenTram from Chuyen where  STT >= (select top(1) STT from Chuyen where TenTram = N'"
+//							+ diemDi + "' and ID =" + getBus().get(i) + ") and ID = " + getBus().get(i)
+//							+ " and STT < =(select top(1) STT from Chuyen where TenTram = N'" + diemDen + "' and ID = "
+//							+ getBus().get(i) + ")");
+//			while (re.next()) {
+//				tramqua.add(re.getString(1));
+//			}
+//			if (tramqua.size() > 0) {
+//				chuyenxe.add(new ChuyenXe(getBus().get(i), tramqua));
+//			}
+//
+//		}
+//
+//		return chuyenxe;
+//	}
+//	
+	public List<String> search(String diemDi, String diemDen) throws SQLException, ClassNotFoundException {
+		Class.forName(driver);
+		Statement sta = getConnect().createStatement();
+		List<String> result = new ArrayList<String>();
+		ResultSet re;
+		int j = getBus().size();
+
+		for (int i = 0; i < j; i++) {
+
+			tramqua = new ArrayList<>();
+
+			re = sta.executeQuery(
+					"select nameBusStop from BusStop where  serial >= (select top(1) serial from BusStop where nameBusStop = N'"
+							+ diemDi + "' and routeID =" + getBus().get(i) + ") and routeID = " + getBus().get(i)
+							+ " and serial < =(select top(1) serial from BusStop where nameBusStop = N'" + diemDen
+							+ "' and routeID = " + getBus().get(i) + ")" + "order by routeID, serial asc");
+			while (re.next()) {
+				tramqua.add(re.getNString(1));
+			}
+//			if (!re.next()) {
+//				result = null;
+//			}
+			if (tramqua.size() > 0) {
+				chuyenxe.add(new ChuyenXe(getBus().get(i), tramqua));
+			}
+		}
+//		String s = "";
+		for (ChuyenXe c : chuyenxe) {
+//			s = s + c.toString() + "\n" + "\n";
+			result.add(c.toString());
+		}
+		if (chuyenxe == null) {
+			result.add(0, "");
+		}
+		System.out.println("dsfsfsfs là: " + result.isEmpty());
+		return result;
+	}
+
+	public List<String> search0(String diemDi, String diemDen) throws SQLException, ClassNotFoundException {
+		Class.forName(driver);
+		Statement sta = getConnect().createStatement();
+		List<String> result = new ArrayList<String>();
+		ResultSet re;
+
+		tramqua = new ArrayList<>();
+
+		re = sta.executeQuery("select distinct routeID from BusStop ");
+		while (re.next()) {
+//			System.out.println(re.getString("routeID"));
+			result.add(re.getString("routeID"));
+
+		}
+		return result;
+	}
+
+	public List<String> getAllRouteID() throws SQLException, ClassNotFoundException {
+		Class.forName(driver);
+		Statement sta = getConnect().createStatement();
+		List<String> result = new ArrayList<String>();
+		ResultSet re;
+
+		tramqua = new ArrayList<>();
+
+		re = sta.executeQuery("select distinct routeID from BusStop");
+		while (re.next()) {
+//			System.out.println(re.getString("routeID"));
+			result.add(re.getString("routeID"));
+
+		}
+		return result;
+	}
+
+	public int countNameBusStop(String routeID) throws SQLException, ClassNotFoundException {
+		Class.forName(driver);
+		Statement sta = getConnect().createStatement();
+		int result = 0;
+		ResultSet re;
+
+		tramqua = new ArrayList<>();
+
+		re = sta.executeQuery("select count(nameBusStop) as countResult from BusStop where routeID =" + routeID);
+		while (re.next()) {
+//			System.out.println(re.getInt("countResult"));
+			result = re.getInt("countResult");
+
+		}
+		return result;
+	}
+
+	public List<String> getPathOfRoute(String routeID) throws SQLException, ClassNotFoundException {
+		Class.forName(driver);
+		Statement sta = getConnect().createStatement();
+		List<String> result = new ArrayList<String>();
+		ResultSet re;
+
+		tramqua = new ArrayList<>();
+
+		re = sta.executeQuery(
+				"select nameBusStop from BusStop where routeID=" + Integer.parseInt(routeID) + "ORDER BY serial ASC");
+//		for (int i = 0; i < countNameBusStop(routeID); i++) {
+
+		while (re.next()) {
+//			System.out.println(re.getString("nameBusStop"));
+			result.add(re.getString("nameBusStop"));
+
+		}
+//		}
+		return result;
+	}
+
+	public Path checkHasPath(String diemDi, String diemDen, String routeID)
+			throws SQLException, ClassNotFoundException {
+		Class.forName(driver);
+		Path result = null;
+		List<String> list = getPathOfRoute(routeID);
+
+		if (list.contains(diemDen) && list.contains(diemDi)) {
+			result = new Path(list.indexOf(diemDi), (list.indexOf(diemDen)));
+			if ((list.indexOf(diemDi)) == (list.indexOf(diemDen))) {
+				return null;
+			}
+//			System.out.println(list.indexOf(diemDi));
+//			System.out.println(list.indexOf(diemDen));
+		}
+		return result;
+	}
+
+	public void printPath(String diemDi, String diemDen, String routeID) throws ClassNotFoundException, SQLException {
+		Path path = checkHasPath(diemDi, diemDen, routeID);
+		List<String> list = getPathOfRoute(routeID);
+		if (path != null) {
+			if (Integer.parseInt(routeID) > 0) {
+				System.out.println("Chuyến xe buýt lượt đi số " + routeID + ":");
+				if (path.getDes() > path.getStart()) {
+					for (int i = path.getStart(); i <= path.getDes(); i++) {
+						System.out.println(list.get(i));
+					}
+				} else {
+					for (int i = path.getDes(); i <= path.getStart(); i++) {
+						System.out.println(list.get(i));
+
+					}
+				}
+			} else {
+				System.out.println("Chuyến xe buýt lượt về số " + Math.abs(Integer.parseInt(routeID)) + ":");
+				if (path.getDes() > path.getStart()) {
+					for (int i = path.getStart(); i <= path.getDes(); i++) {
+						System.out.println(list.get(i));
+					}
+				} else {
+					for (int i = path.getDes(); i <= path.getStart(); i++) {
+						System.out.println(list.get(i));
+
+					}
+				}
+			}
+		}
+	}
+
+//	public String prinChuyenXe() {
+//		// TODO Auto-generated method stub
+//		String s = "";
+//		for (ChuyenXe c : chuyenxe) {
+//			s = s + c.toString() + "\n" + "\n";
+//		}
+//		return s;
+//	}
 
 	public float getMaxID() throws SQLException, ClassNotFoundException {
 		float result = 0;
@@ -263,7 +483,7 @@ public class BusStopDAO implements POI_API_DAO {
 
 	}
 
-		public int checkExist(BusStopDetails busDetails) {
+	public int checkExist(BusStopDetails busDetails) {
 		int count = 0;
 		try {
 

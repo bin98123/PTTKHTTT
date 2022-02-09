@@ -47,6 +47,7 @@ public class ManagerBusStopServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String submit = request.getParameter("submit");
+//		int routeID = Integer.parseInt(request.getParameter("routeID"));
 		if (submit.equals("edit")) {
 			String unitID = request.getParameter("unitID");
 			String serial = request.getParameter("serial");

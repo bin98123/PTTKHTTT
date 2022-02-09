@@ -3,9 +3,7 @@
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="dao.*"%>
-<%@ page import="model.*"%>
 <%@ page import="controller.*"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,19 +33,6 @@ td, th {
 .contain-search {
 	float: right;
 }
-
-<%String display = (String) session.getAttribute("none ");
-if (display == null) {
-	display = "none";
-
-}%>
-.example {
-	display: <%=display%>;
-}
-
-.exampleDefault {
-	display: <%=display%>;
-}
 </style>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <!-- <link rel="stylesheet"
@@ -61,12 +46,12 @@ if (display == null) {
 </head>
 <body>
 	<%
-		List<BusStopDetails> chuyen = (List<BusStopDetails>) request.getAttribute("list1");
+		session.removeAttribute("listBusStop");
+	List<BusStopDetails> chuyen = (List<BusStopDetails>) request.getAttribute("list1");
 	String none = (String) request.getAttribute("none");
 	BusStopDAO c = new BusStopDAO();
 	List<BusStopDetails> chuyens = new ArrayList<BusStopDetails>();
 	chuyens = c.getChuyens();
-	request.setAttribute("listBusStop", chuyens);
 	if (none == null || none == "") {
 		none = "none";
 	}
@@ -84,45 +69,104 @@ if (display == null) {
 			</form>
 		</div>
 	</div>
-	<!-- 	<h1 id="exampleDefault"> -->
-	<!-- 		<Danh Sách Trạm Dừng Tìm Được> -->
-	<!-- 	</h1> -->
-	<!-- 	<table class="table table-striped table-bordered table-list example" -->
-	<!-- 		id="example" style="width: 100%"> -->
-	<!-- 		<thead> -->
-	<!-- 			<tr> -->
-	<!-- 				
-<!-- 	<th>Mã số Chuyến</th> -->
-	<!-- 	<th>Tên trạm lượt đi</th> -->
-	<!-- 	<th>Tên Trạm lượt về</th> -->
-	<!-- 	<th>Tên Chuyến</th> -->
-	<!-- 	 -->
+	<%
+		String error = (String) request.getAttribute("errorBusStopSearch");
+	if (error == null) {
+		error = "";
+	}
+	%>
+	<h2><%=error%>
+	</h2>
+	<h1 id="default" style="display: <%=none%>;">Danh Sách Trạm Dừng Lượt Đi Tìm Được</h1>
+	<table class="table table-striped table-bordered table-list example"
+		id="example" style="width: 100%;display: <%=none%>">
+		<thead>
+			<tr>
+				<!-- 
+	<th>Mã số Chuyến</th>
+	<th>Tên trạm lượt đi</th>
+	<th>Tên Trạm lượt về</th>
+	<th>Tên Chuyến</th>
+	 -->
 
-	<!-- 				<th style="text-align: left">Mã số Chuyến</th> -->
-	<!-- 				<th style="text-align: left">STT</th> -->
-	<!-- 				<th style="text-align: left">Tên Trạm</th> -->
-	<!-- 			</tr> -->
-	<!-- 		</thead> -->
-	<%-- 		<c:forEach items="${listBusStop}" var="li"> --%>
-	<!-- 			<tr> -->
-	<%-- 				<td style="text-align: left">${li.routeID}</td> --%>
-	<%-- 				<td style="text-align: left">${li.serial}</td> --%>
-	<%-- 				<td style="text-align: left">${li.nameBusStop}</td> --%>
-	<!-- 			</tr> -->
-	<%-- 						 </c:forEach> --%>
-	<!-- 		</tbody> -->
-	<!-- 			<tfoot> -->
-	<!-- 	<tr> -->
-	<!-- 		<th style="text-align: left">Mã số Chuyến</th> -->
-	<!-- 		<th style="text-align: left">STT</th> -->
-	<!-- 		<th style="text-align: left">Tên Trạm</th> -->
-	<!-- 	</tr> -->
-	<!-- 	</tfoot> -->
-	<!-- 	</table> -->
+				<th style="text-align: left">Mã số Chuyến</th>
+				<th style="text-align: left">STT</th>
+				<th style="text-align: left">Tên Trạm</th>
+
+			</tr>
+		</thead>
+		<%
+			for (BusStopDetails e : chuyen) {
+			if (e.getRouteID() > 0) {
+		%>
+		<tbody>
+			<tr>
+				<td style="text-align: left"><%=e.getRouteID()%></td>
+				<td style="text-align: left"><%=e.getSerial()%></td>
+				<td style="text-align: left"><%=e.getNameBusStop()%></td>
+			</tr>
+
+			<%
+				}
+			}
+			%>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th style="text-align: left">Mã số Chuyến</th>
+				<th style="text-align: left">STT</th>
+				<th style="text-align: left">Tên Trạm</th>
+			</tr>
+		</tfoot>
+	</table>
+	<h1 id="default" style="display: <%=none%>;">Danh Sách Trạm Dừng Lượt Về
+		Tìm Được</h1>
+	<table class="table table-striped table-bordered table-list example"
+		id="example" style="width: 100%;display: <%=none%>">
+		<thead>
+			<tr>
+				<!-- 
+	<th>Mã số Chuyến</th>
+	<th>Tên trạm lượt đi</th>
+	<th>Tên Trạm lượt về</th>
+	<th>Tên Chuyến</th>
+	 -->
+
+				<th style="text-align: left">Mã số Chuyến</th>
+				<th style="text-align: left">STT</th>
+				<th style="text-align: left">Tên Trạm</th>
+
+			</tr>
+		</thead>
+		<%
+			for (BusStopDetails e : chuyen) {
+			if (e.getRouteID() < 0) {
+		%>
+		<tbody>
+			<tr>
+				<td style="text-align: left"><%=Math.abs(e.getRouteID())%></td>
+				<td style="text-align: left"><%=e.getSerial()%></td>
+				<td style="text-align: left"><%=e.getNameBusStop()%></td>
+			</tr>
+
+			<%
+				}
+			}
+			%>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th style="text-align: left">Mã số Chuyến</th>
+				<th style="text-align: left">STT</th>
+				<th style="text-align: left">Tên Trạm</th>
+			</tr>
+		</tfoot>
+	</table>
+
 	<!-- 	<table class="table1" style="width: 50%; display: none"> -->
 	<h1>Danh Sách Trạm Dừng Lượt Đi</h1>
 	<table class="table table-striped table-bordered table-list table1"
-		style="width: 70%">
+		style="width: 100%">
 		<thead>
 			<tr>
 				<!-- 
@@ -137,16 +181,21 @@ if (display == null) {
 				<th style="text-align: left">Tên Trạm</th>
 			</tr>
 		</thead>
+		<%
+			for (BusStopDetails e : chuyens) {
+			if (e.getRouteID() > 0) {
+		%>
 		<tbody>
-			<c:forEach items="${listBusStop}" var="li">
-				<c:if test="${li.routeID >=0}">
-					<tr>
-						<td style="text-align: left">${li.routeID}</td>
-						<td style="text-align: left">${li.serial}</td>
-						<td style="text-align: left">${li.nameBusStop}</td>
-					</tr>
-				</c:if>
-						 </c:forEach>
+			<tr>
+				<td style="text-align: left"><%=e.getRouteID()%></td>
+				<td style="text-align: left"><%=e.getSerial()%></td>
+				<td style="text-align: left"><%=e.getNameBusStop()%></td>
+			</tr>
+
+			<%
+				}
+			}
+			%>
 		</tbody>
 		<tfoot>
 			<tr>
@@ -158,7 +207,7 @@ if (display == null) {
 	</table>
 	<h1>Danh Sách Trạm Dừng Lượt Về</h1>
 	<table class="table table-striped table-bordered table-list table1"
-		style="width: 70%">
+		style="width: 100%">
 		<thead>
 			<tr>
 				<!-- 
@@ -173,17 +222,21 @@ if (display == null) {
 				<th style="text-align: left">Tên Trạm</th>
 			</tr>
 		</thead>
+		<%
+			for (BusStopDetails e : chuyens) {
+			if (e.getRouteID() < 0) {
+		%>
 		<tbody>
+			<tr>
+				<td style="text-align: left"><%=Math.abs(e.getRouteID())%></td>
+				<td style="text-align: left"><%=e.getSerial()%></td>
+				<td style="text-align: left"><%=e.getNameBusStop()%></td>
+			</tr>
 
-			<c:forEach items="${listBusStop}" var="li1">
-				<c:if test="${li1.routeID <0}">
-					<tr>
-						<td style="text-align: left">${Math.abs(li1.routeID)}</td>
-						<td style="text-align: left">${li1.serial}</td>
-						<td style="text-align: left">${li1.nameBusStop}</td>
-					</tr>
-				</c:if>
-						 </c:forEach>
+			<%
+				}
+			}
+			%>
 		</tbody>
 		<tfoot>
 			<tr>

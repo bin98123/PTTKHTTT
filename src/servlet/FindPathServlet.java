@@ -67,7 +67,7 @@ public class FindPathServlet extends HttpServlet {
 			ok = true;
 		}
 		if (ok == true) {
-			dao.ChuyenXeDB findPath = new ChuyenXeDB();
+			dao.BusStopDAO findPath = new BusStopDAO();
 			try {
 				List<String> path = findPath.search(start, des);
 				System.out.println(start + " " + des);

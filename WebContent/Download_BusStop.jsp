@@ -2,7 +2,7 @@
 <%@page import="org.apache.poi.hssf.usermodel.HSSFWorkbook"%><%@page
 	import="java.io.*"%>
 <%
-	BusStopDAO dao = new BusStopDAO();
+BusStopDAO dao = new BusStopDAO();
 HSSFWorkbook wb = dao.getExportExel();
 // write it as an excel attachment
 ByteArrayOutputStream outByteStream = new ByteArrayOutputStream();

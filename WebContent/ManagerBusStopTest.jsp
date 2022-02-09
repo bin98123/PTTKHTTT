@@ -114,7 +114,14 @@ session.removeAttribute("valueStop");
 			</form>
 		</div>
 	</div>
-	<h1 id="default" style="display: <%=none%>;">Danh sách Trạm Dừng</h1>
+		<%
+		String error = (String) request.getAttribute("errorBusStopSearch");
+	if (error == null) {
+		error = "";
+	}
+	%>
+	<h2><%=error%></h2>
+	<h1 id="default" style="display: <%=none%>;">Danh Sách Trạm Dừng Lượt Đi Tìm Được</h1>
 	<table class="table table-striped table-bordered table-list example"
 		id="example" style="width: 100%;display: <%=none%>">
 		<thead>
@@ -136,7 +143,7 @@ session.removeAttribute("valueStop");
 		</thead>
 		<%
 			for (BusStopDetails e : chuyen) {
-			// 				if (e.getID() > 0) {
+							if (e.getSerial() > 0) {
 		%>
 		<tbody>
 			<tr>
@@ -156,7 +163,63 @@ session.removeAttribute("valueStop");
 			</tr>
 
 			<%
-				// 				}
+								}
+			}
+			%>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th style="text-align: left">Mã số Chuyến</th>
+				<th style="text-align: left">STT</th>
+				<th style="text-align: left">Tên Trạm</th>
+				<th style="text-align: left">Sửa</th>
+				<th style="text-align: left">Xóa</th>
+			</tr>
+		</tfoot>
+	</table>
+	<h1 id="default" style="display: <%=none%>;">Danh Sách Trạm Dừng Lượt Về Tìm Được</h1>
+	<table class="table table-striped table-bordered table-list example"
+		id="example" style="width: 100%;display: <%=none%>">
+		<thead>
+			<tr>
+				<!-- 
+	<th>Mã số Chuyến</th>
+	<th>Tên trạm lượt đi</th>
+	<th>Tên Trạm lượt về</th>
+	<th>Tên Chuyến</th>
+	 -->
+
+				<th style="text-align: left">Mã số Chuyến</th>
+				<th style="text-align: left">STT</th>
+				<th style="text-align: left">Tên Trạm</th>
+				<th style="text-align: left">Sửa</th>
+				<th style="text-align: left">Xóa</th>
+
+			</tr>
+		</thead>
+		<%
+			for (BusStopDetails e : chuyen) {
+							if (e.getSerial() < 0) {
+		%>
+		<tbody>
+			<tr>
+				<td style="text-align: left"><%=e.getRouteID()%></td>
+				<td style="text-align: left"><%=Math.abs(e.getSerial())%></td>
+				<td style="text-align: left"><%=e.getNameBusStop()%></td>
+				<td style="text-align: center; line-height: inherit;"><button
+						type="button" class="btn btn-info btn-sm"
+						onclick="window.location.href='./ManagerBusStop?submit=edit&unitID=<%=e.getRouteID()%>&serial=<%=e.getSerial()%>'">
+						<i class="fa fa-edit"></i>
+					</button></td>
+				<td style="text-align: center; line-height: inherit;"><button
+						type="button" class="btn btn-danger btn-sm"
+						onclick="window.location.href='./ManagerBusStop?submit=delete&unitID=<%=e.getRouteID()%>&serial=<%=e.getSerial()%>'">
+						<i class="fa fa-trash-o"></i>
+					</button></td>
+			</tr>
+
+			<%
+								}
 			}
 			%>
 		</tbody>
